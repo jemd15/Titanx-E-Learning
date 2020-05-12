@@ -1,11 +1,11 @@
+import { MaterializeModule } from 'angular2-materialize';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app-routing.module';
-
-import { MaterializeModule } from 'angular2-materialize';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -25,6 +25,7 @@ import { FooterComponent } from './components/footer/footer.component';
   ],
   imports: [
     BrowserModule,
+    MaterializeModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(AppRoutes, {useHash: true})
