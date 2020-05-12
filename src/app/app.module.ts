@@ -8,16 +8,26 @@ import { AppRoutes } from './app-routing.module';
 import { MaterializeModule } from 'angular2-materialize';
 
 import { AppComponent } from './app.component';
+import { LoginComponent } from './pages/login/login.component';
+import { Page404Component } from './pages/page404/page404.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    Page404Component,
+    HomeComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(AppRoutes, {useHash: true, scrollPositionRestoration: "enabled"})
+    RouterModule.forRoot(AppRoutes, {useHash: true})
   ],
   providers: [],
   bootstrap: [AppComponent]
