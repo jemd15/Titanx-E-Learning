@@ -15,9 +15,9 @@ export class CourseDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    /* this.breadcrumb = {
-      course: this.route.snapshot.paramMap.get('course')
-    } */
+    this.breadcrumb = {
+      course: this.route.snapshot.params['course']
+    }
   }
 
 }

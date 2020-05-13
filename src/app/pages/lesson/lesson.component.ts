@@ -15,11 +15,11 @@ export class LessonComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    /* this.breadcrumb = {
-      course: this.route.snapshot.paramMap.get('course'),
-      unit: this.route.snapshot.paramMap.get('unitId'),
-      lesson: this.route.snapshot.paramMap.get('lessonId')
-    } */
+    this.breadcrumb = {
+      course: this.route.snapshot.params['course'],
+      unit: this.route.snapshot.params['unitId'],
+      lesson: this.route.snapshot.params['lessonId']
+    }
   }
 
 }
