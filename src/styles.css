@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+  color: #464e5b;
+}
+
+.text-uss-color{
+  color: #464e5b;
+}
+
+.uss-color{
+  background-color: #464e5b;
+}

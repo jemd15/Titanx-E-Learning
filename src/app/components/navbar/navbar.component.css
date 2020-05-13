@@ -1,0 +1,8 @@
+.logo{
+  width: 210px;
+  padding-top: 15px;
+}
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+  height: 100px;
+  line-height: 100px;
+}

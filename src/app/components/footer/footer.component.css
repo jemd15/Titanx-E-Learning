@@ -1,0 +1,19 @@
+span a{
+  transition: background 200ms linear;
+}
+
+span a:first-child:hover{
+  background-color: #e91e63 !important;
+}
+
+span a:nth-child(2):hover{
+  background-color: #0264dd !important;
+}
+
+span a:nth-child(3):hover{
+  background-color: #08a0e9 !important;
+}
+
+span a:last-child:hover{
+  background-color: #0073b0 !important;
+}
