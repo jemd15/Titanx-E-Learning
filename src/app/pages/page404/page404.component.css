@@ -1,0 +1,11 @@
+img {
+  width: 70%;
+  height: auto;
+  top: -70px;
+  position: relative;
+}
+
+strong {
+  font-size: 15rem;
+  line-height: 1;
+}

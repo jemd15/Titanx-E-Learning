@@ -1,13 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-*{
+* {
   color: #1a232f;
 }
 
-.text-uss-color{
+.text-uss-color {
   color: #1a232f !important;
 }
 
-.uss-color{
+.uss-color {
   background-color: #1a232f;
 }
 
@@ -40,6 +40,10 @@ a:hover:not(.title):not(.btn) {
   margin: 0;
 }
 
+.no-margin-top {
+  margin-top: 0;
+}
+
 .no-margin-bottom {
   margin-bottom: 0;
 }
@@ -50,4 +54,27 @@ a:hover:not(.title):not(.btn) {
 
 .no-shadow {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.card-image img {
+  object-fit: cover;
+  min-height: 150px;
+  transition: 2000ms;
+}
+
+.card-image:hover img {
+  transform: scale(1.2);
+}
+
+.card-image {
+  height: 150px;
+  overflow: hidden;
+}
+
+.collection.with-header .collection-item {
+  height: 60px;
+}
+
+.collection-item strong{
+  font-size: 1.64rem;
 }

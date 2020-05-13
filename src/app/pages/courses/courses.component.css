@@ -4,5 +4,9 @@
 
 .card-image img{
   object-fit: cover;
-  height: 210px;
+  height: 280px;
+}
+
+.card-image{
+  height: 280px;
 }

@@ -1,0 +1,10 @@
+<nav class="uss-color">
+  <div class="nav-wrapper">
+    <div class="col s12">
+      <a routerLink="/courses" class="breadcrumb">Cursos</a>
+      <a *ngIf="breadcrumb.course" routerLink="/courses/{{breadcrumb.course}}" class="breadcrumb">{{breadcrumb.course}}</a>
+      <a *ngIf="breadcrumb.unit" class="breadcrumb">Unidad {{breadcrumb.unit}}</a>
+      <a *ngIf="breadcrumb.lesson" routerLink="/courses/{{breadcrumb.course}}/unit/{{breadcrumb.unit}}/lesson/{{breadcrumb.lesson}}" class="breadcrumb">Lección {{breadcrumb.lesson}}</a>
+    </div>
+  </div>
+</nav>

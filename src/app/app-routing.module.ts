@@ -3,14 +3,16 @@ import { LoginComponent } from './pages/login/login.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CoursesComponent } from './pages/courses/courses.component';
-// import { Page404Component } from "./pages/page404/page404.component";
-
+import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
+import { LessonComponent } from './pages/lesson/lesson.component';
 
 export const AppRoutes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: '404-not-found', component: Page404Component, pathMatch: 'full' },
   { path: 'courses', component: CoursesComponent, pathMatch: 'full' },
+  { path: 'courses/:course', component: CourseDetailComponent, pathMatch: 'full' },
+  { path: 'courses/:course/unit/:unitId/lesson/:lessonId', component: LessonComponent, pathMatch: 'full' },
+  { path: '404-not-found', component: Page404Component, pathMatch: 'full' },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: '/404-not-found', pathMatch: 'full' }
 ]

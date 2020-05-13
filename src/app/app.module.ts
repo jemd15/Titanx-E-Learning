@@ -15,6 +15,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CoursesComponent } from './pages/courses/courses.component';
+import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { LessonComponent } from './pages/lesson/lesson.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { CoursesComponent } from './pages/courses/courses.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    CoursesComponent
+    CoursesComponent,
+    CourseDetailComponent,
+    BreadcrumbComponent,
+    LessonComponent
   ],
   imports: [
     BrowserModule,
