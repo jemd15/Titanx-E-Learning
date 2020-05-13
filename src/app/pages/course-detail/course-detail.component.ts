@@ -8,14 +8,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CourseDetailComponent implements OnInit {
 
-  private course: string;
+  private breadcrumb = {}
 
   constructor(
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    // this.course = this.route.snapshot.paramMap.get('course');
+    /* this.breadcrumb = {
+      course: this.route.snapshot.paramMap.get('course')
+    } */
   }
 
 }

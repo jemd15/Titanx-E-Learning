@@ -3,8 +3,8 @@
   <div class="row"></div>
   <div class="row"></div>
   <div class="row"></div>
-  <h1>{{course}}</h1>
-  <app-breadcrumb [breadcrumb]="{course: 'inglés', unit: '1', lesson: '1'}"></app-breadcrumb>
+  <h1>{{breadcrumb.course}}</h1>
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
   <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
     <li>
       <div class="collapsible-header">

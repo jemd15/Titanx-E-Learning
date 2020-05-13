@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-lesson',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LessonComponent implements OnInit {
 
-  constructor() { }
+  private breadcrumb = {};
+
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    /* this.breadcrumb = {
+      course: this.route.snapshot.paramMap.get('course'),
+      unit: this.route.snapshot.paramMap.get('unitId'),
+      lesson: this.route.snapshot.paramMap.get('lessonId')
+    } */
   }
 
 }

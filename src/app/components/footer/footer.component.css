@@ -17,3 +17,7 @@ span a:nth-child(3):hover{
 span a:last-child:hover{
   background-color: #0073b0 !important;
 }
+
+img{
+  width: 80%;
+}
