@@ -1,8 +1,8 @@
 <section class="container">
   <div class="row"></div>
   <div class="row"></div>
-  <div class="row"></div>
-  <div class="row"></div>
+  <div class="row hide-on-small-only"></div>
+  <div class="row hide-on-small-only"></div>
   <h1>{{ breadcrumb.course }}</h1>
   <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
   <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
@@ -36,8 +36,8 @@
               pariatur suscipit voluptates.</p>
           </li>
         </ul>
-        <iframe src="https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_es.html"
-          frameborder="0" width="100%" height="700vh"></iframe>
+        <iframe id="simulator" src="https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_es.html"
+          frameborder="0" width="100%" height="700"></iframe>
       </div>
     </li>
     <li>
@@ -102,7 +102,7 @@
                   </p>
                   <p>
                     <input type="checkbox" class="filled-in" id="test7" />
-                    <label for="test7">Indeterminate Style</label>
+                    <label for="test7">cyan</label>
                   </p>
                   <p>
                     <input type="checkbox" class="filled-in" id="test8" />

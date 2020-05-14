@@ -1,18 +1,11 @@
-<!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
-  <li><a class="text-uss-color" href="#!">one</a></li>
-  <li><a class="text-uss-color" href="#!">two</a></li>
-  <li><a class="text-uss-color" href="#!">three</a></li>
-</ul>
 <div class="navbar-fixed">
   <nav class="white">
     <div class="nav-wrapper container">
       <a target="blank" href="http://fit.uss.cl/" class="brand-logo"><img src="../../../assets/imgs/uss-logo-black.svg" class="logo"></a>
       <ul class="right hide-on-med-and-down">
-        <li><a class="text-uss-color" routerLink="home">Inicio</a></li>
+        <li routerLinkActive="uss-color"><a class="text-uss-color" routerLink="home" routerLinkActive="white-text">Inicio</a></li>
+        <li routerLinkActive="uss-color"><a class="text-uss-color" routerLink="courses" routerLinkActive="white-text">Cursos</a></li>
         <li><a class="btn uss-color white-text waves-effect waves-light hoverable" routerLink="login">Ingresar</a></li>
-        <!-- Dropdown Trigger -->
-        <li><a class="dropdown-button text-uss-color" routerLink="courses" data-activates="dropdown1" data-hover="true" data-beloworigin="true">Cursos<i class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
     </div>
   </nav>
