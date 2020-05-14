@@ -28,3 +28,8 @@
   width: 100%;
   height: auto;
 }
+
+.btn-floating{
+  transition: all 500ms;
+  opacity: 0;
+}
