@@ -21,3 +21,11 @@ span a:last-child:hover{
 img{
   width: 80%;
 }
+
+@media only screen and (max-width: 600px) {
+
+  img{
+    width: 100%;
+  }
+  
+}
