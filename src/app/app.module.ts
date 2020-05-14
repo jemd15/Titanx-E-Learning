@@ -19,6 +19,8 @@ import { CourseDetailComponent } from './pages/course-detail/course-detail.compo
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { LessonComponent } from './pages/lesson/lesson.component';
 
+// secret library
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,7 @@ import { LessonComponent } from './pages/lesson/lesson.component';
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(AppRoutes, {useHash: true})
+    RouterModule.forRoot(AppRoutes, { useHash: true })
   ],
   providers: [],
   bootstrap: [AppComponent]
