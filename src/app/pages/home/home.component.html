@@ -1,10 +1,10 @@
-<div id="top" class="parallax-container valign-wrapper">
+<header class="parallax-container valign-wrapper">
   <div class="parallax" materialize="parallax"><img src="../../../assets/imgs/estudiantes.jpg" alt=""></div>
   <div class="container center">
     <h2 class="white-text fit-text hide">e-learning</h2>
     <img class="header-logo" src="../../../assets/imgs/logo.png">
   </div>
-</div>
+</header>
 <div class="section white">
   <div class="row"></div>
   <div class="row"></div>
@@ -65,6 +65,6 @@
 
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large teal accent-4 hoverable z-depth-2" (click)="scrollToElement(top)">
-    <i class="large material-icons">expand_less</i>
+    <i (click)="scrollTo('header')" class="large material-icons">expand_less</i>
   </a>
 </div>
