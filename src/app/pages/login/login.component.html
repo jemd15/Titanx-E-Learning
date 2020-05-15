@@ -17,11 +17,11 @@
             <input formControlName="password" type="password" required="true" class="validate">
             <label for="icon_prefix">Contraseña</label>
           </div>
-          <div class="row"></div>
-          <div class="row">
-            <button type="submit" class="hoverable btn col s10 offset-s1 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Entrar</strong></button>
+          <div class="col s12">
+            <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Entrar</strong></button>
           </div>
           <div class="center">
+            <div class="row"></div>
             <a (click)="openModal()" class="text-uss-color">¿Olvidó su contraseña?</a>
           </div>
         </form>
@@ -50,11 +50,11 @@
             <input formControlName="password" type="password" required="true" class="validate">
             <label for="icon_prefix">Contraseña</label>
           </div>
-          <div class="row"></div>
-          <div class="row">
-            <button type="submit" class="hoverable btn col s10 offset-s1 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Entrar</strong></button>
+          <div class="col s12">
+            <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Entrar</strong></button>
           </div>
           <div class="center">
+            <div class="row"></div>
             <a (click)="openModal()" class="text-uss-color">¿Olvidó su contraseña?</a>
           </div>
         </form>
@@ -66,7 +66,7 @@
 <!-- estructura del modal de recuperación de contraseña -->
 <div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
   <div class="col s12 m6 offset-m3">
-    <form class="card-panel hoverable" materialize [formGroup]="loginForm">
+    <form class="card-panel row hoverable" materialize [formGroup]="loginForm">
       <div class="row center no-margin">
         <img class="logo" src="../../../assets/imgs/logo-dark.png">
       </div>
@@ -79,12 +79,12 @@
         <input formControlName="email" type="email" required="true" class="validate">
         <label for="icon_prefix">Email</label>
       </div>
-      <div class="row"></div>
-      <div class="row">
-        <button type="submit" class="hoverable btn col s10 offset-s1 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Enviar</strong></button>
+      <div class="col s12">
+        <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Enviar</strong></button>
       </div>
-      <div class="row">
-        <a (click)="closeModal()" class="btn transparent btn-secondary waves-effect col s10 offset-s1">Cancelar</a>
+      <div class="row"></div>
+      <div class="col s12">
+        <a (click)="closeModal()" class="btn transparent btn-secondary waves-effect col s12">Cancelar</a>
       </div>
     </form>
   </div>
