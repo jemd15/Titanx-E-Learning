@@ -64,7 +64,7 @@
 </div>
 
 <!-- estructura del modal de recuperación de contraseña -->
-<div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+<div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
   <div class="col s12 m6 offset-m3">
     <form class="card-panel hoverable" materialize [formGroup]="loginForm">
       <div class="row center no-margin">
@@ -82,6 +82,9 @@
       <div class="row"></div>
       <div class="row">
         <button type="submit" class="hoverable btn col s10 offset-s1 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Enviar</strong></button>
+      </div>
+      <div class="row">
+        <a (click)="closeModal()" class="btn-secondary waves-effect col s10 offset-s1">Cancelar</a>
       </div>
     </form>
   </div>

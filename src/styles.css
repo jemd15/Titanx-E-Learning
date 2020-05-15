@@ -74,3 +74,14 @@ a:hover:not(.title):not(.btn) {
 .collection-item strong{
   font-size: 1.64rem;
 }
+
+.btn-secondary {
+  text-decoration: none;
+  color: #1a232f;
+  border: 2px solid #1a232f;
+  text-align: center;
+  letter-spacing: .5px;
+  transition: .2s ease-out;
+  cursor: pointer;
+  font-weight: bold;
+}

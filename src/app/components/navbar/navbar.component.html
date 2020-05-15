@@ -1,5 +1,6 @@
 <div class="navbar-fixed">
   <nav class="white">
+    <a materialize="sideNav" [materializeParams]="[{closeOnClick: true}]" data-activates="slide-out" class="left button-collapse"><i class="material-icons">menu</i></a>
     <div class="nav-wrapper container">
       <a target="blank" href="http://fit.uss.cl/" class="brand-logo"><img src="../../../assets/imgs/uss-logo-black.svg" class="logo"></a>
       <ul class="right hide-on-med-and-down">
@@ -10,3 +11,24 @@
     </div>
   </nav>
 </div>
+
+
+<!-- menú lateral -->
+<ul id="slide-out" class="side-nav">
+  <li class="center uss-color">
+    <div class="row"></div>
+    <img src="../../../assets/imgs/logo-light.png" class="logo">
+    <h5 class="white-text">Nombre Usuario</h5>
+    <h6 class="white-text">correo@prueba.cl</h6>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row no-margin"></div>
+  </li>
+  <li routerLinkActive="grey lighten-4">
+    <a class="waves-effect" routerLink="home"><i class="fas fa-home fa-2x red-text"></i>Inicio</a>
+  </li>
+  <li routerLinkActive="grey lighten-4">
+    <a class="waves-effect" routerLink="courses"><i class="fas fa-graduation-cap fa-2x text-uss-color"></i>Cursos</a>
+  </li>
+  <li><a class="btn uss-color white-text waves-effect waves-light hoverable" routerLink="login">Ingresar</a></li>
+</ul>
