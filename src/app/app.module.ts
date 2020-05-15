@@ -18,6 +18,7 @@ import { CoursesComponent } from './pages/courses/courses.component';
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { LessonComponent } from './pages/lesson/lesson.component';
+import { RestorePassComponent } from './pages/restore-pass/restore-pass.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { LessonComponent } from './pages/lesson/lesson.component';
     CoursesComponent,
     CourseDetailComponent,
     BreadcrumbComponent,
-    LessonComponent
+    LessonComponent,
+    RestorePassComponent
   ],
   imports: [
     BrowserModule,

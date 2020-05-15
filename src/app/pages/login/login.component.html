@@ -2,64 +2,87 @@
   <div class="parallax-container valign-wrapper">
     <div class="parallax" materialize="parallax"><img src="../../../assets/imgs/fondomakeit.png" alt=""></div>
     <div class="container row no-margin-bottom">
-    <div class="col s12 m4 offset-m1">
-      <form class="card-panel hoverable" materialize [formGroup]="loginForm">
-        <div class="row center no-margin">
-          <img class="logo" src="../../../assets/imgs/logo-dark.png">
-        </div>
-        <div class="input-field col s12">
-          <i class="material-icons prefix text-uss-color">email</i>
-          <input formControlName="email" type="email" required="true" class="validate">
-          <label for="icon_prefix">Email</label>
-        </div>
-        <div class="input-field col s12">
-          <i class="material-icons prefix text-uss-color">lock</i>
-          <input formControlName="password" type="password" required="true" class="validate">
-          <label for="icon_prefix">Contraseña</label>
-        </div>
-        <div class="row"></div>
-        <div class="row">
-          <button type="submit" class="hoverable btn col s10 offset-s1 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Entrar</strong></button>
-        </div>
-        <div class="center">
-          <a class="text-uss-color">¿Olvidó su contraseña?</a>
-        </div>
-      </form>
+      <div class="col s12 m4 offset-m1">
+        <form class="card-panel hoverable" materialize [formGroup]="loginForm">
+          <div class="row center no-margin">
+            <img class="logo" src="../../../assets/imgs/logo-dark.png">
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix text-uss-color">email</i>
+            <input formControlName="email" type="email" required="true" class="validate">
+            <label for="icon_prefix">Email</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix text-uss-color">lock</i>
+            <input formControlName="password" type="password" required="true" class="validate">
+            <label for="icon_prefix">Contraseña</label>
+          </div>
+          <div class="row"></div>
+          <div class="row">
+            <button type="submit" class="hoverable btn col s10 offset-s1 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Entrar</strong></button>
+          </div>
+          <div class="center">
+            <a (click)="openModal()" class="text-uss-color">¿Olvidó su contraseña?</a>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
   </div>
 </div>
 
-
 <!-- small version -->
 <div class="full valign-wrapper hide-on-med-and-up">
-  <div class="container row no-margin-bottom">
-    <div class="col s12 m4 offset-m1">
-      <form class="card-panel hoverable" materialize [formGroup]="loginForm">
-        <div class="row center">
-          <img class="logo" src="../../../assets/imgs/logo-dark.png">
-        </div>
-        <div class="input-field col s12">
-          <i class="material-icons prefix white-text">email</i>
-          <input formControlName="email" type="email" required="true" class="validate">
-          <label for="icon_prefix">Email</label>
-        </div>
-        <div class="input-field col s12">
-          <i class="material-icons prefix white-text">lock_outline</i>
-          <input formControlName="password" type="password" required="true">
-          <label for="icon_prefix">Contraseña</label>
-        </div>
-        <div class="row"></div>
-        <div class="row">
-          <button type="submit" class="hoverable btn white-text col s10 offset-s1 waves-effect waves-light light-blue accent-3" value="Entrar"><strong>Entrar</strong></button>
-        </div>
-        <div class="center">
-          <a href="" class="white-text">¿Olvidó su contraseña?</a>
-        </div>
-        <div class="center">
-          <a routerLink="crear-cuenta" class="white-text">¿No tiene cuenta?</a>
-        </div>
-      </form>
+  <div class="parallax-container valign-wrapper">
+    <div class="parallax" materialize="parallax"><img src="../../../assets/imgs/fondomakeit.png" alt=""></div>
+    <div class="container row no-margin-bottom">
+      <div class="col s12 m4 offset-m1">
+        <form class="card-panel hoverable" materialize [formGroup]="loginForm">
+          <div class="row center">
+            <img class="logo" src="../../../assets/imgs/logo-dark.png">
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix text-uss-color">email</i>
+            <input formControlName="email" type="email" required="true" class="validate">
+            <label for="icon_prefix">Email</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix text-uss-color">lock</i>
+            <input formControlName="password" type="password" required="true" class="validate">
+            <label for="icon_prefix">Contraseña</label>
+          </div>
+          <div class="row"></div>
+          <div class="row">
+            <button type="submit" class="hoverable btn col s10 offset-s1 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Entrar</strong></button>
+          </div>
+          <div class="center">
+            <a (click)="openModal()" class="text-uss-color">¿Olvidó su contraseña?</a>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
+</div>
+
+<!-- estructura del modal de recuperación de contraseña -->
+<div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+  <div class="col s12 m6 offset-m3">
+    <form class="card-panel hoverable" materialize [formGroup]="loginForm">
+      <div class="row center no-margin">
+        <img class="logo" src="../../../assets/imgs/logo-dark.png">
+      </div>
+      <div class="col s12 center">
+        <h5><strong>¿Olvidó su contraseña?</strong></h5>
+        <p class="center">Escribe a continuación tu dirección de correo electrónico y te enviaremos las instrucciones para restablecer tu contraseña.</p>
+      </div>
+      <div class="input-field col s12">
+        <i class="material-icons prefix text-uss-color">email</i>
+        <input formControlName="email" type="email" required="true" class="validate">
+        <label for="icon_prefix">Email</label>
+      </div>
+      <div class="row"></div>
+      <div class="row">
+        <button type="submit" class="hoverable btn col s10 offset-s1 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Enviar</strong></button>
+      </div>
+    </form>
   </div>
 </div>

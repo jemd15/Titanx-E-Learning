@@ -5,10 +5,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { CoursesComponent } from './pages/courses/courses.component';
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 import { LessonComponent } from './pages/lesson/lesson.component';
+import { RestorePassComponent } from './pages/restore-pass/restore-pass.component';
 
 export const AppRoutes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'restore-pass/:token', component: RestorePassComponent, pathMatch: 'full' },
   { path: 'courses', component: CoursesComponent, pathMatch: 'full' },
   { path: 'courses/:course', component: CourseDetailComponent, pathMatch: 'full' },
   { path: 'courses/:course/unit/:unitId/lesson/:lessonId', component: LessonComponent, pathMatch: 'full' },
