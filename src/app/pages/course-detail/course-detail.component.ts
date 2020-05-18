@@ -8,7 +8,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CourseDetailComponent implements OnInit {
 
-  private breadcrumb = {}
+  public breadcrumb = {
+    course: ''
+  }
 
   constructor(
     private route: ActivatedRoute
