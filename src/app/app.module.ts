@@ -21,6 +21,7 @@ import { LessonComponent } from './pages/lesson/lesson.component';
 import { RestorePassComponent } from './pages/restore-pass/restore-pass.component';
 import { ApiService } from './services/api.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
       useClass: AuthInterceptor,
       multi:true,
     },
-    ApiService
+    ApiService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

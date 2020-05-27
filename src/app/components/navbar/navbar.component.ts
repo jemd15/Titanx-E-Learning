@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 
 @Component({
@@ -7,25 +9,17 @@ import { User } from '../../models/user';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  
+  public user: User;
 
-  public user: User = JSON.parse(localStorage.getItem('userData'));
-
-  constructor() { }
+  constructor(
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    public router: Router, // para enviar al usuario a otra vista
+    public auth: AuthService
+  ) { }
 
   ngOnInit() {
-
-  }
-
-  isLogged(){
-    if(this.user){
-      return true
-    } else {
-      return false
-    }
-  }
-
-  logout(){
-    localStorage.removeItem('userData');
+    this.user = this.auth.userData();
   }
 
 }

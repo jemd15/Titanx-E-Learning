@@ -32,6 +32,10 @@ export class ApiService {
     return this.http.get<User[]>(this.apiUrl + '/users/admins');
   }
 
+  getAllCourses(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl + '/courses');
+  }
+
   login(email: string, password: string): Observable<User> {
     return this.http.post<User>(this.apiUrl + '/auth/login', { email, password });
   }

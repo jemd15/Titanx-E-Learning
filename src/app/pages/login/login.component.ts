@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from "@angular/router";
 import { toast, MaterializeAction } from 'angular2-materialize';
 import { EventEmitter } from '@angular/core';
-import { ApiService } from '../../services/api.service';
-import { User } from '../../models/user';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +19,7 @@ export class LoginComponent implements OnInit {
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     public router: Router, // para enviar al usuario a otra vista
     public formBuilder: FormBuilder,
-    private api: ApiService
+    private auth: AuthService
   ) {
 
   }
@@ -39,16 +38,7 @@ export class LoginComponent implements OnInit {
   login(){
     let email = this.loginForm.value.email;
     let password = this.loginForm.value.password;
-    this.api.login(email, password)
-      .subscribe(
-        (user: User) => {
-          localStorage.setItem('userData', JSON.stringify(user));
-          toast('Login correcto', 3000);
-          this.ngZone.run(() => {
-            this.router.navigate(['courses']);
-          });
-        }
-      );
+    this.auth.login(email, password);
   }
 
   openModal() {
