@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import {AuthInterceptor} from './auth/auth.interceptor';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -18,6 +19,8 @@ import { CourseDetailComponent } from './pages/course-detail/course-detail.compo
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { LessonComponent } from './pages/lesson/lesson.component';
 import { RestorePassComponent } from './pages/restore-pass/restore-pass.component';
+import { ApiService } from './services/api.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
@@ -35,13 +38,21 @@ import { RestorePassComponent } from './pages/restore-pass/restore-pass.componen
     RestorePassComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     MaterializeModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(AppRoutes, { useHash: true, scrollPositionRestoration: 'enabled' })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi:true,
+    },
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,7 +16,12 @@ nav ul a {
   padding: 0 25px;
 }
 
-ul li:nth-child(4) {
+ul li#side-nav-login-btn {
+  bottom: -55vh;
+  position: relative;
+}
+
+ul li#side-nav-logout-btn {
   bottom: -40vh;
   position: relative;
 }

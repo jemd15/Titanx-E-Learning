@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/titanxELearning",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

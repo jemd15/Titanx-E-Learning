@@ -5,8 +5,9 @@
       <a target="blank" href="http://fit.uss.cl/" class="brand-logo"><img src="../../../assets/imgs/uss-logo-black.svg" class="logo"></a>
       <ul class="right hide-on-med-and-down">
         <li routerLinkActive="uss-color"><a class="text-uss-color" routerLink="home" routerLinkActive="white-text">Inicio</a></li>
-        <li routerLinkActive="uss-color"><a class="text-uss-color" routerLink="courses" routerLinkActive="white-text">Cursos</a></li>
-        <li><a class="btn uss-color white-text waves-effect waves-light hoverable" routerLink="login">Ingresar</a></li>
+        <li *ngIf="isLogged()" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="courses" routerLinkActive="white-text">Cursos</a></li>
+        <li *ngIf="!isLogged()"><a class="btn uss-color white-text waves-effect waves-light hoverable" routerLink="login">Ingresar</a></li>
+        <li *ngIf="isLogged()"><a class="btn uss-color white-text waves-effect waves-light hoverable" (click)="logout()">Salir</a></li>
       </ul>
     </div>
   </nav>
@@ -18,8 +19,8 @@
   <li class="center uss-color">
     <div class="row"></div>
     <img src="../../../assets/imgs/logo-light.png" class="logo">
-    <h5 class="white-text">Nombre Usuario</h5>
-    <h6 class="white-text">correo@prueba.cl</h6>
+    <h5 *ngIf="user" class="white-text">{{ user.name }}</h5>
+    <h6 *ngIf="user" class="white-text">{{ user.email }}</h6>
     <div class="row"></div>
     <div class="row"></div>
     <div class="row no-margin"></div>
@@ -27,8 +28,9 @@
   <li routerLinkActive="grey lighten-4">
     <a class="waves-effect" routerLink="home"><i class="fas fa-home fa-2x"></i>Inicio</a>
   </li>
-  <li routerLinkActive="grey lighten-4">
+  <li *ngIf="isLogged()" routerLinkActive="grey lighten-4">
     <a class="waves-effect" routerLink="courses"><i class="fas fa-graduation-cap fa-2x"></i>Cursos</a>
   </li>
-  <li><a class="btn uss-color white-text waves-effect waves-light hoverable" routerLink="login">Ingresar</a></li>
+  <li id="side-nav-login-btn" *ngIf="!isLogged()"><a class="btn uss-color white-text waves-effect waves-light hoverable" routerLink="login">Ingresar</a></li>
+  <li id="side-nav-logout-btn" *ngIf="isLogged()"><a class="btn uss-color white-text waves-effect waves-light hoverable" (click)="logout()">Ingresar</a></li>
 </ul>

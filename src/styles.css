@@ -58,7 +58,7 @@ a:hover:not(.title):not(.btn) {
   transition: 2000ms;
 }
 
-.card-image:hover img {
+.card:hover .card-image img {
   transform: scale(1.2);
 }
 

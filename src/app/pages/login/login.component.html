@@ -3,7 +3,7 @@
     <div class="parallax" materialize="parallax"><img src="../../../assets/imgs/fondomakeit.png" alt=""></div>
     <div class="container row no-margin-bottom">
       <div class="col s12 m4 offset-m1">
-        <form class="card-panel hoverable" materialize [formGroup]="loginForm">
+        <form class="card-panel hoverable" materialize [formGroup]="loginForm" (ngSubmit)="login()">
           <div class="row center no-margin">
             <img class="logo" src="../../../assets/imgs/logo-dark.png">
           </div>
@@ -36,7 +36,7 @@
     <div class="parallax" materialize="parallax"><img src="../../../assets/imgs/fondomakeit.png" alt=""></div>
     <div class="container row no-margin-bottom">
       <div class="col s12 m4 offset-m1">
-        <form class="card-panel hoverable" materialize [formGroup]="loginForm">
+        <form class="card-panel hoverable" materialize [formGroup]="loginForm" (ngSubmit)="login()">
           <div class="row center">
             <img class="logo" src="../../../assets/imgs/logo-dark.png">
           </div>
