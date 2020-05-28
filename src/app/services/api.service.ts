@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { User } from "../models/user";
 import { Course } from '../models/courses';
 import { Unit } from '../models/units';
+import { Activity } from '../models/activities';
+import { Lesson } from '../models/lessons';
 
 @Injectable({
   providedIn: 'root'
@@ -39,19 +41,23 @@ export class ApiService {
   }
 
   getAllCourses(): Observable<Course[]> {
-    return this.http.get<User[]>(this.apiUrl + '/courses');
+    return this.http.get<Course[]>(this.apiUrl + '/courses');
   }
 
   getAllUnitsByCourseId(course_id: string): Observable<Unit[]> {
     return this.http.get<Unit[]>(`${this.apiUrl}/course/${course_id}/units`);
   }
 
-  getAllLessonsByUnitId(unit_id: string): Observable<Unit[]> {
-    return this.http.get<Unit[]>(`${this.apiUrl}/unit/${unit_id}/lessons`);
+  getAllLessonsByUnitId(unit_id: string): Observable<Lesson[]> {
+    return this.http.get<Lesson[]>(`${this.apiUrl}/unit/${unit_id}/lessons`);
   }
 
-  getAllActivities(course_id: string, unit_number: string, lesson_number: string): Observable<Unit[]> {
-    return this.http.get<Unit[]>(`${this.apiUrl}/course/${course_id}/unit/${unit_number}/lesson/${lesson_number}/activities`);
+  getAllActivities(course_id: string, unit_number: string, lesson_number: string): Observable<Activity[]> {
+    return this.http.get<Activity[]>(`${this.apiUrl}/course/${course_id}/unit/${unit_number}/lesson/${lesson_number}/activities`);
+  }
+
+  getTestByCourseId(course_id: string, unit_number: string, lesson_number: string): Observable<Unit> {
+    return this.http.get<Unit>(`${this.apiUrl}/course/${course_id}/unit/${unit_number}/lesson/${lesson_number}/test`);
   }
 
 }

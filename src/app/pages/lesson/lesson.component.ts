@@ -20,7 +20,8 @@ export class LessonComponent implements OnInit {
   public unitNumber: string;
   public unitId: string;
   public lesson_number: string;
-  public activities;
+  public activities = [];
+  public test
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +44,11 @@ export class LessonComponent implements OnInit {
       this.activities = res.activities;
       console.log('activities', this.activities)
     });
+    this.api.getTestByCourseId(this.course_id, this.unitNumber, this.lesson_number)
+      .subscribe((res: any) => {
+        this.test = res.test;
+        console.log(this.test)
+      });
   }
 
 }
