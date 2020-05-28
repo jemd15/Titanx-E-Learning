@@ -22,6 +22,7 @@ import { RestorePassComponent } from './pages/restore-pass/restore-pass.componen
 import { ApiService } from './services/api.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AuthService } from './services/auth.service';
     CourseDetailComponent,
     BreadcrumbComponent,
     LessonComponent,
-    RestorePassComponent
+    RestorePassComponent,
+    SafeUrlPipe
   ],
   imports: [
     HttpClientModule,
