@@ -3,77 +3,25 @@
   <div class="row"></div>
   <div class="row"></div>
   <div class="row"></div>
-  <h1>{{ breadcrumb.course  }}</h1>
+  <h1>{{ breadcrumb.course | titlecase }}</h1>
   <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
   <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
-    <li>
+    <li *ngFor="let unit of units">
       <div class="collapsible-header">
-        <h4><strong>Unidad 1:</strong> Lorem ipsum dolor sit amet consectetur.</h4>
+        <h4><strong>Unidad {{ unit.number }}:</strong> {{ unit.title }}</h4>
       </div>
       <div class="collapsible-body">
         <ul class="collection with-header z-depth-1">
           <li class="collection-header">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus error architecto quia? Fugit minus possimus qui error a fugiat sapiente voluptate vero laboriosam? Debitis dolores voluptate architecto pariatur suscipit voluptates.</p>
+            <p>{{ unit.description }}</p>
           </li>
-          <li class="collection-item">
-            <strong>Lección 1</strong><a routerLink="unit/1/lesson/1" class="secondary-content  btn uss-color">ingresar</a>
-          </li>
-          <li class="collection-item">
-            <strong>Lección 2</strong><a routerLink="unit/1/lesson/2" class="secondary-content  btn uss-color">ingresar</a>
-          </li>
-          <li class="collection-item">
-            <strong>Lección 3</strong><a routerLink="unit/1/lesson/3" class="secondary-content  btn uss-color">ingresar</a>
-          </li>
-          <li class="collection-item">
-            <strong>Lección 4</strong><a routerLink="unit/1/lesson/4" class="secondary-content  btn uss-color">ingresar</a>
-          </li>
-        </ul>
-      </div>
-    </li>
-    <li>
-      <div class="collapsible-header">
-        <h4><strong>Unidad 2:</strong> Lorem ipsum dolor sit amet consectetur.</h4>
-      </div>
-      <div class="collapsible-body">
-        <ul class="collection with-header z-depth-1">
-          <li class="collection-header">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus error architecto quia? Fugit minus possimus qui error a fugiat sapiente voluptate vero laboriosam? Debitis dolores voluptate architecto pariatur suscipit voluptates.</p>
-          </li>
-          <li class="collection-item">
-            <strong>Lección 1</strong><a routerLink="unit/2/lesson/1" class="secondary-content  btn uss-color">ingresar</a>
-          </li>
-          <li class="collection-item">
-            <strong>Lección 2</strong><a routerLink="unit/2/lesson/2" class="secondary-content  btn uss-color">ingresar</a>
-          </li>
-          <li class="collection-item">
-            <strong>Lección 3</strong><a routerLink="unit/2/lesson/3" class="secondary-content  btn uss-color">ingresar</a>
-          </li>
-          <li class="collection-item">
-            <strong>Lección 4</strong><a routerLink="unit/2/lesson/4" class="secondary-content  btn uss-color">ingresar</a>
-          </li>
-        </ul>
-      </div>
-    </li>
-    <li>
-      <div class="collapsible-header">
-        <h4><strong>Unidad 3:</strong> Lorem ipsum dolor sit amet consectetur.</h4>
-      </div>
-      <div class="collapsible-body">
-        <ul class="collection with-header z-depth-1">
-          <li class="collection-header">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus error architecto quia? Fugit minus possimus qui error a fugiat sapiente voluptate vero laboriosam? Debitis dolores voluptate architecto pariatur suscipit voluptates.</p>
-          </li>
-          <li class="collection-item">
-            <strong>Lección 1</strong><a routerLink="unit/3/lesson/1" class="secondary-content  btn uss-color">ingresar</a>
-          </li>
-          <li class="collection-item">
-            <strong>Lección 2</strong><a routerLink="unit/3/lesson/2" class="secondary-content  btn uss-color">ingresar</a>
-          </li>
-          <li class="collection-item">
-            <strong>Lección 3</strong><a routerLink="unit/3/lesson/3" class="secondary-content  btn uss-color">ingresar</a>
-          </li>
-          <li class="collection-item">
-            <strong>Lección 4</strong><a routerLink="unit/3/lesson/4" class="secondary-content  btn uss-color">ingresar</a>
+          <li class="collection-item row" *ngFor="let lesson of unit.lessons">
+            <div class="col s10 no-padding">
+              <h5><strong>Lección {{ lesson.number }}:</strong> {{ lesson.title }}</h5>
+            </div>
+            <div class="col s2">
+              <a routerLink="unit/{{ unit.number }}/lesson/{{ lesson.number }}" class="btn uss-color col s10 offset-s2 hoverable">ingresar</a>
+            </div>
           </li>
         </ul>
       </div>

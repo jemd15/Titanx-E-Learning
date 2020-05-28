@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from "../models/user";
+import { Course } from '../models/courses';
+import { Unit } from '../models/units';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,10 @@ export class ApiService {
     private http: HttpClient
   ) {
 
+  }
+
+  login(email: string, password: string): Observable<User> {
+    return this.http.post<User>(this.apiUrl + '/auth/login', { email, password });
   }
 
   getAllUsers(): Observable<User[]> {
@@ -32,12 +38,20 @@ export class ApiService {
     return this.http.get<User[]>(this.apiUrl + '/users/admins');
   }
 
-  getAllCourses(): Observable<User[]> {
+  getAllCourses(): Observable<Course[]> {
     return this.http.get<User[]>(this.apiUrl + '/courses');
   }
 
-  login(email: string, password: string): Observable<User> {
-    return this.http.post<User>(this.apiUrl + '/auth/login', { email, password });
+  getAllUnitsByCourseId(course_id: string): Observable<Unit[]> {
+    return this.http.get<Unit[]>(`${this.apiUrl}/course/${course_id}/units`);
+  }
+
+  getAllLessonsByUnitId(unit_id: string): Observable<Unit[]> {
+    return this.http.get<Unit[]>(`${this.apiUrl}/unit/${unit_id}/lessons`);
+  }
+
+  getAllActivities(course_id: string, unit_number: string, lesson_number: string): Observable<Unit[]> {
+    return this.http.get<Unit[]>(`${this.apiUrl}/course/${course_id}/unit/${unit_number}/lesson/${lesson_number}/activities`);
   }
 
 }

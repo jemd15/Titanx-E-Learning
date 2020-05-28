@@ -12,8 +12,8 @@ export const AppRoutes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'restore-pass/:token', component: RestorePassComponent, pathMatch: 'full' },
   { path: 'courses', component: CoursesComponent, pathMatch: 'full' },
-  { path: 'courses/:course', component: CourseDetailComponent, pathMatch: 'full' },
-  { path: 'courses/:course/unit/:unitId/lesson/:lessonId', component: LessonComponent, pathMatch: 'full' },
+  { path: 'courses/:courseId/:course', component: CourseDetailComponent, pathMatch: 'full' },
+  { path: 'courses/:courseId/:course/unit/:unitNumber/lesson/:lessonNumber', component: LessonComponent, pathMatch: 'full' },
   { path: '404-not-found', component: Page404Component, pathMatch: 'full' },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: '/404-not-found', pathMatch: 'full' }

@@ -8,5 +8,7 @@ export interface User {
   createdAt: any;
   lastLogin: any;
   token: string;
+  emailVerified: string;
+  school_school_id: number;
 
 }

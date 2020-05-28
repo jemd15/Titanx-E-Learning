@@ -3,69 +3,19 @@
   <div class="row"></div>
   <div class="row"></div>
   <div class="row">
-    <div class="col s12 m4">
+    <div class="col s12 m4" *ngFor="let course of courses">
       <div class="card hoverable">
         <div class="card-image">
-          <img src="https://loremflickr.com/640/460/shrek">
-          <span class="card-title text-shadow"><strong class="white-text">Nombre de Asignatura</strong></span>
+          <img [src]="course.img_url">
+          <span class="card-title text-shadow"><strong class="white-text">{{ course.course | titlecase }}</strong></span>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li><i class="material-icons left">school</i><strong>{{ course.teacher | titlecase }}</strong></li>
+          </ul>
         </div>
         <div class="card-action center">
-          <a class="btn waves-effect waves-light uss-color" routerLink="inglés">Ingresar</a>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m4">
-      <div class="card hoverable">
-        <div class="card-image">
-          <img src="https://loremflickr.com/640/360/crash-bandicoot">
-          <span class="card-title text-shadow"><strong class="white-text">Nombre de Asignatura</strong></span>
-        </div>
-        <div class="card-action center">
-          <a class="btn waves-effect waves-light uss-color" routerLink="inglés">Ingresar</a>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m4">
-      <div class="card hoverable">
-        <div class="card-image">
-          <img src="https://loremflickr.com/640/360/nfs">
-          <span class="card-title text-shadow"><strong class="white-text">Nombre de Asignatura</strong></span>
-        </div>
-        <div class="card-action center">
-          <a class="btn waves-effect waves-light uss-color" routerLink="inglés">Ingresar</a>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m4">
-      <div class="card hoverable">
-        <div class="card-image">
-          <img src="https://loremflickr.com/640/460/mario-bros">
-          <span class="card-title text-shadow"><strong class="white-text">Nombre de Asignatura</strong></span>
-        </div>
-        <div class="card-action center">
-          <a class="btn waves-effect waves-light uss-color" routerLink="inglés">Ingresar</a>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m4">
-      <div class="card hoverable">
-        <div class="card-image">
-          <img src="https://loremflickr.com/640/360/playstation">
-          <span class="card-title text-shadow"><strong class="white-text">Nombre de Asignatura</strong></span>
-        </div>
-        <div class="card-action center">
-          <a class="btn waves-effect waves-light uss-color" routerLink="inglés">Ingresar</a>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m4">
-      <div class="card hoverable">
-        <div class="card-image">
-          <img src="https://loremflickr.com/640/360/god-of-war">
-          <span class="card-title text-shadow"><strong class="white-text">Nombre de Asignatura</strong></span>
-        </div>
-        <div class="card-action center">
-          <a class="btn waves-effect waves-light uss-color" routerLink="inglés">Ingresar</a>
+          <a class="btn waves-effect waves-light uss-color" routerLink="{{ course.course_id }}/{{ course.course }}">Ingresar</a>
         </div>
       </div>
     </div>

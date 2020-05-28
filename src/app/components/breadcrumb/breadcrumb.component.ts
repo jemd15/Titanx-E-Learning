@@ -12,6 +12,7 @@ export class BreadcrumbComponent implements OnInit {
   @Input() breadcrumb: any
 
   ngOnInit() {
+    
   }
 
 }
