@@ -1,0 +1,24 @@
+.cross-screen {
+  position: fixed;
+  bottom: -10px;
+  z-index: 99;
+  width: 252px;
+  height: 156px;
+  margin: auto;
+  background: url('../assets/secret/race2.gif');
+  animation-duration: 10s;
+  animation-name: cross-screen;
+  animation-delay: 4s;
+  margin-left: -20%;
+}
+
+
+@keyframes cross-screen {
+  from {
+    margin-left: -20%;
+  }
+
+  to {
+    margin-left: 120%;
+  }
+}

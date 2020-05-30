@@ -24,6 +24,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 
+// Secret library
+import { KonamiModule } from 'ngx-konami';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     SafeUrlPipe
   ],
   imports: [
+    KonamiModule,
     HttpClientModule,
     BrowserModule,
     MaterializeModule,
