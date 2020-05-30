@@ -1,0 +1,32 @@
+<section class="container">
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row"></div>
+  <h1>{{ breadcrumb.course | titlecase }}</h1>
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+    <li *ngFor="let unit of units">
+      <div class="collapsible-header">
+        <h4><strong>Unidad {{ unit.number }}:</strong> {{ unit.title }}</h4>
+      </div>
+      <div class="collapsible-body">
+        <ul class="collection with-header z-depth-1">
+          <li class="collection-header">
+            <p>{{ unit.description }}</p>
+          </li>
+          <li class="collection-item row" *ngFor="let lesson of unit.lessons">
+            <div class="col s10 no-padding">
+              <h5><strong>Lección {{ lesson.number }}:</strong> {{ lesson.title }}</h5>
+            </div>
+            <div class="col s2">
+              <a routerLink="unit/{{ unit.number }}/lesson/{{ lesson.number }}" class="btn uss-color col s10 offset-s2 hoverable">ingresar</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <div class="row"></div>
+  <div class="row"></div>
+</section>

@@ -1,0 +1,102 @@
+<section class="container">
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row hide-on-small-only"></div>
+  <div class="row hide-on-small-only"></div>
+  <h1>{{ breadcrumb.course | titlecase }}</h1>
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+    <li *ngFor="let activity of activities">
+      <div class="collapsible-header">
+        <h4><strong>Actividad {{ activity.number }}:</strong> {{ activity.title }}</h4>
+      </div>
+      <div class="collapsible-body">
+        <ul class="collection with-header z-depth-1">
+          <li class="collection-header">
+            <p>{{ activity.description }}</p>
+          </li>
+          <div class="video-container">
+            
+            <!-- video activity -->
+            <iframe *ngIf="activity.type == 'video'" width="100%" height="auto" [src]="activity.url | safeUrl" allowfullscreen></iframe>
+
+            <!-- simulator activity -->
+            <iframe *ngIf="activity.type == 'simulator'" width="100%" height="700" [src]="activity.url | safeUrl" allowfullscreen></iframe>
+            
+            <!-- game activity -->
+            <iframe *ngIf="activity.type == 'game'" width="100%" height="700" [src]="activity.url | safeUrl" allowfullscreen></iframe>
+
+            <!-- interactive img activity -->
+            <iframe *ngIf="activity.type == 'interactive-img'" width="100%" height="700" [src]="activity.url | safeUrl" allowscriptaccess="always" allowfullscreen="true" scrolling="yes" allownetworking="all"></iframe>
+
+          </div>
+        </ul>
+      </div>
+    </li>
+
+    <!-- test structure -->
+    <li *ngIf="this.test">
+      <div class="collapsible-header">
+        <h4><strong>Actividad {{ activities.length + 1 }}:</strong> Test de conocimientos.</h4>
+      </div>
+      <div class="collapsible-body">
+        <div class="card-panel white">
+          <h4><strong>Pone a prueba tus conocimientos!</strong></h4>
+          <div class="row">
+
+            <form class="col s12">
+              <div *ngIf="questions">
+                <div *ngFor="let question of questions; let j = index">
+                  <!-- question of text area -->
+                  <div *ngIf="question.type == 'text'" class="row">
+                    <h5 class="col s12">
+                      <strong>{{ j + 1 }}.-</strong> {{ question.title }}
+                    </h5>
+                    <div class="input-field col s12">
+                      <textarea id="textarea1" class="materialize-textarea grey lighten-3"></textarea>
+                    </div>
+                  </div>
+
+                  <!-- question of simple selection -->
+                  <div *ngIf="question.type == 'simple-selection'" class="row">
+                    <h5 class="col s12">
+                      <strong>{{ j + 1 }}.-</strong> {{ question.title }}
+                    </h5>
+                    <div class="col s12">
+                      <p *ngFor="let answer of question.answers; let i = index">
+                        <input name="group1" type="radio" id="{{ 'answer' + i + 'question' + question.question_id }}" />
+                        <label for="{{ 'answer' + i + 'question' + question.question_id }}">{{ answer.title }}</label>
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- question of multiple selection-->
+                  <div *ngIf="question.type == 'multiple-selection'" class="row">
+                    <h5 class="col s12">
+                      <strong>{{ j + 1 }}.-</strong> {{ question.title }}
+                    </h5>
+                    <div class="col s12">
+                      <p *ngFor="let answer of question.answers; let i = index">
+                        <input type="checkbox" class="filled-in" id="{{ 'answer' + i + 'question' + question.question_id }}" />
+                        <label for="{{ 'answer' + i + 'question' + question.question_id }}">{{ answer.title }}</label>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="center">
+                <button class="btn btn-large uss-color waves-effect waves-light" type="submit" name="action">Enviar
+                  <i class="material-icons right white-text">send</i>
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="row"></div>
+  <div class="row"></div>
+</section>

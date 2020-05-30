@@ -1,0 +1,14 @@
+img {
+  width: 70%;
+}
+
+img:nth-child(1) {
+  height: auto;
+  top: -70px;
+  position: relative;
+}
+
+strong {
+  font-size: 15rem;
+  line-height: 1;
+}

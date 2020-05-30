@@ -1,0 +1,15 @@
+iframe{
+  border: 0;
+}
+
+@media only screen and (max-width: 600px) {
+
+  #simulator{
+    max-height: 300px;
+  }
+
+  nav{
+    height: 116px !important;
+  }
+  
+}

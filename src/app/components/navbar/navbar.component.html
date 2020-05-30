@@ -1,0 +1,36 @@
+<div class="navbar-fixed">
+  <nav class="white">
+    <a materialize="sideNav" [materializeParams]="[{closeOnClick: true}]" data-activates="slide-out" class="left button-collapse"><i class="material-icons">menu</i></a>
+    <div class="nav-wrapper container">
+      <a target="blank" href="http://fit.uss.cl/" class="brand-logo"><img src="../../../assets/imgs/uss-logo-black.svg" class="logo"></a>
+      <ul class="right hide-on-med-and-down">
+        <li routerLinkActive="uss-color"><a class="text-uss-color" routerLink="home" routerLinkActive="white-text">Inicio</a></li>
+        <li *ngIf="auth.isLogged()" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="courses" routerLinkActive="white-text">Cursos</a></li>
+        <li *ngIf="!auth.isLogged()"><a class="btn uss-color white-text waves-effect waves-light hoverable" routerLink="login">Ingresar</a></li>
+        <li *ngIf="auth.isLogged()"><a (click)="auth.logout()"><i class="material-icons text-uss-color">exit_to_app</i></a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+<!-- menú lateral -->
+<ul id="slide-out" class="side-nav">
+  <li class="center uss-color">
+    <div class="row"></div>
+    <img src="../../../assets/imgs/logo-light.png" class="logo">
+    <h5 *ngIf="auth.isLogged() && user !== null" class="white-text">{{ user.name + ' ' + user.lastName }}</h5>
+    <h6 *ngIf="auth.isLogged() && user !== null" class="white-text">{{ user.email }}</h6>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row no-margin"></div>
+  </li>
+  <li routerLinkActive="grey lighten-4">
+    <a class="waves-effect" routerLink="home"><i class="fas fa-home fa-2x"></i>Inicio</a>
+  </li>
+  <li *ngIf="auth.isLogged()" routerLinkActive="grey lighten-4">
+    <a class="waves-effect" routerLink="courses"><i class="fas fa-graduation-cap fa-2x"></i>Cursos</a>
+  </li>
+  <li id="side-nav-login-btn" *ngIf="!auth.isLogged()"><a class="btn uss-color white-text waves-effect waves-light hoverable" routerLink="login">Ingresar</a></li>
+  <li id="side-nav-logout-btn" *ngIf="auth.isLogged()"><a class="btn uss-color white-text waves-effect waves-light hoverable" (click)="auth.logout()">Salir</a></li>
+</ul>

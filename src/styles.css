@@ -1,1 +1,87 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  color: #1a232f;
+}
+
+.text-uss-color {
+  color: #1a232f;
+}
+
+.uss-color {
+  background-color: #1a232f;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px #000;
+}
+
+.container {
+  width: 85%;
+}
+
+a:hover:not(.title):not(.btn) {
+  transition: 500ms;
+  color: #2bbbad !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.no-padding-right {
+  padding-right: 0 !important;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-margin-top {
+  margin-top: 0;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.no-border {
+  border: 0 !important;
+}
+
+.card-image img {
+  object-fit: cover;
+  min-height: 150px;
+  transition: 2000ms;
+}
+
+.card:hover .card-image img {
+  transform: scale(1.2);
+}
+
+.card-image {
+  height: 150px;
+  overflow: hidden;
+}
+
+.collection.with-header .collection-item {
+  height: 60px;
+}
+
+.collection-item strong{
+  font-size: 1.64rem;
+}
+
+.btn-secondary {
+  text-decoration: none;
+  color: #1a232f;
+  border: 2px solid #1a232f;
+  text-align: center;
+  letter-spacing: .5px;
+  transition: .2s ease-out;
+  cursor: pointer;
+  font-weight: bold;
+}

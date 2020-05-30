@@ -1,0 +1,61 @@
+.parallax img{
+  width: 150%;
+  height: auto;
+  object-fit: cover;
+}
+
+.parallax-container{
+  height: 80vh;
+  background: linear-gradient(to right, rgba(52,72,128,0.85), rgba(30,207,202,0.85));
+}
+
+.prefix {
+  top: 10px;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=number]:not(.browser-default):focus:not([readonly])+label,
+input[type=email]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label,
+.input-field .prefix.active,
+button.btn-flat.picker__today.waves-effect,
+button.btn-flat.picker__close.waves-effect,
+.picker__day.picker__day--infocus.picker__day--today.picker__day--highlighted,
+.picker__day.picker__day--infocus.picker__day--today {
+  color: #1a232f;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: 1px solid #1a232f;
+  box-shadow: 0 1px 0 0 #1a232f;
+}
+
+input {
+  color: #1a232f !important;
+}
+
+img.logo {
+  zoom: 0.17;
+}
+
+@media only screen and (max-width: 600px) {
+
+  img.logo {
+    zoom: 0.15;
+    max-width: 1790px;
+  }
+
+  .full {
+    min-height: 90vh;
+    overflow-y: hidden;
+  }
+
+  .parallax-container{
+    height: 90vh;
+    background: linear-gradient(to right, rgba(52,72,128,0.85), rgba(30,207,202,0.85));
+  }
+
+}
