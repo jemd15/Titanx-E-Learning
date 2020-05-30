@@ -22,6 +22,7 @@ export class LessonComponent implements OnInit {
   public lesson_number: string;
   public activities = [];
   public test
+  public questions = []
 
   constructor(
     private route: ActivatedRoute,
@@ -42,13 +43,46 @@ export class LessonComponent implements OnInit {
     }
     this.api.getAllActivities(this.course_id, this.unitNumber, this.lesson_number).subscribe((res: any) => {
       this.activities = res.activities;
-      console.log('activities', this.activities)
     });
     this.api.getTestByCourseId(this.course_id, this.unitNumber, this.lesson_number)
-      .subscribe((res: any) => {
-        this.test = res.test;
-        console.log(this.test)
-      });
+      /* .subscribe((res: any) => {
+        this.test = res.test[0];
+        this.api.getQuestionsByTestId(this.test.test_id).subscribe((res: any) => {
+          this.test.questions = res.questions;
+          this.test.questions.forEach(question => {
+            this.api.getAnswersByQuestionId(question.question_id).subscribe((res: any) => {
+              question.answers = res.answers;
+              console.log('answers', res.answers)
+            });
+            console.log(this.test)
+          });
+        });
+      }); */
+      .toPromise()
+      .then((res: any) => {
+        this.test = res.test[0];
+        this.api.getQuestionsByTestId(this.test.test_id)
+          .toPromise()
+          .then((res: any) => {
+            this.questions = res.questions;
+            this.questions.forEach(question => {
+              this.api.getAnswersByQuestionId(question.question_id)
+                .toPromise()
+                .then((res: any) => {
+                  question.answers = res.answers;
+                })
+                .catch(err => {
+                  console.log('error', err);
+                });
+            });
+          })
+          .catch(err => {
+            console.log('error', err);
+          });
+      })
+      .catch(err => {
+        console.log('error', err);
+      })
   }
 
 }

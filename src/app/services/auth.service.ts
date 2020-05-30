@@ -26,6 +26,8 @@ export class AuthService {
           this.ngZone.run(() => {
             this.router.navigate(['courses']);
           });
+        }, err => {
+          toast(`Error: ${err.message}`, 3000);
         }
       );
   }

@@ -6,13 +6,17 @@ import { Course } from '../models/courses';
 import { Unit } from '../models/units';
 import { Activity } from '../models/activities';
 import { Lesson } from '../models/lessons';
+import { Test } from '../models/tests';
+import { Question } from '../models/questions';
+import { Answer } from '../models/answers';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  private apiUrl = 'http://localhost:3000'
+  // private apiUrl = 'http://localhost:3000/api'
+  private apiUrl = 'https://e-learning.titanx.cl/api'
 
   constructor(
     private http: HttpClient
@@ -56,8 +60,16 @@ export class ApiService {
     return this.http.get<Activity[]>(`${this.apiUrl}/course/${course_id}/unit/${unit_number}/lesson/${lesson_number}/activities`);
   }
 
-  getTestByCourseId(course_id: string, unit_number: string, lesson_number: string): Observable<Unit> {
-    return this.http.get<Unit>(`${this.apiUrl}/course/${course_id}/unit/${unit_number}/lesson/${lesson_number}/test`);
+  getTestByCourseId(course_id: string, unit_number: string, lesson_number: string): Observable<Test> {
+    return this.http.get<Test>(`${this.apiUrl}/course/${course_id}/unit/${unit_number}/lesson/${lesson_number}/test`);
+  }
+
+  getQuestionsByTestId(test_id: string): Observable<Question> {
+    return this.http.get<Question>(`${this.apiUrl}/test/${test_id}/questions`);
+  }
+
+  getAnswersByQuestionId(question_id: string): Observable<Answer> {
+    return this.http.get<Answer>(`${this.apiUrl}/question/${question_id}/answers`);
   }
 
 }

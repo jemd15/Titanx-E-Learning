@@ -22,6 +22,14 @@ img{
   width: 80%;
 }
 
+.fit-logo{
+  transition: 500ms;
+}
+
+.fit-logo:hover{
+  transform: scale(1.2);
+}
+
 @media only screen and (max-width: 600px) {
 
   img{

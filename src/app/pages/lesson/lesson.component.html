@@ -16,15 +16,26 @@
             <p>{{ activity.description }}</p>
           </li>
           <div class="video-container">
-            <iframe *ngIf="activity.type == 'video'" width="100%" height="auto" [src]="activity.url | safeUrl" frameborder="0" allowfullscreen></iframe>
-            <iframe *ngIf="activity.type == 'simulator'" width="100%" height="700" [src]="activity.url | safeUrl" frameborder="0" allowfullscreen></iframe>
+            
+            <!-- video activity -->
+            <iframe *ngIf="activity.type == 'video'" width="100%" height="auto" [src]="activity.url | safeUrl" allowfullscreen></iframe>
+
+            <!-- simulator activity -->
+            <iframe *ngIf="activity.type == 'simulator'" width="100%" height="700" [src]="activity.url | safeUrl" allowfullscreen></iframe>
+            
+            <!-- game activity -->
+            <iframe *ngIf="activity.type == 'game'" width="100%" height="700" [src]="activity.url | safeUrl" allowfullscreen></iframe>
+
+            <!-- interactive img activity -->
+            <iframe *ngIf="activity.type == 'interactive-img'" width="100%" height="700" [src]="activity.url | safeUrl" allowscriptaccess="always" allowfullscreen="true" scrolling="yes" allownetworking="all"></iframe>
+
           </div>
         </ul>
       </div>
     </li>
 
     <!-- test structure -->
-    <li>
+    <li *ngIf="this.test">
       <div class="collapsible-header">
         <h4><strong>Actividad {{ activities.length + 1 }}:</strong> Test de conocimientos.</h4>
       </div>
@@ -34,71 +45,46 @@
           <div class="row">
 
             <form class="col s12">
+              <div *ngIf="questions">
+                <div *ngFor="let question of questions; let j = index">
+                  <!-- question of text area -->
+                  <div *ngIf="question.type == 'text'" class="row">
+                    <h5 class="col s12">
+                      <strong>{{ j + 1 }}.-</strong> {{ question.title }}
+                    </h5>
+                    <div class="input-field col s12">
+                      <textarea id="textarea1" class="materialize-textarea grey lighten-3"></textarea>
+                    </div>
+                  </div>
 
-              <!-- pregunta con text area -->
-              <div class="row">
-                <h5 class="col s12">
-                  <strong>1.-</strong> Esta es una pregunta de desarrollo.
-                </h5>
-                <div class="input-field col s12">
-                  <textarea id="textarea1" class="materialize-textarea grey lighten-3"></textarea>
+                  <!-- question of simple selection -->
+                  <div *ngIf="question.type == 'simple-selection'" class="row">
+                    <h5 class="col s12">
+                      <strong>{{ j + 1 }}.-</strong> {{ question.title }}
+                    </h5>
+                    <div class="col s12">
+                      <p *ngFor="let answer of question.answers; let i = index">
+                        <input name="group1" type="radio" id="{{ 'answer' + i + 'question' + question.question_id }}" />
+                        <label for="{{ 'answer' + i + 'question' + question.question_id }}">{{ answer.title }}</label>
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- question of multiple selection-->
+                  <div *ngIf="question.type == 'multiple-selection'" class="row">
+                    <h5 class="col s12">
+                      <strong>{{ j + 1 }}.-</strong> {{ question.title }}
+                    </h5>
+                    <div class="col s12">
+                      <p *ngFor="let answer of question.answers; let i = index">
+                        <input type="checkbox" class="filled-in" id="{{ 'answer' + i + 'question' + question.question_id }}" />
+                        <label for="{{ 'answer' + i + 'question' + question.question_id }}">{{ answer.title }}</label>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <!-- pregunta con una alternativa correcta -->
-              <div class="row">
-                <h5 class="col s12">
-                  <strong>2.-</strong> Esta es una pregunta con una alternativa correcta.
-                </h5>
-                <div class="col s12">
-                  <p>
-                    <input name="group1" type="radio" id="test1" />
-                    <label for="test1">Red</label>
-                  </p>
-                  <p>
-                    <input name="group1" type="radio" id="test2" />
-                    <label for="test2">Yellow</label>
-                  </p>
-                  <p>
-                    <input name="group1" type="radio" id="test3" />
-                    <label for="test3">Green</label>
-                  </p>
-                  <p>
-                    <input name="group1" type="radio" id="test4" />
-                    <label for="test4">Brown</label>
-                  </p>
-                </div>
-              </div>
-
-              <!-- pregunta con selección múltiple-->
-              <div class="row">
-                <h5 class="col s12">
-                  <strong>3.-</strong> Esta es una pregunta con selección múltiple.
-                </h5>
-                <div class="col s12">
-                  <p>
-                    <input type="checkbox" class="filled-in" id="test5" />
-                    <label for="test5">Red</label>
-                  </p>
-                  <p>
-                    <input type="checkbox" class="filled-in" id="test6" />
-                    <label for="test6">Yellow</label>
-                  </p>
-                  <p>
-                    <input type="checkbox" class="filled-in" id="test7" />
-                    <label for="test7">cyan</label>
-                  </p>
-                  <p>
-                    <input type="checkbox" class="filled-in" id="test8" />
-                    <label for="test8">Green</label>
-                  </p>
-                  <p>
-                    <input type="checkbox" class="filled-in" id="test9" />
-                    <label for="test9">Brown</label>
-                  </p>
-                </div>
-              </div>
-
+              
               <div class="center">
                 <button class="btn btn-large uss-color waves-effect waves-light" type="submit" name="action">Enviar
                   <i class="material-icons right white-text">send</i>
