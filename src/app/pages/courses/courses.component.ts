@@ -26,6 +26,8 @@ export class CoursesComponent implements OnInit {
   ngOnInit() {
     this.newCourseForm = this.createNewCoruseForm();
     this.user = JSON.parse(localStorage.getItem('user'));
+    console.log(this.user);
+    
     this.api.getAllCourses().subscribe((res: any) => {
       this.courses = res.courses;
       console.log(this.courses);
@@ -68,6 +70,10 @@ export class CoursesComponent implements OnInit {
         toast('Error al crear curso', 3000);
         console.log(err);
       })
+  }
+
+  addStudentToCourse(){
+    
   }
 
 }

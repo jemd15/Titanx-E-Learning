@@ -23,3 +23,14 @@
 .card:hover .card-image .material-icons.fa-10x{
   transform: scale(1.5);
 }
+
+.card-content span strong{
+  font-size: 15px;
+}
+.card-content ul{
+  margin: 10.5px 0;
+}
+
+.delete-hover:hover {
+  background-color: #b71c1c !important;
+}

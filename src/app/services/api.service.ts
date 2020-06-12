@@ -16,8 +16,8 @@ import { ResolvedTest } from '../models/ResolvedTests';
 })
 export class ApiService {
 
-  // private apiUrl = 'http://localhost:3000/api'
-  private apiUrl = 'https://e-learning.titanx.cl/api'
+  private apiUrl = 'http://localhost:3000/api'
+  // private apiUrl = 'https://e-learning.titanx.cl/api'
 
   constructor(
     private http: HttpClient
