@@ -20,6 +20,7 @@ export class AppComponent {
       karts.classList.add('cross-screen');
       document.addEventListener('animationend', () => {
         karts.classList.add('hide');
+        this.secretUnlock = true;
       }, false);
     }
   }
