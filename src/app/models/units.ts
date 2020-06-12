@@ -1,11 +1,11 @@
 export interface Unit {
 
-  unit_id: string;
+  unit_id?: string;
   number: number;
   title: string;
-  descrption: string;
+  description: string;
   state: string;
-  course_course_id: number;
-  lessons: any[];
+  course_course_id: string;
+  lessons?: any[];
 
 }

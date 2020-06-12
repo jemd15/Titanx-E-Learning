@@ -85,3 +85,36 @@ a:hover:not(.title):not(.btn) {
   cursor: pointer;
   font-weight: bold;
 }
+
+.material-tooltip, .material-tooltip span, .material-tooltip .backdrop {
+  color: white !important;
+  border: 0;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=number]:not(.browser-default):focus:not([readonly])+label,
+input[type=email]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label,
+.input-field .prefix.active,
+button.btn-flat.picker__today.waves-effect,
+button.btn-flat.picker__close.waves-effect,
+.picker__day.picker__day--infocus.picker__day--today.picker__day--highlighted,
+.picker__day.picker__day--infocus.picker__day--today {
+  color: #1a232f;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: 1px solid #1a232f;
+  box-shadow: 0 1px 0 0 #1a232f;
+}
+
+input {
+  color: #1a232f !important;
+}
+
+.modal {
+  max-height: fit-content;
+}

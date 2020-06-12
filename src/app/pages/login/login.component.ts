@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { toast, MaterializeAction } from 'angular2-materialize';
+import { MaterializeAction } from 'angular2-materialize';
 import { EventEmitter } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 

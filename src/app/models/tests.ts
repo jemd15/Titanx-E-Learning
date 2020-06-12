@@ -1,6 +1,6 @@
 export interface Test {
 
-  test_id: number;
+  test_id: string;
   state: string;
   start: string;
   finish: string;

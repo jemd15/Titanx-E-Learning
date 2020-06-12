@@ -9,14 +9,15 @@ import { Lesson } from '../models/lessons';
 import { Test } from '../models/tests';
 import { Question } from '../models/questions';
 import { Answer } from '../models/answers';
+import { ResolvedTest } from '../models/ResolvedTests';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  // private apiUrl = 'http://localhost:3000/api'
-  private apiUrl = 'https://e-learning.titanx.cl/api'
+  private apiUrl = 'http://localhost:3000/api'
+  // private apiUrl = 'https://e-learning.titanx.cl/api'
 
   constructor(
     private http: HttpClient
@@ -72,4 +73,42 @@ export class ApiService {
     return this.http.get<Answer>(`${this.apiUrl}/question/${question_id}/answers`);
   }
 
+  getResolvedTestByCourseId(course_id: string, unit_number: string, lesson_number: string): Observable<ResolvedTest[]> {
+    return this.http.get<ResolvedTest[]>(`${this.apiUrl}/course/${course_id}/unit/${unit_number}/lesson/${lesson_number}/resolvedTests`);
+  }
+
+  postResolvedTest(email: string, password: string): Observable<User> {
+    return this.http.post<User>(this.apiUrl + '/auth/login', { email, password });
+  }
+
+  postNewUnit(unit: Unit): Observable<Unit> {
+    return this.http.post<Unit>(this.apiUrl + '/course/:course_id/unit/new', {
+      number: unit.number,
+      title: unit.title,
+      description: unit.description,
+      state: unit.state,
+      course_course_id: unit.course_course_id
+    })
+  }
+
+  postNewLesson(lesson: Lesson): Observable<Lesson> {
+    return this.http.post<Lesson>(this.apiUrl + `/unit/${lesson.unit_unit_id}/lesson/new`, {
+      number: lesson.number,
+      title: lesson.title,
+      unit_unit_id: lesson.unit_unit_id,
+      unit_course_course_id: lesson.unit_course_course_id
+    })
+  }
+
+  postNewActivity(course_id: string, unit_number: string, lesson_number, activity: Activity): Observable<Activity> {
+    return this.http.post<Activity>(this.apiUrl + `/course/${course_id}/unit/${unit_number}/lesson/${lesson_number}/activity/new`, {
+      number: activity.number, 
+      title: activity.title, 
+      description: activity.description, 
+      type: activity.type, 
+      url: activity.url
+    })
+  }
+
 }
+

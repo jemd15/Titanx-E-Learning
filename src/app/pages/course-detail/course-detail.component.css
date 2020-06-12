@@ -1,0 +1,13 @@
+a.tooltipped{
+  margin-top: 20px;
+}
+
+.prefix {
+  top: 10px;
+}
+
+textarea{
+  height: 5rem;
+  overflow-y: auto;
+  max-height: 5rem;
+}

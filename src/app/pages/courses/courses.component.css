@@ -1,12 +1,25 @@
-.card-img img{
+.card-img img {
   object-fit: cover;
 }
 
-.card-image img{
+.card-image img {
   object-fit: cover;
   height: 280px;
 }
 
-.card-image{
+.card-image {
   height: 280px;
+}
+
+.uss-color-gradient {
+  background: #1a232f;
+  transition: 3s;
+}
+
+.card .card-image .material-icons.fa-10x{
+  transition: 2s;
+}
+
+.card:hover .card-image .material-icons.fa-10x{
+  transform: scale(1.5);
 }

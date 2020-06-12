@@ -1,53 +1,20 @@
-<div class="full hide-on-small-only">
+<div class="full">
   <div class="parallax-container valign-wrapper">
     <div class="parallax" materialize="parallax"><img src="../../../assets/imgs/fondomakeit.png" alt=""></div>
     <div class="container row no-margin-bottom">
       <div class="col s12 m4 offset-m1">
-        <form class="card-panel hoverable" materialize [formGroup]="loginForm" (ngSubmit)="login()">
+        <form class="card-panel hoverable" materialize [formGroup]="loginForm" (ngSubmit)="login()" ngNativeValidate>
           <div class="row center no-margin">
             <img class="logo" src="../../../assets/imgs/logo-dark.png">
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix text-uss-color">email</i>
-            <input formControlName="email" type="email" required="true" class="validate">
+            <input formControlName="email" type="email" required class="validate">
             <label for="icon_prefix">Email</label>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix text-uss-color">lock</i>
-            <input formControlName="password" type="password" required="true" class="validate">
-            <label for="icon_prefix">Contraseña</label>
-          </div>
-          <div class="col s12">
-            <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Entrar</strong></button>
-          </div>
-          <div class="center">
-            <div class="row"></div>
-            <a (click)="openModal()" class="text-uss-color">¿Olvidó su contraseña?</a>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- small version -->
-<div class="full valign-wrapper hide-on-med-and-up">
-  <div class="parallax-container valign-wrapper">
-    <div class="parallax" materialize="parallax"><img src="../../../assets/imgs/fondomakeit.png" alt=""></div>
-    <div class="container row no-margin-bottom">
-      <div class="col s12 m4 offset-m1">
-        <form class="card-panel hoverable" materialize [formGroup]="loginForm" (ngSubmit)="login()">
-          <div class="row center">
-            <img class="logo" src="../../../assets/imgs/logo-dark.png">
-          </div>
-          <div class="input-field col s12">
-            <i class="material-icons prefix text-uss-color">email</i>
-            <input formControlName="email" type="email" required="true" class="validate">
-            <label for="icon_prefix">Email</label>
-          </div>
-          <div class="input-field col s12">
-            <i class="material-icons prefix text-uss-color">lock</i>
-            <input formControlName="password" type="password" required="true" class="validate">
+            <input formControlName="password" type="password" required class="validate">
             <label for="icon_prefix">Contraseña</label>
           </div>
           <div class="col s12">
@@ -66,7 +33,7 @@
 <!-- estructura del modal de recuperación de contraseña -->
 <div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
   <div class="col s12 m6 offset-m3">
-    <form class="card-panel row hoverable" materialize [formGroup]="loginForm">
+    <form class="card-panel row hoverable" materialize [formGroup]="loginForm" ngNativeValidate>
       <div class="row center no-margin">
         <img class="logo" src="../../../assets/imgs/logo-dark.png">
       </div>

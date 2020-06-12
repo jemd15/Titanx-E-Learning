@@ -1,9 +1,11 @@
 <section class="container">
   <div class="row"></div>
-  <div class="row"></div>
-  <div class="row hide-on-small-only"></div>
-  <div class="row hide-on-small-only"></div>
-  <h1>{{ breadcrumb.course | titlecase }}</h1>
+  <div class="row valign-wrapper no-margin">
+    <h1 class="col left s11">{{ breadcrumb.course | titlecase }}</h1>
+    <div class="col right s1">
+      <a (click)="openActivityModal()" *ngIf="user.rol !== 'student'" materialize="tooltip" class="right btn uss-color tooltipped" data-position="left" data-delay="50" data-tooltip="Crear nueva actividad"><i class="material-icons white-text">add_circle_outline</i></a>
+    </div>
+  </div>
   <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
   <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
     <li *ngFor="let activity of activities">
@@ -15,19 +17,19 @@
           <li class="collection-header">
             <p>{{ activity.description }}</p>
           </li>
-          <div class="video-container">
+          <div class="video-container" [ngSwitch]="activity.type">
             
             <!-- video activity -->
-            <iframe *ngIf="activity.type == 'video'" width="100%" height="auto" [src]="activity.url | safeUrl" allowfullscreen></iframe>
+            <iframe *ngSwitchCase="'video'" width="100%" height="auto" [src]="activity.url | safeUrl" allowfullscreen></iframe>
 
             <!-- simulator activity -->
-            <iframe *ngIf="activity.type == 'simulator'" width="100%" height="700" [src]="activity.url | safeUrl" allowfullscreen></iframe>
+            <iframe *ngSwitchCase="'simulator'" width="100%" height="700" [src]="activity.url | safeUrl" allowfullscreen></iframe>
             
             <!-- game activity -->
-            <iframe *ngIf="activity.type == 'game'" width="100%" height="700" [src]="activity.url | safeUrl" allowfullscreen></iframe>
+            <iframe *ngSwitchCase="'game'" width="100%" height="700" [src]="activity.url | safeUrl" allowfullscreen></iframe>
 
             <!-- interactive img activity -->
-            <iframe *ngIf="activity.type == 'interactive-img'" width="100%" height="700" [src]="activity.url | safeUrl" allowscriptaccess="always" allowfullscreen="true" scrolling="yes" allownetworking="all"></iframe>
+            <iframe *ngSwitchCase="'interactive-img'" width="100%" height="700" [src]="activity.url | safeUrl" allowscriptaccess="always" allowfullscreen="true" scrolling="yes" allownetworking="all"></iframe>
 
           </div>
         </ul>
@@ -44,43 +46,34 @@
           <h4><strong>Pone a prueba tus conocimientos!</strong></h4>
           <div class="row">
 
-            <form class="col s12">
+            <form [formGroup]="testForm" class="col s12">
               <div *ngIf="questions">
-                <div *ngFor="let question of questions; let j = index">
-                  <!-- question of text area -->
-                  <div *ngIf="question.type == 'text'" class="row">
+                <div formArrayName="answers" *ngFor="let question of questions; let j = index; let answer of answers.controls" [ngSwitch]="question.type">
+                  <div class="row">
                     <h5 class="col s12">
                       <strong>{{ j + 1 }}.-</strong> {{ question.title }}
                     </h5>
-                    <div class="input-field col s12">
-                      <textarea id="textarea1" class="materialize-textarea grey lighten-3"></textarea>
+                    
+                    <!-- question of text area -->
+                    <div *ngSwitchCase="'text'" class="col s12 input-field">
+                      <textarea [formControlName]="j" id="textarea1" class="materialize-textarea grey lighten-3"></textarea>
                     </div>
-                  </div>
 
-                  <!-- question of simple selection -->
-                  <div *ngIf="question.type == 'simple-selection'" class="row">
-                    <h5 class="col s12">
-                      <strong>{{ j + 1 }}.-</strong> {{ question.title }}
-                    </h5>
-                    <div class="col s12">
-                      <p *ngFor="let answer of question.answers; let i = index">
-                        <input name="group1" type="radio" id="{{ 'answer' + i + 'question' + question.question_id }}" />
-                        <label for="{{ 'answer' + i + 'question' + question.question_id }}">{{ answer.title }}</label>
+                    <!-- question of simple selection -->
+                    <div *ngSwitchCase="'simple-selection'" class="col s12">
+                      <p *ngFor="let alternatives of question.answers; let i = index">
+                        <input [formControlName]="j" name="answers" type="radio" id="{{ 'alternatives' + i + 'question' + question.question_id }}" />
+                        <label for="{{ 'alternatives' + i + 'question' + question.question_id }}">{{ alternatives.title }}</label>
                       </p>
                     </div>
-                  </div>
 
-                  <!-- question of multiple selection-->
-                  <div *ngIf="question.type == 'multiple-selection'" class="row">
-                    <h5 class="col s12">
-                      <strong>{{ j + 1 }}.-</strong> {{ question.title }}
-                    </h5>
-                    <div class="col s12">
-                      <p *ngFor="let answer of question.answers; let i = index">
-                        <input type="checkbox" class="filled-in" id="{{ 'answer' + i + 'question' + question.question_id }}" />
-                        <label for="{{ 'answer' + i + 'question' + question.question_id }}">{{ answer.title }}</label>
+                    <!-- question of multiple selection-->
+                    <div *ngSwitchCase="'multiple-selection'" class="col s12">
+                      <p *ngFor="let alternatives of question.answers; let i = index">
+                        <input [formControlName]="j" type="checkbox" class="filled-in" id="{{ 'alternatives' + i + 'question' + question.question_id }}" />
+                        <label for="{{ 'alternatives' + i + 'question' + question.question_id }}">{{ alternatives.title }}</label>
                       </p>
-                    </div>
+                    </div> 
                   </div>
                 </div>
               </div>
@@ -100,3 +93,55 @@
   <div class="row"></div>
   <div class="row"></div>
 </section>
+
+<!-- estructura del modal de creación de actividad -->
+<div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalNewActivity">
+  <div class="col s12 m8 offset-m2">
+    <form (ngSubmit)="addActivity()" class="card-panel row hoverable no-margin" materialize [formGroup]="newActivityForm" ngNativeValidate autocomplete="off">
+      <div class="col s12 center">
+        <h5><strong>Crear nueva actividad</strong></h5>
+      </div>
+      <div class="input-field col s12">
+        <input formControlName="title" id="title" type="text" required class="validate">
+        <label for="title">Título</label>
+      </div>
+      <div class="input-field col s12">
+        <textarea formControlName="description" id="description" class="materialize-textarea validate"
+        required></textarea>
+        <label for="description">Descripción</label>
+      </div>
+      <div class="input-field col s12">
+        <input formControlName="url" id="url" type="text" required class="validate">
+        <label for="url">Url</label>
+      </div>
+      <div class="col s12">
+        Tipo:
+        <br>
+        <p>
+          <input name="group1" formControlName="type" type="radio" id="video" value="video" required />
+          <label for="video">Video</label>
+        </p>
+        <p>
+          <input name="group1" formControlName="type" type="radio" id="simulator"value="simulator" />
+          <label for="simulator">Simulador</label>
+        </p>
+        <p>
+          <input name="group1" formControlName="type" type="radio" id="game" required value="game" />
+          <label for="game">Juego</label>
+        </p>
+        <p>
+          <input name="group1" formControlName="type" type="radio" id="interactive-img" required value="interactive-img" />
+          <label for="interactive-img">Imágenes interactivas</label>
+        </p>
+      </div>
+      <div class="row"></div>
+      <div class="col s12">
+        <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color" value="Crear"><strong class="white-text">Crear</strong></button>
+      </div>
+      <div class="row"></div>
+      <div class="col s12">
+        <a (click)="closeActivityModal()" class="btn transparent btn-secondary waves-effect col s12">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>

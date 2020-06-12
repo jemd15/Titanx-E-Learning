@@ -19,5 +19,22 @@
         </div>
       </div>
     </div>
+    <div class="col s12 m4" *ngIf="user.rol == 'teacher'">
+      <div class="card hoverable">
+        <div class="card-image uss-color-gradient valign-wrapper">
+          <!-- <img [src]="course.img_url"> -->
+          <i class="material-icons grey-text center-block fa-10x">add_circle_outline</i>
+          <span class="card-title text-shadow"><strong class="white-text">Crear nuevo curso</strong></span>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li><i class="material-icons left">school</i><strong>{{ user.name + ' ' + user.lastName | titlecase }}</strong></li>
+          </ul>
+        </div>
+        <div class="card-action center">
+          <a class="btn waves-effect waves-light uss-color">Crear</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
