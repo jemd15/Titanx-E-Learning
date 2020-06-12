@@ -32,9 +32,36 @@
           </ul>
         </div>
         <div class="card-action center">
-          <a class="btn waves-effect waves-light uss-color">Crear</a>
+          <a (click)="openCourseModal()" class="btn waves-effect waves-light uss-color">Crear</a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- estructura del modal de creación de curso -->
+<div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalNewCourse">
+  <div class="col s12 m8 offset-m2">
+    <form (ngSubmit)="addCourse()" class="card-panel row hoverable no-margin" materialize [formGroup]="newCourseForm" ngNativeValidate autocomplete="off">
+      <div class="col s12 center">
+        <h5><strong>Crear nuevo curso</strong></h5>
+      </div>
+      <div class="input-field col s12">
+        <input formControlName="name" id="name" type="text" required class="validate">
+        <label for="name">Nombre</label>
+      </div>
+      <div class="input-field col s12">
+        <input formControlName="img_url" id="img_url" type="text" required class="validate">
+        <label for="img_url">Imágen (url)</label>
+      </div>
+      <div class="row"></div>
+      <div class="col s12">
+        <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color" value="Crear"><strong class="white-text">Crear</strong></button>
+      </div>
+      <div class="row"></div>
+      <div class="col s12">
+        <a (click)="closeCourseModal()" class="btn transparent btn-secondary waves-effect col s12">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>

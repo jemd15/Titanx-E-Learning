@@ -1,12 +1,10 @@
 export interface Course {
 
-  user_id: number;
-  name: string;
-  lastName: string;
-  email: string;
-  rol: string;
-  createdAt: any;
-  lastLogin: any;
-  token: string;
+  course_id?: number;
+  school_id: number;
+  course: string;
+  img_url: string;
+  teacher: string;
+  teacher_teacher_id: number;
 
 }

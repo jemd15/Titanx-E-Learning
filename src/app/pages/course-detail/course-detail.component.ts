@@ -37,14 +37,14 @@ export class CourseDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.newUnitForm = this.createNewUnitForm()
-    this.newLessonForm = this.createNewLessonForm()
-    this.course_id = this.route.snapshot.params['courseId']
-    this.course_name = this.route.snapshot.params['course']
+    this.newUnitForm = this.createNewUnitForm();
+    this.newLessonForm = this.createNewLessonForm();
+    this.course_id = this.route.snapshot.params['courseId'];
+    this.course_name = this.route.snapshot.params['course'];
     this.breadcrumb = {
       course: this.course_name,
       course_id: this.course_id
-    }
+    };
     this.api.getAllUnitsByCourseId(this.course_id).subscribe((res: any) => {
       this.units = res.units;
       for (let i = 0; i < this.units.length; i++) {
@@ -101,8 +101,9 @@ export class CourseDetailComponent implements OnInit {
     }
     this.api.postNewUnit(newUnit).toPromise()
       .then((res: any) => {
+        console.log(res)
         newUnit.lessons = [];
-        newUnit.unit_id = res.unit_id.unit_id
+        newUnit.unit_id = res.unit.unit_id
         this.units.push(newUnit);
         this.closeUnitModal();
         toast('Unidad creada', 3000);

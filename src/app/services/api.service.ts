@@ -16,8 +16,8 @@ import { ResolvedTest } from '../models/ResolvedTests';
 })
 export class ApiService {
 
-  private apiUrl = 'http://localhost:3000/api'
-  // private apiUrl = 'https://e-learning.titanx.cl/api'
+  // private apiUrl = 'http://localhost:3000/api'
+  private apiUrl = 'https://e-learning.titanx.cl/api'
 
   constructor(
     private http: HttpClient
@@ -110,5 +110,14 @@ export class ApiService {
     })
   }
 
+  postNewCourse(course: Course): Observable<Course>  {
+    console.log(course);
+    return this.http.post<Course>(this.apiUrl + `/course/new`, {
+      school_id: course.school_id, 
+      name: course.course,
+      img_url: course.img_url,
+      teacher_teacher_id: course.teacher_teacher_id
+    })
+  }
 }
 

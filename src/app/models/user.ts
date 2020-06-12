@@ -10,5 +10,7 @@ export interface User {
   token: string;
   emailVerified: string;
   school_school_id: number;
+  teacher_id?: number,
+  student_id?: number
 
 }
