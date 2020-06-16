@@ -102,22 +102,38 @@ export class ApiService {
 
   postNewActivity(course_id: string, unit_number: string, lesson_number, activity: Activity): Observable<Activity> {
     return this.http.post<Activity>(this.apiUrl + `/course/${course_id}/unit/${unit_number}/lesson/${lesson_number}/activity/new`, {
-      number: activity.number, 
-      title: activity.title, 
-      description: activity.description, 
-      type: activity.type, 
+      number: activity.number,
+      title: activity.title,
+      description: activity.description,
+      type: activity.type,
       url: activity.url
     })
   }
 
-  postNewCourse(course: Course): Observable<Course>  {
+  postNewCourse(course: Course): Observable<Course> {
     console.log(course);
     return this.http.post<Course>(this.apiUrl + `/course/new`, {
-      school_id: course.school_id, 
+      school_id: course.school_id,
       name: course.course,
       img_url: course.img_url,
       teacher_teacher_id: course.teacher_teacher_id
     })
+  }
+
+  getStudentsBySchoolId(school_id: string): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl + `/users/school/${school_id}`);
+  }
+
+  getStudentsByCourseId(course_id: string): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl + `/users/course/${course_id}`);
+  }
+
+  asignStudentToCourse(course_id, student_id, school_id): Observable<any> {
+    return this.http.post<any>(this.apiUrl + `/course/add-student`, { course_id, student_id, school_id });
+  }
+
+  removeStudentToCourse(course_id, student_id): Observable<any> {
+    return this.http.delete<any>(this.apiUrl + `/course/${course_id}/student/${student_id}/remove-student`);
   }
 }
 

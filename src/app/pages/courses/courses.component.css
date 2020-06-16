@@ -34,3 +34,7 @@
 .delete-hover:hover {
   background-color: #b71c1c !important;
 }
+
+.student-modal{
+  width: fit-content;
+}
