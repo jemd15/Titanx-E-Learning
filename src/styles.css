@@ -118,3 +118,7 @@ input {
 .modal {
   max-height: fit-content;
 }
+
+.delete-hover:hover {
+  background-color: #b71c1c !important;
+}

@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import {AuthInterceptor} from './auth/auth.interceptor';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -22,7 +22,9 @@ import { RestorePassComponent } from './pages/restore-pass/restore-pass.componen
 import { ApiService } from './services/api.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
-import { SafeUrlPipe } from './pipes/safe-url.pipe';
+import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
+import { UsersComponent } from './pages/users/users.component';
+import { SearchPipe } from './pipes/search/search.pipe';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     BreadcrumbComponent,
     LessonComponent,
     RestorePassComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    UsersComponent,
+    SearchPipe
   ],
   imports: [
     HttpClientModule,

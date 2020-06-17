@@ -1,0 +1,92 @@
+<section class="container">
+  <div class="row"></div>
+  <div class="row">
+    <!-- tabla de usuarios -->
+    <div class="valign-wrapper">
+      <h1 class="no-padding col s12 m9">Listado de Usuarios <a (click)="openCreateUserModal()" materialize="tooltip" class="add-user btn uss-color tooltipped" data-position="right" data-delay="50" data-tooltip="Crear nuevo usuario"><i class="material-icons white-text">add_circle_outline</i></a></h1>
+      <div class="input-field col s12 m3 card card-input">
+        <i class="material-icons prefix">search</i>
+        <input id="icon_prefix" name="filter" [(ngModel)]="filter" type="text" class="validate card-input">
+        <label for="icon_prefix" class="card-input">Buscar Usuario</label>
+      </div>
+    </div>
+    <div class="card-panel no-margin col s12">
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users | search:filter">
+            <td>{{user.name}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td *ngIf="user.rol == 'admin'">admin</td>
+            <td *ngIf="user.rol == 'teacher'">profesor</td>
+            <td *ngIf="user.rol == 'student'">alumno</td>
+            <td *ngIf="user.state == 'active'">Activo</td>
+            <td *ngIf="user.state == 'inactive'">Bloqueado</td>
+            <th class="row">
+              <a *ngIf="user.state == 'inactive'" materialize="tooltip" class="waves-effect waves-light btn uss-color right tooltipped" data-position="left" data-delay="50" data-tooltip="Desbloquear usuario"><i class="material-icons white-text">add_circle_outline</i></a>
+              <a *ngIf="user.state == 'active'" materialize="tooltip" class="waves-effect waves-light btn uss-color delete-hover right tooltipped" data-position="left" data-delay="50" data-tooltip="Bloquear usuario"><i class="material-icons white-text">block</i></a>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- estructura del modal de creación de usuario -->
+<div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCreateUser">
+  <div class="col s12 m8 offset-m2">
+    <form (ngSubmit)="createUser()" class="card-panel row hoverable no-margin" materialize [formGroup]="createUserForm" ngNativeValidate autocomplete="off">
+      <div class="col s12 center">
+        <h5><strong>Crear nuevo usuario</strong></h5>
+      </div>
+      <div class="input-field col s12">
+        <input formControlName="name" id="name" type="text" required class="validate">
+        <label for="name">Nombre</label>
+      </div>
+      <div class="input-field col s12">
+        <input formControlName="lastName" id="lastName" type="text" required class="validate">
+        <label for="lastName">Apellido</label>
+      </div>
+      <div class="input-field col s12">
+        <input formControlName="password" id="password" type="password" required class="validate">
+        <label for="password">Contraseña provisoria</label>
+      </div>
+      <div class="input-field col s12">
+        <input formControlName="email" id="email" type="email" required class="validate">
+        <label for="email">Email</label>
+      </div>
+      <div class="input-field col s12">
+        <select materialize="material_select" required fomrControlName="rol">
+          <option value="" disabled selected>Rol</option>
+          <option value="admin">admin</option>
+          <option value="teacher">profesor</option>
+          <option value="student">alumno</option>
+        </select>
+      </div>
+      <div class="input-field col s12">
+        <select materialize="material_select" [materializeSelectOptions]="selectOptions" fomrControlName="school_school_id">
+          <option *ngFor="let school of schools" [value]="school.id">{{school.name}}</option>
+        </select>
+      </div>
+      <div class="row"></div>
+      <div class="col s12">
+        <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color" value="Crear"><strong class="white-text">Crear</strong></button>
+      </div>
+      <div class="row"></div>
+      <div class="col s12">
+        <a (click)="closeCreateUserModal()" class="btn transparent btn-secondary waves-effect col s12">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
