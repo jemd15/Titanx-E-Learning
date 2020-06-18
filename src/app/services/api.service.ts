@@ -10,15 +10,15 @@ import { Test } from '../models/tests';
 import { Question } from '../models/questions';
 import { Answer } from '../models/answers';
 import { ResolvedTest } from '../models/ResolvedTests';
-import { School } from 'app/models/schools';
+import { School } from '../models/schools';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  // private apiUrl = 'http://localhost:3000/api'
-  private apiUrl = 'https://e-learning.titanx.cl/api'
+  private apiUrl = 'http://localhost:3000/api'
+  // private apiUrl = 'https://e-learning.titanx.cl/api'
 
   constructor(
     private http: HttpClient
@@ -143,6 +143,10 @@ export class ApiService {
 
   createUser(user: User): Observable<User> {
     return this.http.post<User>(this.apiUrl + `/course/new`, user)
+  }
+
+  changeState(userChanges): Observable<any> {
+    return this.http.put<any>(this.apiUrl + `/users/change-state`, userChanges)
   }
 }
 

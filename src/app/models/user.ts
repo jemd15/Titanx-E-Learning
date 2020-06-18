@@ -11,6 +11,7 @@ export interface User {
   emailVerified: string;
   school_school_id: number;
   teacher_id?: number,
-  student_id?: number
+  student_id?: number,
+  state: string;
 
 }

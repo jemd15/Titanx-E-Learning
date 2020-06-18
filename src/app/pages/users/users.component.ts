@@ -38,9 +38,9 @@ export class UsersComponent implements OnInit {
       this.users = res.users;
       console.log(this.users);
     },
-    err => {
-      console.log(err)
-    });
+      err => {
+        console.log(err)
+      });
   }
 
   private createCreateUserForm() {
@@ -69,6 +69,29 @@ export class UsersComponent implements OnInit {
       .then((res: any) => {
 
       }) */
+  }
+
+  changeState(user_id: number, state: string) {
+    console.log('changeState to:', state);
+
+    let newState: string;
+    if (state == 'active') {
+      newState = 'inactive';
+    } else if (state == 'inactive') {
+      newState = 'active';
+    }
+    console.log({ user_id, state: newState });
+    this.api.changeState({ user_id, state: newState }).toPromise()
+      .then((res: any) => {
+        this.users.forEach(user => {
+          if (user.user_id == user_id) {
+            user.state = newState;
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
 }

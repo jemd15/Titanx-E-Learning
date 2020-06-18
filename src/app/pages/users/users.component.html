@@ -4,14 +4,14 @@
     <!-- tabla de usuarios -->
     <div class="valign-wrapper">
       <h1 class="no-padding col s12 m9">Listado de Usuarios <a (click)="openCreateUserModal()" materialize="tooltip" class="add-user btn uss-color tooltipped" data-position="right" data-delay="50" data-tooltip="Crear nuevo usuario"><i class="material-icons white-text">add_circle_outline</i></a></h1>
-      <div class="input-field col s12 m3 card card-input">
+      <div class="input-field col s12 m3 card card-input hoverable">
         <i class="material-icons prefix">search</i>
         <input id="icon_prefix" name="filter" [(ngModel)]="filter" type="text" class="validate card-input">
         <label for="icon_prefix" class="card-input">Buscar Usuario</label>
       </div>
     </div>
     <div class="card-panel no-margin col s12">
-      <table class="striped">
+      <table class="striped responsive-table">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -33,8 +33,8 @@
             <td *ngIf="user.state == 'active'">Activo</td>
             <td *ngIf="user.state == 'inactive'">Bloqueado</td>
             <th class="row">
-              <a *ngIf="user.state == 'inactive'" materialize="tooltip" class="waves-effect waves-light btn uss-color right tooltipped" data-position="left" data-delay="50" data-tooltip="Desbloquear usuario"><i class="material-icons white-text">add_circle_outline</i></a>
-              <a *ngIf="user.state == 'active'" materialize="tooltip" class="waves-effect waves-light btn uss-color delete-hover right tooltipped" data-position="left" data-delay="50" data-tooltip="Bloquear usuario"><i class="material-icons white-text">block</i></a>
+              <a (click)="changeState(user.user_id, user.state)" *ngIf="user.state == 'inactive'" materialize="tooltip" class="waves-effect waves-light btn uss-color right tooltipped" data-position="left" data-delay="50" data-tooltip="Desbloquear usuario"><i class="material-icons white-text">add_circle_outline</i></a>
+              <a (click)="changeState(user.user_id, user.state)" *ngIf="user.state == 'active'" materialize="tooltip" class="waves-effect waves-light btn uss-color delete-hover right tooltipped" data-position="left" data-delay="50" data-tooltip="Bloquear usuario"><i class="material-icons white-text">block</i></a>
             </th>
           </tr>
         </tbody>
@@ -75,7 +75,7 @@
         </select>
       </div>
       <div class="input-field col s12">
-        <select materialize="material_select" [materializeSelectOptions]="selectOptions" fomrControlName="school_school_id">
+        <select materialize="material_select" [materializeSelectOptions]="schools" fomrControlName="school_school_id">
           <option *ngFor="let school of schools" [value]="school.id">{{school.name}}</option>
         </select>
       </div>
