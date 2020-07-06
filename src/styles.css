@@ -122,3 +122,11 @@ input {
 .delete-hover:hover {
   background-color: #b71c1c !important;
 }
+
+td, th {
+  width: 20% !important;
+}
+
+td:last-child, th:last-child {
+  width: 5% !important;
+}

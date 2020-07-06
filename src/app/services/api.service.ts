@@ -34,6 +34,10 @@ export class ApiService {
     return this.http.get<User[]>(this.apiUrl + '/users')
   }
 
+  getUsersWithPagination(page: number, limit: number): Observable<User[]> {
+    return this.http.post<User[]>(this.apiUrl + '/users', { page, limit });
+  }
+
   getAllTeachers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl + '/users/teachers')
   }

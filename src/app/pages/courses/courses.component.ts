@@ -19,7 +19,7 @@ export class CoursesComponent implements OnInit {
   public newCourseForm: FormGroup;
   public modalAddStudent = new EventEmitter<string | MaterializeAction>();
   public students: User[];
-  public courseStudents: User[];
+  public courseStudents: User[] = [];
   public courseSelected: number;
 
   constructor(
