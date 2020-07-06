@@ -6,11 +6,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { School } from '../../models/schools';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-students',
+  templateUrl: './students.component.html',
+  styleUrls: ['./students.component.css']
 })
-export class UsersComponent implements OnInit {
+export class StudentsComponent implements OnInit {
 
   public users: User[];
   public filter: string = '';
@@ -33,8 +33,8 @@ export class UsersComponent implements OnInit {
         // toast('Error en obtener escuelas', 3000);
       });
     this.createUserForm = this.createCreateUserForm();
-    this.api.getAllUsers().subscribe((res: any) => {
-      this.users = res.users;
+    this.api.getAllStudents().subscribe((res: any) => {
+      this.users = res.students;
       console.log(this.users);
     },
     err => {
@@ -48,7 +48,7 @@ export class UsersComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
-      rol: ['', Validators.required],
+      rol: ['student', Validators.required],
       school_school_id: ['']
     })
   }
@@ -63,26 +63,11 @@ export class UsersComponent implements OnInit {
   }
 
   createUser() {
-    switch(this.createUserForm.value.rol){
-      case 'Admin':
-        this.createUserForm.value.rol = 'admin'
-        break
-      case 'Profesor':
-        this.createUserForm.value.rol = 'teacher'
-        break
-      case 'Alumno':
-        this.createUserForm.value.rol = 'student'
-        break
-      default:
-        toast('Error en rol de usuario.', 3000);
-        throw new Error('error en rol de usuario');
-    }
-    this.createUserForm.value.school_school_id = this.schools.find(school => school.name == this.createUserForm.value.school_school_id).school_id;
     console.table(this.createUserForm.value);
     this.api.createUser(this.createUserForm.value).toPromise()
       .then((res: any) => {
         console.log(res.newUser)
-        toast('Usuario creado correctamente.', 3000);
+        toast('Alumno creado correctamente.', 3000);
         this.closeCreateUserModal();
       })
       .catch(err => {
@@ -91,40 +76,6 @@ export class UsersComponent implements OnInit {
         } else {
           toast('No se pudo procesar su solicitud. Intente nuevamente.', 3000);
         }
-        switch(this.createUserForm.value.rol){
-          case 'admin':
-            this.createUserForm.value.rol = 'Admin'
-            break
-          case 'teacher':
-            this.createUserForm.value.rol = 'Profesor'
-            break
-          case 'student':
-            this.createUserForm.value.rol = 'Alumno'
-            break
-        }
-      });
-  }
-
-  changeState(user_id: number, state: string) {
-    console.log('changeState to:', state);
-
-    let newState: string;
-    if (state == 'active') {
-      newState = 'inactive';
-    } else if (state == 'inactive') {
-      newState = 'active';
-    }
-    console.log({ user_id, state: newState });
-    this.api.changeState({ user_id, state: newState }).toPromise()
-      .then((res: any) => {
-        this.users.forEach(user => {
-          if (user.user_id == user_id) {
-            user.state = newState;
-          }
-        });
-      })
-      .catch(err => {
-        console.log('error', err);
       });
   }
 

@@ -146,7 +146,7 @@ export class ApiService {
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.apiUrl + `/course/new`, user)
+    return this.http.post<User>(this.apiUrl + `/users/new`, user)
   }
 
   changeState(userChanges): Observable<any> {

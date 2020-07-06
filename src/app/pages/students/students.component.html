@@ -3,13 +3,13 @@
   <div class="row">
     <!-- tabla de usuarios -->
     <div class="valign-wrapper">
-      <h1 class="no-padding col s12 m9">Listado de Usuarios <a (click)="openCreateUserModal()" materialize="tooltip"
+      <h1 class="no-padding col s12 m9">Listado de Alumnos <a (click)="openCreateUserModal()" materialize="tooltip"
           class="add-user btn uss-color tooltipped" data-position="right" data-delay="50"
           data-tooltip="Crear nuevo usuario"><i class="material-icons white-text">add_circle_outline</i></a></h1>
       <div class="input-field col s12 m3 card card-input hoverable">
         <i class="material-icons prefix">search</i>
         <input id="icon_prefix" name="filter" [(ngModel)]="filter" type="text" class="validate card-input">
-        <label for="icon_prefix" class="card-input">Buscar Usuario</label>
+        <label for="icon_prefix" class="card-input">Buscar Alumno</label>
       </div>
     </div>
     <div class="card-panel no-margin col s12">
@@ -19,9 +19,7 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Email</th>
-            <th>Rol</th>
             <th>Estado</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -29,19 +27,8 @@
             <td>{{user.name}}</td>
             <td>{{user.lastName}}</td>
             <td>{{user.email}}</td>
-            <td *ngIf="user.rol == 'admin'">admin</td>
-            <td *ngIf="user.rol == 'teacher'">profesor</td>
-            <td *ngIf="user.rol == 'student'">alumno</td>
             <td *ngIf="user.state == 'active'">Activo</td>
             <td *ngIf="user.state == 'inactive'">Bloqueado</td>
-            <th class="row">
-              <a (click)="changeState(user.user_id, user.state)" *ngIf="user.state == 'inactive'" materialize="tooltip"
-                class="waves-effect waves-light btn uss-color right tooltipped" data-position="left" data-delay="50"
-                data-tooltip="Desbloquear usuario"><i class="material-icons white-text">add_circle_outline</i></a>
-              <a (click)="changeState(user.user_id, user.state)" *ngIf="user.state == 'active'" materialize="tooltip"
-                class="waves-effect waves-light btn uss-color delete-hover right tooltipped" data-position="left"
-                data-delay="50" data-tooltip="Bloquear usuario"><i class="material-icons white-text">block</i></a>
-            </th>
           </tr>
         </tbody>
       </table>
@@ -56,7 +43,7 @@
     <form (ngSubmit)="createUser()" class="card-panel row hoverable no-margin" materialize [formGroup]="createUserForm"
       ngNativeValidate>
       <div class="col s12 center">
-        <h5><strong>Crear nuevo usuario</strong></h5>
+        <h5><strong>Crear nuevo alumno</strong></h5>
       </div>
       <div class="input-field col s12">
         <input formControlName="name" id="name" type="text" required class="validate">
@@ -74,24 +61,9 @@
         <input formControlName="email" id="email" type="email" required class="validate">
         <label for="email">Email</label>
       </div>
-      <div class="input-field col s12">
-        <input type="text" list="roles" placeholder="Rol" formControlName="rol">
-        <datalist id="roles">
-          <option value="Admin"></option>
-          <option value="Profesor"></option>
-          <option value="Alumno"></option>
-        </datalist>
-      </div>
-      <div *ngIf="this.createUserForm.value.rol == 'Profesor' || this.createUserForm.value.rol == 'Alumno'" class="input-field col s12">
-        <input type="text" list="schools" placeholder="Colegio" formControlName="school_school_id">
-        <datalist id="schools">
-          <option *ngFor="let school of schools">{{school.name}}</option>
-        </datalist>
-      </div>
       <div class="row"></div>
       <div class="col s12">
-        <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color" value="Crear"><strong
-            class="white-text">Crear</strong></button>
+        <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color" value="Crear"><strong class="white-text">Crear</strong></button>
       </div>
       <div class="row"></div>
       <div class="col s12">

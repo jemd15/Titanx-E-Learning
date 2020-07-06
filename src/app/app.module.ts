@@ -25,6 +25,7 @@ import { AuthService } from './services/auth.service';
 import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
 import { UsersComponent } from './pages/users/users.component';
 import { SearchPipe } from './pipes/search/search.pipe';
+import { StudentsComponent } from './pages/students/students.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { SearchPipe } from './pipes/search/search.pipe';
     RestorePassComponent,
     SafeUrlPipe,
     UsersComponent,
-    SearchPipe
+    SearchPipe,
+    StudentsComponent
   ],
   imports: [
     HttpClientModule,

@@ -1,0 +1,35 @@
+/* input text en card */
+i.prefix {
+  padding-top: 10px;
+}
+
+.input-field.card-input {
+  height: 45px;
+}
+
+input[type=text]:not(.browser-default).card-input {
+  border-bottom: none;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]).card-input {
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.input-field label:not(.label-icon).active.card-input {
+  transform: none;
+  visibility: hidden;
+}
+
+.input-field label.card-input {
+  transition: none;
+}
+/* fin input text en card */
+
+.input-field.card {
+  margin-top: 30px;
+}
+
+td, th {
+  width: 20%;
+}
