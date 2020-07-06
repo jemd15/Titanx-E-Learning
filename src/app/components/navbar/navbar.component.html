@@ -7,6 +7,7 @@
         <li routerLinkActive="uss-color"><a class="text-uss-color" routerLink="home" routerLinkActive="white-text">Inicio</a></li>
         <li *ngIf="auth.isLogged()" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="courses" routerLinkActive="white-text">Cursos</a></li>
         <li *ngIf="auth.isLogged() && auth.userData().rol == 'admin'" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="users" routerLinkActive="white-text">Usuarios</a></li>
+        <li *ngIf="auth.isLogged() && auth.userData().rol == 'admin'" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="schools" routerLinkActive="white-text">Colegios</a></li>
         <li *ngIf="auth.isLogged() && auth.userData().rol == 'teacher'" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="students" routerLinkActive="white-text">Alumnos</a></li>
         <li *ngIf="!auth.isLogged()"><a class="btn uss-color white-text waves-effect waves-light hoverable" routerLink="login">Ingresar</a></li>
         <li *ngIf="auth.isLogged()"><a (click)="auth.logout()"><i class="material-icons text-uss-color">exit_to_app</i></a></li>

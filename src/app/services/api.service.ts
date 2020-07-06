@@ -149,6 +149,10 @@ export class ApiService {
     return this.http.post<User>(this.apiUrl + `/users/new`, user)
   }
 
+  createSchool(school: School): Observable<School> {
+    return this.http.post<School>(this.apiUrl + `/schools/new`, school)
+  }
+
   changeState(userChanges): Observable<any> {
     return this.http.put<any>(this.apiUrl + `/users/change-state`, userChanges)
   }

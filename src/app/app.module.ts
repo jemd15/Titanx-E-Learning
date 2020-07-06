@@ -26,6 +26,7 @@ import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
 import { UsersComponent } from './pages/users/users.component';
 import { SearchPipe } from './pipes/search/search.pipe';
 import { StudentsComponent } from './pages/students/students.component';
+import { SchoolsComponent } from './pages/schools/schools.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { StudentsComponent } from './pages/students/students.component';
     SafeUrlPipe,
     UsersComponent,
     SearchPipe,
-    StudentsComponent
+    StudentsComponent,
+    SchoolsComponent
   ],
   imports: [
     HttpClientModule,

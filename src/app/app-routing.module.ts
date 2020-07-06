@@ -8,6 +8,7 @@ import { LessonComponent } from './pages/lesson/lesson.component';
 import { RestorePassComponent } from './pages/restore-pass/restore-pass.component';
 import { UsersComponent } from './pages/users/users.component';
 import { StudentsComponent } from './pages/students/students.component';
+import { SchoolsComponent } from './pages/schools/schools.component';
 
 export const AppRoutes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
@@ -16,6 +17,7 @@ export const AppRoutes: Routes = [
   { path: 'courses', component: CoursesComponent, pathMatch: 'full' },
   { path: 'users', component: UsersComponent, pathMatch: 'full' },
   { path: 'students', component: StudentsComponent, pathMatch: 'full' },
+  { path: 'schools', component: SchoolsComponent, pathMatch: 'full' },
   { path: 'courses/:courseId/:course', component: CourseDetailComponent, pathMatch: 'full' },
   { path: 'courses/:courseId/:course/unit/:unitNumber/lesson/:lessonNumber', component: LessonComponent, pathMatch: 'full' },
   { path: '404-not-found', component: Page404Component, pathMatch: 'full' },

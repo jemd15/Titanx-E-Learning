@@ -81,7 +81,8 @@ export class UsersComponent implements OnInit {
     console.table(this.createUserForm.value);
     this.api.createUser(this.createUserForm.value).toPromise()
       .then((res: any) => {
-        console.log(res.newUser)
+        console.log(res.newUser);
+        this.users.push(res.newUser);
         toast('Usuario creado correctamente.', 3000);
         this.closeCreateUserModal();
       })
