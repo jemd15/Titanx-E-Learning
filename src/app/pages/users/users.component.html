@@ -53,8 +53,7 @@
 <div id="modal1" class="modal white row transparent z-depth-0" materialize="modal"
   [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCreateUser">
   <div class="col s12 m8 offset-m2">
-    <form (ngSubmit)="createUser()" class="card-panel row hoverable no-margin" materialize [formGroup]="createUserForm"
-      ngNativeValidate>
+    <form (ngSubmit)="createUser()" class="card-panel row hoverable no-margin" materialize [formGroup]="createUserForm" ngNativeValidate>
       <div class="col s12 center">
         <h5><strong>Crear nuevo usuario</strong></h5>
       </div>

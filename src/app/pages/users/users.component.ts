@@ -77,7 +77,7 @@ export class UsersComponent implements OnInit {
         toast('Error en rol de usuario.', 3000);
         throw new Error('error en rol de usuario');
     }
-    this.createUserForm.value.school_school_id = this.schools.find(school => school.name == this.createUserForm.value.school_school_id).school_id;
+    this.createUserForm.value.school_school_id = (this.schools.find(school => school.name == this.createUserForm.value.school_school_id)) ? this.schools.find(school => school.name == this.createUserForm.value.school_school_id).school_id:'';
     console.table(this.createUserForm.value);
     this.api.createUser(this.createUserForm.value).toPromise()
       .then((res: any) => {

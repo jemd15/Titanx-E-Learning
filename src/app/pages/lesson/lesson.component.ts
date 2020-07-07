@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../services/api.service';
-import { Test } from '../../models/tests';
 import { Activity } from '../../models/activities';
 import { Question } from '../../models/questions';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms'
@@ -29,11 +28,11 @@ export class LessonComponent implements OnInit {
   public unitId: string;
   public lesson_number: string;
   public activities: Activity[] = [];
-  public test: Test;
   public questions: Question[] = [];
   public testForm: FormGroup;
   public newActivityForm: FormGroup;
   public modalNewActivity = new EventEmitter<string | MaterializeAction>();
+  public testStructure = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -45,10 +44,10 @@ export class LessonComponent implements OnInit {
     this.testForm = this.createTestForm();
     this.newActivityForm = this.createNewActivityForm();
     this.course = this.route.snapshot.params['course'],
-    this.course_id = this.route.snapshot.params['courseId'],
-    this.unitNumber = this.route.snapshot.params['unitNumber'],
-    this.unitId = this.route.snapshot.params['unitId'],
-    this.lesson_number = this.route.snapshot.params['lessonNumber']
+      this.course_id = this.route.snapshot.params['courseId'],
+      this.unitNumber = this.route.snapshot.params['unitNumber'],
+      this.unitId = this.route.snapshot.params['unitId'],
+      this.lesson_number = this.route.snapshot.params['lessonNumber']
     this.breadcrumb = {
       course: this.course,
       course_id: this.course_id,
@@ -61,25 +60,29 @@ export class LessonComponent implements OnInit {
     this.api.getTestByCourseId(this.course_id, this.unitNumber, this.lesson_number)
       .toPromise()
       .then((res: any) => {
-        if(res.test.length > 0){
-          this.test = res.test[0];
-          this.api.getQuestionsByTestId(this.test.test_id)
+        if (res.test.length > 0) {
+          this.api.getQuestionsByTestId(res.test[0].test_id)
             .toPromise()
             .then((res: any) => {
               this.questions = res.questions;
               this.questions.forEach(question => {
-                this.addAnswer();
                 this.api.getAnswersByQuestionId(question.question_id)
                   .toPromise()
                   .then((res: any) => {
-                    question.answers = res.answers;
+                    if (res.answers[0]) {
+                      this.testStructure.push({ type: question.type, title: question.title, answer_1: res.answers[0].title, answer_2: res.answers[1].title, answer_3: res.answers[2].title, answer_4: res.answers[3].title });
+                    } else {
+                      this.testStructure.push({ type: question.type, title: question.title });
+                    }
+                    this.addQuestionAndAnswers(question.title, '');
+                  })
+                  .then(() => {
+                    console.table(this.testForm.value.test);
                   })
                   .catch(err => {
                     console.log('error', err);
                   });
-                });
-              console.log('question', this.questions)
-              console.log(this.testForm.value.answers)
+              });
             })
             .catch(err => {
               console.log('error', err);
@@ -88,18 +91,28 @@ export class LessonComponent implements OnInit {
       })
       .catch(err => {
         console.log('error', err);
-      })
+      });
   }
 
   private createTestForm() {
     return this.formBuilder.group({
-      answers: this.formBuilder.array([
+      test: this.formBuilder.array([])
+    });
+  }
+
+  /* private createTestForm() {
+    return this.formBuilder.group({
+      test: this.formBuilder.array([
         this.formBuilder.group({
-          answer: ['']
+          question: [''],
+          answer_1: [''],
+          answer_2: [''],
+          answer_3: [''],
+          answer_4: ['']
         })
       ])
     });
-  }
+  } */
 
   private createNewActivityForm() {
     return this.formBuilder.group({
@@ -110,15 +123,18 @@ export class LessonComponent implements OnInit {
     })
   }
 
-  get answers(){
-    return (<FormArray>this.testForm.get('answers')).controls;
+  get test(): FormArray {
+    return this.testForm.get('test') as FormArray;
   }
 
-  private addAnswer() {
-    const testFormGroup  = this.formBuilder.group({
-      answer: ''
+  private addQuestionAndAnswers(question: string, answer: string) {
+    const testFormGroup = this.formBuilder.group({
+      question,
+      answer
     });
-    this.answers.push(testFormGroup);
+
+    this.test.push(testFormGroup);
+    // console.table(this.testForm.value.test);
   }
 
   openActivityModal() {
@@ -131,11 +147,11 @@ export class LessonComponent implements OnInit {
   }
 
   addActivity() {
-    let newActivity: Activity = { 
+    let newActivity: Activity = {
       number: this.activities.length + 1,
       title: this.newActivityForm.value.title,
-      description: this.newActivityForm.value.description, 
-      type: this.newActivityForm.value.type, 
+      description: this.newActivityForm.value.description,
+      type: this.newActivityForm.value.type,
       url: this.newActivityForm.value.url
     }
     this.api.postNewActivity(this.course_id, this.unitNumber, this.lesson_number, newActivity).toPromise()
@@ -147,7 +163,7 @@ export class LessonComponent implements OnInit {
       .catch(err => {
         toast('Error al crear actividad', 3000);
         console.log(err);
-      })
+      });
   }
 
 }
