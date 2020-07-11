@@ -1,0 +1,40 @@
+<div class="full">
+  <div class="parallax-container valign-wrapper">
+    <div class="parallax" materialize="parallax"><img src="../../../assets/imgs/fondomakeit.png" alt=""></div>
+    <div class="container row no-margin-bottom">
+      <div class="col s12 m6 offset-m3">
+        <div class="card-panel row hoverable">
+          <div class="row center no-margin">
+            <img class="logo" src="../../../assets/imgs/logo-dark.png">
+          </div>
+          <div class="center" [ngSwitch]="verificationState">
+            <i class="material-icons large">mail_outline</i>
+            <i class="material-icons large">more_horiz</i>
+            <i *ngSwitchCase="'loading'" class="material-icons large" id="loading">sync</i>
+            <i *ngSwitchCase="'ok'" class="material-icons large green-text text-darken-4">done_all</i>
+            <i *ngSwitchCase="'refused'" class="material-icons large red-text text-darken-4">not_interested</i>
+          </div>
+          <div [ngSwitch]="verificationState">
+            <div *ngSwitchCase="'loading'">
+              <h4 class="center"><strong>Verificando Email...</strong></h4>
+            </div>
+            <div *ngSwitchCase="'ok'">
+              <h4 class="center"><strong>Su email ha sido verificado correctamente.</strong></h4>
+              <h5 class="center">Ya puede hacer ingreso a la plataforma con los datos adjuntos en su correo.</h5>
+              <div class="row"></div>
+              <div class="col s12 center">
+                <a routerLink="/login" class="hoverable btn waves-effect waves-light uss-color"><strong class="white-text">Ingresar</strong></a>
+              </div>
+            </div>
+            <div *ngSwitchCase="'refused'" class="center">
+              <h4><strong>Su email no ha podido ser verificado.</strong></h4>
+              <h5>Por favor recargue el sitio y si su problema persiste contáctese con un Administrador.</h5>
+              <div class="row"></div>
+              <a href="javascript:location.reload()" class="hoverable btn waves-effect waves-light uss-color"><strong class="white-text">Recargar Sitio</strong></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

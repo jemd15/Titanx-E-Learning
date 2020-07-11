@@ -27,6 +27,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { SearchPipe } from './pipes/search/search.pipe';
 import { StudentsComponent } from './pages/students/students.component';
 import { SchoolsComponent } from './pages/schools/schools.component';
+import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { SchoolsComponent } from './pages/schools/schools.component';
     UsersComponent,
     SearchPipe,
     StudentsComponent,
-    SchoolsComponent
+    SchoolsComponent,
+    VerifyEmailComponent
   ],
   imports: [
     HttpClientModule,

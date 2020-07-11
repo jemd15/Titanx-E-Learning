@@ -17,8 +17,8 @@ import { School } from '../models/schools';
 })
 export class ApiService {
 
-  // private apiUrl = 'http://localhost:3000/api'
-  private apiUrl = 'https://e-learning.titanx.cl/api'
+  private apiUrl = 'http://localhost:3000/api'
+  // private apiUrl = 'https://e-learning.titanx.cl/api'
 
   constructor(
     private http: HttpClient
@@ -35,7 +35,7 @@ export class ApiService {
   }
 
   getUsersWithPagination(page: number, limit: number): Observable<User[]> {
-    return this.http.post<User[]>(this.apiUrl + '/users', { page, limit });
+    return this.http.post<User[]>(this.apiUrl + '/users', { page, limit })
   }
 
   getAllTeachers(): Observable<User[]> {
@@ -155,6 +155,10 @@ export class ApiService {
 
   changeState(userChanges): Observable<any> {
     return this.http.put<any>(this.apiUrl + `/users/change-state`, userChanges)
+  }
+
+  verifyEmail(token: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + `/users/verify-email`, { token })
   }
 }
 

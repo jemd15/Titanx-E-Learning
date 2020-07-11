@@ -1,0 +1,47 @@
+.parallax img{
+  width: 150%;
+  height: auto;
+  object-fit: cover;
+}
+
+.parallax-container{
+  height: 80vh;
+  background: linear-gradient(to right, rgba(52,72,128,0.85), rgba(30,207,202,0.85));
+}
+
+.prefix {
+  top: 10px;
+}
+
+img.logo {
+  zoom: 0.3;
+}
+
+#loading {
+  animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  img.logo {
+    zoom: 0.15;
+    max-width: 1790px;
+  }
+
+  .full {
+    min-height: 90vh;
+    overflow-y: hidden;
+  }
+
+  .parallax-container{
+    height: 90vh;
+    background: linear-gradient(to right, rgba(52,72,128,0.85), rgba(30,207,202,0.85));
+  }
+
+}

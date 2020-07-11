@@ -49,7 +49,7 @@ export class AuthService {
   }
 
   userData(){
-    return JSON.parse(localStorage.getItem('user'))
+    return JSON.parse(localStorage.getItem('user'));
   }
   
 }
