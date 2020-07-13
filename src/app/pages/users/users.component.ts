@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { User } from '../../models/user';
 import { MaterializeAction, toast } from 'angular2-materialize';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { School } from '../../models/schools';
 
 @Component({
@@ -17,6 +17,7 @@ export class UsersComponent implements OnInit {
   public modalCreateUser = new EventEmitter<string | MaterializeAction>();
   public createUserForm: FormGroup;
   public schools: School[];
+  public passConfirmationWrong = null;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -48,6 +49,7 @@ export class UsersComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
+      passwordConfirm: ['', Validators.required],
       rol: ['', Validators.required],
       school_school_id: ['']
     })
@@ -63,47 +65,51 @@ export class UsersComponent implements OnInit {
   }
 
   createUser() {
-    switch(this.createUserForm.value.rol){
-      case 'Admin':
-        this.createUserForm.value.rol = 'admin'
-        break
-      case 'Profesor':
-        this.createUserForm.value.rol = 'teacher'
-        break
-      case 'Alumno':
-        this.createUserForm.value.rol = 'student'
-        break
-      default:
-        toast('Error en rol de usuario.', 3000);
-        throw new Error('error en rol de usuario');
+    if (!this.passConfirmationWrong) {
+      switch(this.createUserForm.value.rol){
+        case 'Admin':
+          this.createUserForm.value.rol = 'admin'
+          break
+        case 'Profesor':
+          this.createUserForm.value.rol = 'teacher'
+          break
+        case 'Alumno':
+          this.createUserForm.value.rol = 'student'
+          break
+        default:
+          toast('Error en rol de usuario.', 3000);
+          throw new Error('error en rol de usuario');
+      }
+      this.createUserForm.value.school_school_id = (this.schools.find(school => school.name == this.createUserForm.value.school_school_id)) ? this.schools.find(school => school.name == this.createUserForm.value.school_school_id).school_id:null;
+      console.table(this.createUserForm.value);
+      this.api.createUser(this.createUserForm.value).toPromise()
+        .then((res: any) => {
+          console.log(res.newUser);
+          this.users.push(res.newUser);
+          toast('Usuario creado correctamente.', 3000);
+          this.closeCreateUserModal();
+        })
+        .catch(err => {
+          if (err.error.message.search('Duplicate entry') >= 0) {
+            toast('El email ya existe!', 3000);
+          } else {
+            toast('No se pudo procesar su solicitud. Intente nuevamente.', 3000);
+          }
+          switch(this.createUserForm.value.rol){
+            case 'admin':
+              this.createUserForm.value.rol = 'Admin'
+              break
+            case 'teacher':
+              this.createUserForm.value.rol = 'Profesor'
+              break
+            case 'student':
+              this.createUserForm.value.rol = 'Alumno'
+              break
+          }
+        });
+    } else {
+      toast('Lasc ontraseñas deben coincidir', 3000);
     }
-    this.createUserForm.value.school_school_id = (this.schools.find(school => school.name == this.createUserForm.value.school_school_id)) ? this.schools.find(school => school.name == this.createUserForm.value.school_school_id).school_id:null;
-    console.table(this.createUserForm.value);
-    this.api.createUser(this.createUserForm.value).toPromise()
-      .then((res: any) => {
-        console.log(res.newUser);
-        this.users.push(res.newUser);
-        toast('Usuario creado correctamente.', 3000);
-        this.closeCreateUserModal();
-      })
-      .catch(err => {
-        if (err.error.message.search('Duplicate entry') >= 0) {
-          toast('El email ya existe!', 3000);
-        } else {
-          toast('No se pudo procesar su solicitud. Intente nuevamente.', 3000);
-        }
-        switch(this.createUserForm.value.rol){
-          case 'admin':
-            this.createUserForm.value.rol = 'Admin'
-            break
-          case 'teacher':
-            this.createUserForm.value.rol = 'Profesor'
-            break
-          case 'student':
-            this.createUserForm.value.rol = 'Alumno'
-            break
-        }
-      });
   }
 
   changeState(user_id: number, state: string) {
@@ -127,6 +133,26 @@ export class UsersComponent implements OnInit {
       .catch(err => {
         console.log('error', err);
       });
+  }
+
+  // confirm new password validator
+  onPasswordChange() {
+    if (this.confirm_password.value == this.password.value) {
+      this.confirm_password.setErrors({ mismatch: false });
+      this.passConfirmationWrong = false;
+    } else {
+      this.confirm_password.setErrors({ mismatch: true });
+      this.passConfirmationWrong = true;
+    }
+  }
+  
+  // getting the form control elements
+  get password(): AbstractControl {
+    return this.createUserForm.controls['password'];
+  }
+  
+  get confirm_password(): AbstractControl {
+    return this.createUserForm.controls['passwordConfirm'];
   }
 
 }

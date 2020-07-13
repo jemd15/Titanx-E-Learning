@@ -66,9 +66,15 @@
         <label for="lastName">Apellido</label>
       </div>
       <div class="input-field col s12">
-        <input formControlName="password" id="password" type="password" required class="validate">
-        <label for="password">Contraseña</label>
+        <input formControlName="password" type="password" required class="validate" (keyup)="onPasswordChange()">
+        <label for="icon_prefix">Contraseña</label>
       </div>
+      <div class="input-field col s12">
+        <input id="confirmPass" formControlName="passwordConfirm" type="password" required (keyup)="onPasswordChange()" [ngClass]="{ invalid: passConfirmationWrong, valid: !passConfirmationWrong }">
+        <label for="icon_prefix">Repita la Contraseña</label>
+        <span *ngIf="confirm_password.hasError('mismatch')" class="pass-not-match red-text">Las contraseñas deben coincidir.</span>
+      </div>
+      <div class="row"></div>
       <div class="input-field col s12">
         <input formControlName="email" id="email" type="email" required class="validate">
         <label for="email">Email</label>

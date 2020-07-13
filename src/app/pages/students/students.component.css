@@ -33,3 +33,9 @@ input[type=text]:not(.browser-default):focus:not([readonly]).card-input {
 td, th {
   width: 20%;
 }
+
+.pass-not-match {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+}

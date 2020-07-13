@@ -1,0 +1,64 @@
+<div class="background">
+  <div class="container row no-margin-bottom">
+    <div class="row"></div>
+    <div class="col s12 m6 offset-m3">
+      <form class="card-panel row hoverable" materialize [formGroup]="changeDataForm" (ngSubmit)="changeData()" ngNativeValidate>
+        <div class="row center no-margin">
+          <i class="material-icons large">account_circle</i>
+          <h5><strong>Datos de la Cuenta</strong></h5>
+        </div>
+        <div class="row"></div>
+        <div class="input-field col s12 m6">
+          <i class="material-icons prefix text-uss-color">person</i>
+          <input formControlName="name" type="text" required class="validate">
+          <label for="icon_prefix">Nombre</label>
+        </div>
+        <div class="input-field col s12 m6 hide-on-med-and-up">
+          <i class="material-icons prefix text-uss-color"></i>
+          <input formControlName="lastName" type="text" required class="validate">
+          <label for="icon_prefix">Apellido</label>
+        </div>
+        <div class="input-field col s12 m6 hide-on-small-only">
+          <input formControlName="lastName" type="text" required class="validate">
+          <label for="icon_prefix">Apellido</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix text-uss-color">email</i>
+          <input formControlName="email" type="email" required class="validate">
+          <label for="icon_prefix">Email</label>
+        </div>
+        <div class="col s12">
+          <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Guardar Cambios</strong></button>
+        </div>
+      </form>
+    </div>
+    <div class="col s12 m6 offset-m3">
+      <form class="card-panel row hoverable" materialize [formGroup]="changePassForm" (ngSubmit)="changePass()" ngNativeValidate>
+        <div class="center">
+          <h5><strong>Cambiar contraseña</strong></h5>
+        </div>
+        <div class="row"></div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix text-uss-color">lock</i>
+          <input formControlName="password" type="password" required class="validate">
+          <label for="icon_prefix">Contraseña Actual</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix text-uss-color">lock</i>
+          <input formControlName="newPassword" type="password" required class="validate" (keyup)="onPasswordChange()">
+          <label for="icon_prefix">Nueva Contraseña</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix text-uss-color">lock</i>
+          <input id="confirmPass" formControlName="newPassword2" type="password" required (keyup)="onPasswordChange()" [ngClass]="{ invalid: passConfirmationWrong, validate: !passConfirmationWrong }">
+          <label for="icon_prefix">Repita la Contraseña</label>
+          <span *ngIf="confirm_password.hasError('mismatch')" class="pass-not-match red-text">Las contraseñas deben coincidir.</span>
+        </div>
+        <div class="row"></div>
+        <div class="col s12">
+          <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color" value="Entrar"><strong class="white-text">Cambiar contraseña</strong></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

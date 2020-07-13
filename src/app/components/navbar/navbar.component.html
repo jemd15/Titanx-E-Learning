@@ -5,6 +5,7 @@
       <a target="blank" href="http://fit.uss.cl/" class="brand-logo"><img src="../../../assets/imgs/uss-logo-black.svg" class="logo"></a>
       <ul class="right hide-on-med-and-down">
         <li routerLinkActive="uss-color"><a class="text-uss-color" routerLink="home" routerLinkActive="white-text">Inicio</a></li>
+        <li *ngIf="auth.isLogged()" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="account" routerLinkActive="white-text">Cuenta</a></li>
         <li *ngIf="auth.isLogged()" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="courses" routerLinkActive="white-text">Cursos</a></li>
         <li *ngIf="auth.isLogged() && auth.userData().rol == 'admin'" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="users" routerLinkActive="white-text">Usuarios</a></li>
         <li *ngIf="auth.isLogged() && auth.userData().rol == 'admin'" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="schools" routerLinkActive="white-text">Colegios</a></li>

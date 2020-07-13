@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { User } from '../../models/user';
 import { MaterializeAction, toast } from 'angular2-materialize';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { School } from '../../models/schools';
 
 @Component({
@@ -17,6 +17,7 @@ export class StudentsComponent implements OnInit {
   public modalCreateUser = new EventEmitter<string | MaterializeAction>();
   public createUserForm: FormGroup;
   public schools: School[];
+  public passConfirmationWrong = null;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -48,6 +49,7 @@ export class StudentsComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
+      passwordConfirm: ['', Validators.required],
       rol: ['student', Validators.required],
       school_school_id: ['']
     })
@@ -78,6 +80,26 @@ export class StudentsComponent implements OnInit {
           toast('No se pudo procesar su solicitud. Intente nuevamente.', 3000);
         }
       });
+  }
+
+  // confirm new password validator
+  onPasswordChange() {
+    if (this.confirm_password.value == this.password.value) {
+      this.confirm_password.setErrors({ mismatch: false });
+      this.passConfirmationWrong = false;
+    } else {
+      this.confirm_password.setErrors({ mismatch: true });
+      this.passConfirmationWrong = true;
+    }
+  }
+  
+  // getting the form control elements
+  get password(): AbstractControl {
+    return this.createUserForm.controls['password'];
+  }
+  
+  get confirm_password(): AbstractControl {
+    return this.createUserForm.controls['passwordConfirm'];
   }
 
 }

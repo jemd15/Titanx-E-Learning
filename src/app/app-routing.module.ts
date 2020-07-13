@@ -10,6 +10,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { StudentsComponent } from './pages/students/students.component';
 import { SchoolsComponent } from './pages/schools/schools.component';
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+import { AccountComponent } from './pages/account/account.component';
 
 export const AppRoutes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
@@ -20,6 +21,7 @@ export const AppRoutes: Routes = [
   { path: 'students', component: StudentsComponent, pathMatch: 'full' },
   { path: 'schools', component: SchoolsComponent, pathMatch: 'full' },
   { path: 'verify-email/:token', component: VerifyEmailComponent, pathMatch: 'full' },
+  { path: 'account', component: AccountComponent, pathMatch: 'full' },
   { path: 'courses/:courseId/:course', component: CourseDetailComponent, pathMatch: 'full' },
   { path: 'courses/:courseId/:course/unit/:unitNumber/lesson/:lessonNumber', component: LessonComponent, pathMatch: 'full' },
   { path: '404-not-found', component: Page404Component, pathMatch: 'full' },
