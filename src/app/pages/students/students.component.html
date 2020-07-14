@@ -2,11 +2,17 @@
   <div class="row"></div>
   <div class="row">
     <!-- tabla de usuarios -->
-    <div class="valign-wrapper">
-      <h1 class="no-padding col s12 m9">Listado de Alumnos <a (click)="openCreateUserModal()" materialize="tooltip"
-          class="add-user btn uss-color tooltipped" data-position="right" data-delay="50"
-          data-tooltip="Crear nuevo usuario"><i class="material-icons white-text">add_circle_outline</i></a></h1>
+    <div class="valign-wrapper hide-on-small-only">
+      <h1 class="no-padding col s12 m9">Listado de Alumnos <a (click)="openCreateUserModal()" materialize="tooltip" class="add-user btn uss-color tooltipped" data-position="right" data-delay="50" data-tooltip="Crear nuevo usuario"><i class="material-icons white-text">add_circle_outline</i></a></h1>
       <div class="input-field col s12 m3 card card-input hoverable">
+        <i class="material-icons prefix">search</i>
+        <input id="icon_prefix" name="filter" [(ngModel)]="filter" type="text" class="validate card-input">
+        <label for="icon_prefix" class="card-input">Buscar Alumno</label>
+      </div>
+    </div>
+    <div class="hide-on-med-and-up">
+      <h4 class="no-padding col s12 m9">Listado de Alumnos <a (click)="openCreateUserModal()" materialize="tooltip" class="right add-user btn uss-color tooltipped" data-position="right" data-delay="50" data-tooltip="Crear nuevo usuario"><i class="material-icons white-text">add_circle_outline</i></a></h4>
+      <div class="input-field col s12 m3 card card-input hoverable no-margin-top">
         <i class="material-icons prefix">search</i>
         <input id="icon_prefix" name="filter" [(ngModel)]="filter" type="text" class="validate card-input">
         <label for="icon_prefix" class="card-input">Buscar Alumno</label>
@@ -37,11 +43,9 @@
 </section>
 
 <!-- estructura del modal de creación de usuario -->
-<div id="modal1" class="modal white row transparent z-depth-0" materialize="modal"
-  [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCreateUser">
+<div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCreateUser">
   <div class="col s12 m8 offset-m2">
-    <form (ngSubmit)="createUser()" class="card-panel row hoverable no-margin" materialize [formGroup]="createUserForm"
-      ngNativeValidate>
+    <form (ngSubmit)="createUser()" class="card-panel row hoverable no-margin" materialize [formGroup]="createUserForm" ngNativeValidate>
       <div class="col s12 center">
         <h5><strong>Crear nuevo alumno</strong></h5>
       </div>

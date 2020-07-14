@@ -33,19 +33,19 @@ a:hover:not(.title):not(.btn) {
 }
 
 .no-padding {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .no-margin {
-  margin: 0;
+  margin: 0 !important;
 }
 
 .no-margin-top {
-  margin-top: 0;
+  margin-top: 0 !important;
 }
 
 .no-margin-bottom {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 .no-border {
@@ -133,4 +133,19 @@ td:last-child, th:last-child {
 
 .modal{
   top: 5% !important;
+}
+
+@media only screen and (max-width: 600px) {
+  
+  .change-state-btn {
+    position: absolute;
+    margin: 0 10%;
+    top: 260px;
+  }
+
+  tbody, tr {
+    height: 306px;
+    overflow-y: hidden;
+  }
+
 }

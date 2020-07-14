@@ -1,5 +1,9 @@
 span a{
-  transition: background 200ms linear;
+  transition: 200ms linear;
+}
+
+span a:nth-child(n+2){
+  margin-left: 10px;
 }
 
 span a:first-child:hover{

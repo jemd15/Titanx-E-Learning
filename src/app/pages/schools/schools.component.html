@@ -2,9 +2,17 @@
   <div class="row"></div>
   <div class="row">
     <!-- tabla de Colegios -->
-    <div class="valign-wrapper">
+    <div class="valign-wrapper hide-on-small-only">
       <h1 class="no-padding col s12 m9">Listado de Colegios <a (click)="openCreateSchoolModal()" materialize="tooltip" class="add-user btn uss-color tooltipped" data-position="right" data-delay="50" data-tooltip="Crear nuevo colegio"><i class="material-icons white-text">add_circle_outline</i></a></h1>
       <div class="input-field col s12 m3 card card-input hoverable">
+        <i class="material-icons prefix">search</i>
+        <input id="icon_prefix" name="filter" [(ngModel)]="filter" type="text" class="validate card-input">
+        <label for="icon_prefix" class="card-input">Buscar Colegio</label>
+      </div>
+    </div>
+    <div class="hide-on-med-and-up">
+      <h4 class="no-padding col s12 m9">Listado de Colegios <a (click)="openCreateSchoolModal()" materialize="tooltip" class="right add-user btn uss-color tooltipped" data-position="right" data-delay="50" data-tooltip="Crear nuevo colegio"><i class="material-icons white-text">add_circle_outline</i></a></h4>
+      <div class="input-field col s12 m3 card card-input hoverable no-margin-top">
         <i class="material-icons prefix">search</i>
         <input id="icon_prefix" name="filter" [(ngModel)]="filter" type="text" class="validate card-input">
         <label for="icon_prefix" class="card-input">Buscar Colegio</label>
