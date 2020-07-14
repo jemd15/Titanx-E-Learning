@@ -52,4 +52,23 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user'));
   }
   
+  // user_id, name, lastName, email
+
+  setUserName(name: string){
+    let userData = this.userData();
+    userData.name = name;
+    localStorage.setItem('user', JSON.stringify(userData));
+  }
+
+  setUserLastName(lastName: string){
+    let userData = this.userData();
+    userData.lastName = lastName;
+    localStorage.setItem('user', JSON.stringify(userData));
+  }
+
+  setUserEmail(email: string){
+    let userData = this.userData();
+    userData.email = email;
+    localStorage.setItem('user', JSON.stringify(userData));
+  }
 }

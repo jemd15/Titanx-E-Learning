@@ -65,50 +65,55 @@ export class UsersComponent implements OnInit {
   }
 
   createUser() {
-    if (!this.passConfirmationWrong) {
-      switch(this.createUserForm.value.rol){
-        case 'Admin':
-          this.createUserForm.value.rol = 'admin'
-          break
-        case 'Profesor':
-          this.createUserForm.value.rol = 'teacher'
-          break
-        case 'Alumno':
-          this.createUserForm.value.rol = 'student'
-          break
-        default:
-          toast('Error en rol de usuario.', 3000);
-          throw new Error('error en rol de usuario');
+    if (this.checkSchool(this.createUserForm.value.school_school_id) || this.createUserForm.value.rol == 'Admin') { // si el usuario no es admin se comprueba que se le asigne un colegio existente
+      if (!this.passConfirmationWrong) {
+        toast('usuario creado', 3000)
+        switch(this.createUserForm.value.rol){
+          case 'Admin':
+            this.createUserForm.value.rol = 'admin'
+            break
+          case 'Profesor':
+            this.createUserForm.value.rol = 'teacher'
+            break
+          case 'Alumno':
+            this.createUserForm.value.rol = 'student'
+            break
+          default:
+            toast('Error en rol de usuario.', 3000);
+            throw new Error('error en rol de usuario');
+        }
+        this.createUserForm.value.school_school_id = (this.schools.find(school => school.name == this.createUserForm.value.school_school_id)) ? this.schools.find(school => school.name == this.createUserForm.value.school_school_id).school_id:null;
+        console.table(this.createUserForm.value);
+        this.api.createUser(this.createUserForm.value).toPromise()
+          .then((res: any) => {
+            console.log(res.newUser);
+            this.users.push(res.newUser);
+            toast('Usuario creado correctamente.', 3000);
+            this.closeCreateUserModal();
+          })
+          .catch(err => {
+            if (err.error.message.search('Duplicate entry') >= 0) {
+              toast('El email ya existe!', 3000);
+            } else {
+              toast('No se pudo procesar su solicitud. Intente nuevamente.', 3000);
+            }
+            switch(this.createUserForm.value.rol){
+              case 'admin':
+                this.createUserForm.value.rol = 'Admin'
+                break
+              case 'teacher':
+                this.createUserForm.value.rol = 'Profesor'
+                break
+              case 'student':
+                this.createUserForm.value.rol = 'Alumno'
+                break
+            }
+          });
+      } else {
+        toast('Las contraseñas deben coincidir', 3000);
       }
-      this.createUserForm.value.school_school_id = (this.schools.find(school => school.name == this.createUserForm.value.school_school_id)) ? this.schools.find(school => school.name == this.createUserForm.value.school_school_id).school_id:null;
-      console.table(this.createUserForm.value);
-      this.api.createUser(this.createUserForm.value).toPromise()
-        .then((res: any) => {
-          console.log(res.newUser);
-          this.users.push(res.newUser);
-          toast('Usuario creado correctamente.', 3000);
-          this.closeCreateUserModal();
-        })
-        .catch(err => {
-          if (err.error.message.search('Duplicate entry') >= 0) {
-            toast('El email ya existe!', 3000);
-          } else {
-            toast('No se pudo procesar su solicitud. Intente nuevamente.', 3000);
-          }
-          switch(this.createUserForm.value.rol){
-            case 'admin':
-              this.createUserForm.value.rol = 'Admin'
-              break
-            case 'teacher':
-              this.createUserForm.value.rol = 'Profesor'
-              break
-            case 'student':
-              this.createUserForm.value.rol = 'Alumno'
-              break
-          }
-        });
     } else {
-      toast('Lasc ontraseñas deben coincidir', 3000);
+      toast('Debe seleccionar un colegio existente', 3000);
     }
   }
 
@@ -153,6 +158,19 @@ export class UsersComponent implements OnInit {
   
   get confirm_password(): AbstractControl {
     return this.createUserForm.controls['passwordConfirm'];
+  }
+
+  // comprobación de que el colegio exista previo a la creación de un usuario
+  checkSchool(schoolName: string): boolean {
+    let check: boolean = false;
+    for (let school of this.schools) {
+      console.log(school.name, schoolName)
+      if(school.name.toUpperCase() == schoolName.toUpperCase()) {
+        check = true;
+        break
+      }
+    }
+    return check
   }
 
 }

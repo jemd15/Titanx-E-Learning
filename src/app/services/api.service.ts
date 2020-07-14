@@ -161,12 +161,12 @@ export class ApiService {
     return this.http.post<any>(this.apiUrl + `/users/verify-email`, { token })
   }
 
-  updateUser(user_id: number, name: string, lastName: string, email: string): Observable<any> {
-    return this.http.put<any>(this.apiUrl + `/users/update/${user_id}`, { name, lastName, email })
+  updateUser(user_id: number, name: string, lastName: string, newEmail: string, email: string): Observable<any> {
+    return this.http.put<any>(this.apiUrl + `/users/update/`, { name, lastName, newEmail, email, user_id })
   }
 
-  changePassUser(user_id: number, password: string, newPassword: string): Observable<any> {
-    return this.http.put<any>(this.apiUrl + `/users/${user_id}/change-pass`, { password, newPassword })
+  changePassUser(user_id: number, password: string, newPassword: string, email: string): Observable<any> {
+    return this.http.put<any>(this.apiUrl + `/users/change-pass`, { user_id, password, newPassword, email })
   }
 
 }

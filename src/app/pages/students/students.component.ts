@@ -65,21 +65,25 @@ export class StudentsComponent implements OnInit {
   }
 
   createUser() {
-    console.table(this.createUserForm.value);
-    this.api.createUser(this.createUserForm.value).toPromise()
-      .then((res: any) => {
-        console.log(res.newUser);
-        this.users.push(res.newStudent);
-        toast('Alumno creado correctamente.', 3000);
-        this.closeCreateUserModal();
-      })
-      .catch(err => {
-        if (err.error.message.search('Duplicate entry') >= 0) {
-          toast('El email ya existe!', 3000);
-        } else {
-          toast('No se pudo procesar su solicitud. Intente nuevamente.', 3000);
-        }
-      });
+    if (this.checkSchool(this.createUserForm.value.school_school_id)) { // comprueba que se le asigne un colegio existente al nuevo usuario
+      console.table(this.createUserForm.value);
+      this.api.createUser(this.createUserForm.value).toPromise()
+        .then((res: any) => {
+          console.log(res.newUser);
+          this.users.push(res.newStudent);
+          toast('Alumno creado correctamente.', 3000);
+          this.closeCreateUserModal();
+        })
+        .catch(err => {
+          if (err.error.message.search('Duplicate entry') >= 0) {
+            toast('El email ya existe!', 3000);
+          } else {
+            toast('No se pudo procesar su solicitud. Intente nuevamente.', 3000);
+          }
+        });
+    } else {
+      toast('Debe seleccionar un colegio existente', 3000);
+    }
   }
 
   // confirm new password validator
@@ -100,6 +104,19 @@ export class StudentsComponent implements OnInit {
   
   get confirm_password(): AbstractControl {
     return this.createUserForm.controls['passwordConfirm'];
+  }
+
+  // comprobación de que el colegio exista previo a la creación de un usuario
+  checkSchool(schoolName: string): boolean {
+    let check: boolean = false;
+    for (let school of this.schools) {
+      console.log(school.name, schoolName)
+      if(school.name.toUpperCase() == schoolName.toUpperCase()) {
+        check = true;
+        break
+      }
+    }
+    return check
   }
 
 }

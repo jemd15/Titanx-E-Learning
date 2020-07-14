@@ -30,8 +30,13 @@ export class AccountComponent implements OnInit {
   }
 
   changeData() {
-    this.api.updateUser(this.user.user_id, this.changeDataForm.value.name, this.changeDataForm.value.lastName, this.changeDataForm.value.email).toPromise()
+    console.log(this.user.user_id, this.changeDataForm.value.name, this.changeDataForm.value.lastName, this.changeDataForm.value.email);
+    
+    this.api.updateUser(this.user.user_id, this.changeDataForm.value.name, this.changeDataForm.value.lastName, this.changeDataForm.value.email, this.user.email).toPromise()
       .then((res: any) => {
+        this.auth.setUserName(this.changeDataForm.value.name);
+        this.auth.setUserLastName(this.changeDataForm.value.lastName);
+        this.auth.setUserEmail(this.changeDataForm.value.email);
         toast('Datos guardados correctamente', 1500);
       })
       .catch(err => {
@@ -41,9 +46,10 @@ export class AccountComponent implements OnInit {
   }
 
   changePass() {
+    console.log(this.user.user_id, this.changePassForm.value.password, this.changePassForm.value.newPassword, this.user.email);
     if(!this.passConfirmationWrong){
-      this.api.changePassUser(this.user.user_id, this.changePassForm.value.password, this.changePassForm.value.newPassword).toPromise()
-        .then((res: any) => {
+      this.api.changePassUser(this.user.user_id, this.changePassForm.value.password, this.changePassForm.value.newPassword, this.user.email).toPromise()
+        .then(() => {
           toast('Contraseña actualizada correctamente', 1500);
         })
         .catch(err => {
@@ -65,7 +71,7 @@ export class AccountComponent implements OnInit {
 
   private createChangePassForm() {
     return this.formBuilder.group({
-      password: ['*******', Validators.required],
+      password: ['', Validators.required],
       newPassword: ['', Validators.required],
       newPassword2: ['', Validators.required]
     })
