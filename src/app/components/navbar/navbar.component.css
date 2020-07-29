@@ -16,14 +16,10 @@ nav ul a {
   padding: 0 25px;
 }
 
-ul li#side-nav-login-btn {
-  bottom: -55vh;
-  position: relative;
-}
-
-ul li#side-nav-logout-btn {
-  bottom: -40vh;
-  position: relative;
+ul li#side-nav-logout-btn, ul li#side-nav-login-btn {
+  bottom: 10vh;
+  position: absolute;
+  width: 100%;
 }
 
 i.fas {

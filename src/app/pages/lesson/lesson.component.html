@@ -46,59 +46,58 @@
           <h4><strong>Pone a prueba tus conocimientos!</strong></h4>
           <div class="row">
 
-            <form [formGroup]="testForm" class="col s12">
+            <form [formGroup]="testForm" (ngSubmit)="responseTest()" class="col s12">
               <div *ngIf="testStructure">
-                <!-- <div formArrayName="test" *ngFor="let question of questions; let j = index; let answer of test.controls" [ngSwitch]="question.type"> -->
-                <div formArrayName="test" *ngFor="let question of testStructure; let i = index; let item of test.controls" [ngSwitch]="question.type">
+                <div formArrayName="test" *ngFor="let item of test.controls; let i = index;" [ngSwitch]="item.controls.type.value">
                   <div class="row">
                     <h5 class="col s12">
-                      <strong>{{ i + 1 }}.-</strong> {{ question.title }}
+                      <strong>{{ i + 1 }}.-</strong> {{ item.controls.title.value }}
                     </h5>
                     
                     <!-- question of text area -->
                     <div *ngSwitchCase="'text'" class="col s12 input-field">
-                      <textarea id="textarea1" class="materialize-textarea grey lighten-3"></textarea>
+                      <textarea [formControl]="item.get('response')" id="textarea1" class="materialize-textarea grey lighten-3"></textarea>
                     </div>
 
                     <!-- question of simple selection -->
                     <div *ngSwitchCase="'simple-selection'" class="col s12">
                       <p>
-                        <input [name]="'question_' + ( i + 1 )" type="radio" [id]="'question_' + ( i + 1 ) + 'answer_1'" [value]="question.answer_1" />
-                        <label [for]="'question_' + ( i + 1 ) + 'answer_1'">{{question.answer_1}}</label>
+                        <input [name]="'question_' + ( i + 1 )" type="radio" [id]="'question_' + ( i + 1 ) + 'answer_1'" [value]="item.controls.answer_1.value" (change)="setSimpleResponse(i, item.controls.answer_1.value)" />
+                        <label [for]="'question_' + ( i + 1 ) + 'answer_1'">{{item.controls.answer_1.value}}</label>
                       </p>
                       <p>
-                        <input [name]="'question_' + ( i + 1 )" type="radio" [id]="'question_' + ( i + 1 ) + 'answer_2'" [value]="question.answer_1" />
-                        <label [for]="'question_' + ( i + 1 ) + 'answer_2'">{{question.answer_2}}</label>
+                        <input [name]="'question_' + ( i + 1 )" type="radio" [id]="'question_' + ( i + 1 ) + 'answer_2'" [value]="item.controls.answer_1.value" (change)="setSimpleResponse(i, item.controls.answer_2.value)" />
+                        <label [for]="'question_' + ( i + 1 ) + 'answer_2'">{{item.controls.answer_2.value}}</label>
                       </p>
                       <p>
-                        <input [name]="'question_' + ( i + 1 )" type="radio" [id]="'question_' + ( i + 1 ) + 'answer_3'" [value]="question.answer_1" />
-                        <label [for]="'question_' + ( i + 1 ) + 'answer_3'">{{question.answer_3}}</label>
+                        <input [name]="'question_' + ( i + 1 )" type="radio" [id]="'question_' + ( i + 1 ) + 'answer_3'" [value]="item.controls.answer_1.value" (change)="setSimpleResponse(i, item.controls.answer_3.value)" />
+                        <label [for]="'question_' + ( i + 1 ) + 'answer_3'">{{item.controls.answer_3.value}}</label>
                       </p>
                       <p>
-                        <input [name]="'question_' + ( i + 1 )" type="radio" [id]="'question_' + ( i + 1 ) + 'answer_4'" [value]="question.answer_1" />
-                        <label [for]="'question_' + ( i + 1 ) + 'answer_4'">{{question.answer_4}}</label>
+                        <input [name]="'question_' + ( i + 1 )" type="radio" [id]="'question_' + ( i + 1 ) + 'answer_4'" [value]="item.controls.answer_1.value" (change)="setSimpleResponse(i, item.controls.answer_4.value)" />
+                        <label [for]="'question_' + ( i + 1 ) + 'answer_4'">{{item.controls.answer_4.value}}</label>
                       </p>
                     </div>
 
                     <!-- question of multiple selection-->
                     <div *ngSwitchCase="'multiple-selection'" class="col s12">
                       <p>
-                        <input [name]="'question_' + ( i + 1 )" type="checkbox" class="filled-in" [id]="'question_' + ( i + 1 ) + 'answer_1'" [value]="question.answer_1" />
-                        <label [for]="'question_' + ( i + 1 ) + 'answer_1'">{{question.answer_1}}</label>
+                        <input type="checkbox" class="filled-in" [id]="'question_' + ( i + 1 ) + 'answer_1'" (change)="setMultipleResponse(i, item.controls.answer_1.value)" />
+                        <label [for]="'question_' + ( i + 1 ) + 'answer_1'">{{item.controls.answer_1.value}}</label>
                       </p>
                       <p>
-                        <input [name]="'question_' + ( i + 1 )" type="checkbox" class="filled-in" [id]="'question_' + ( i + 1 ) + 'answer_2'" [value]="question.answer_1" />
-                        <label [for]="'question_' + ( i + 1 ) + 'answer_2'">{{question.answer_2}}</label>
+                        <input type="checkbox" class="filled-in" [id]="'question_' + ( i + 1 ) + 'answer_2'" (change)="setMultipleResponse(i, item.controls.answer_2.value)" />
+                        <label [for]="'question_' + ( i + 1 ) + 'answer_2'">{{item.controls.answer_2.value}}</label>
                       </p>
                       <p>
-                        <input [name]="'question_' + ( i + 1 )" type="checkbox" class="filled-in" [id]="'question_' + ( i + 1 ) + 'answer_3'" [value]="question.answer_1" />
-                        <label [for]="'question_' + ( i + 1 ) + 'answer_3'">{{question.answer_3}}</label>
+                        <input type="checkbox" class="filled-in" [id]="'question_' + ( i + 1 ) + 'answer_3'" (change)="setMultipleResponse(i, item.controls.answer_3.value)" />
+                        <label [for]="'question_' + ( i + 1 ) + 'answer_3'">{{item.controls.answer_3.value}}</label>
                       </p>
                       <p>
-                        <input [name]="'question_' + ( i + 1 )" type="checkbox" class="filled-in" [id]="'question_' + ( i + 1 ) + 'answer_4'" [value]="question.answer_1" />
-                        <label [for]="'question_' + ( i + 1 ) + 'answer_4'">{{question.answer_4}}</label>
+                        <input type="checkbox" class="filled-in" [id]="'question_' + ( i + 1 ) + 'answer_4'" (change)="setMultipleResponse(i, item.controls.answer_4.value)" />
+                        <label [for]="'question_' + ( i + 1 ) + 'answer_4'">{{item.controls.answer_4.value}}</label>
                       </p>
-                    </div> 
+                    </div>
                   </div>
                 </div>
               </div>
