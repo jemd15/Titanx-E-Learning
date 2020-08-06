@@ -9,6 +9,7 @@
         <li *ngIf="auth.isLogged()" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="courses" routerLinkActive="white-text">Cursos</a></li>
         <li *ngIf="auth.isLogged() && auth.userData().rol == 'admin'" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="users" routerLinkActive="white-text">Usuarios</a></li>
         <li *ngIf="auth.isLogged() && auth.userData().rol == 'admin'" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="schools" routerLinkActive="white-text">Colegios</a></li>
+        <li *ngIf="auth.isLogged() && auth.userData().rol == 'teacher'" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="test-list" routerLinkActive="white-text">Tests</a></li>
         <li *ngIf="auth.isLogged() && auth.userData().rol == 'teacher'" routerLinkActive="uss-color"><a class="text-uss-color" routerLink="students" routerLinkActive="white-text">Alumnos</a></li>
         <li *ngIf="!auth.isLogged()"><a class="btn uss-color white-text waves-effect waves-light hoverable" routerLink="login">Ingresar</a></li>
         <li *ngIf="auth.isLogged()"><a (click)="auth.logout()"><i class="material-icons text-uss-color">exit_to_app</i></a></li>
@@ -36,7 +37,7 @@
     <a class="waves-effect" routerLink="account"><i class="fas fa-user fa-2x"></i>Cuenta</a>
   </li>
   <li *ngIf="auth.isLogged()" routerLinkActive="grey lighten-4">
-    <a class="waves-effect" routerLink="courses"><i class="fas fa-book fa-2x"></i>Cursos</a>
+    <a class="waves-effect" routerLink="courses"><i class="fas fa-graduation-cap fa-2x"></i>Cursos</a>
   </li>
   <li *ngIf="auth.isLogged() && auth.userData().rol == 'admin'" routerLinkActive="grey lighten-4">
     <a class="waves-effect" routerLink="users"><i class="fas fa-users fa-2x"></i>Usuarios</a>
@@ -45,7 +46,10 @@
     <a class="waves-effect" routerLink="schools"><i class="fas fa-school fa-2x"></i>Colegios</a>
   </li>
   <li *ngIf="auth.isLogged() && auth.userData().rol == 'teacher'" routerLinkActive="grey lighten-4">
-    <a class="waves-effect" routerLink="students"><i class="fas fa-graduation-cap fa-2x"></i>Alumnos</a>
+    <a class="waves-effect" routerLink="test-list"><i class="fas fa-file-alt fa-2x"></i>Tests</a>
+  </li>
+  <li *ngIf="auth.isLogged() && auth.userData().rol == 'teacher'" routerLinkActive="grey lighten-4">
+    <a class="waves-effect" routerLink="students"><i class="fas fa-user-graduate fa-2x"></i>Alumnos</a>
   </li>
   <li id="side-nav-login-btn" *ngIf="!auth.isLogged()"><a class="btn uss-color white-text waves-effect waves-light hoverable" routerLink="login">Ingresar</a></li>
   <li id="side-nav-logout-btn" *ngIf="auth.isLogged()"><a class="btn uss-color white-text waves-effect waves-light hoverable" (click)="auth.logout()">Salir</a></li>

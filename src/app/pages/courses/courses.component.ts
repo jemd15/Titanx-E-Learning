@@ -5,6 +5,7 @@ import { User } from '../../models/user';
 import { EventEmitter } from '@angular/core';
 import { MaterializeAction, toast } from 'angular2-materialize';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-courses',
@@ -24,19 +25,16 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    private api: ApiService
+    private api: ApiService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
     this.newCourseForm = this.createNewCoruseForm();
-    this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user);
-
+    this.user = this.auth.userData();
     this.api.getAllCourses().subscribe((res: any) => {
       this.courses = res.courses;
-      console.log(this.courses);
-
-    })
+    });
   }
 
   private createNewCoruseForm() {
@@ -60,7 +58,7 @@ export class CoursesComponent implements OnInit {
     this.api.getStudentsBySchoolId(school_id).toPromise()
       .then((res: any) => {
         let students = res.students;
-        console.log(students);
+        console.log({students});
         this.api.getStudentsByCourseId(course_id).toPromise()
           .then((res: any) => {
             this.modalAddStudent.emit({ action: 'modal', params: ['open'] });

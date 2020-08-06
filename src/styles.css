@@ -19,6 +19,14 @@
   width: 85%;
 }
 
+.pagination li.active {
+  background-color: #1a232f;
+}
+
+.pagination{
+  padding: 10px 0;
+}
+
 a:hover:not(.title):not(.btn) {
   transition: 500ms;
   color: #2bbbad !important;

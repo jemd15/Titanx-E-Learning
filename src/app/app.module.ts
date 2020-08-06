@@ -29,6 +29,7 @@ import { StudentsComponent } from './pages/students/students.component';
 import { SchoolsComponent } from './pages/schools/schools.component';
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
 import { AccountComponent } from './pages/account/account.component';
+import { TestListComponent } from './pages/test-list/test-list.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { AccountComponent } from './pages/account/account.component';
     StudentsComponent,
     SchoolsComponent,
     VerifyEmailComponent,
-    AccountComponent
+    AccountComponent,
+    TestListComponent
   ],
   imports: [
     HttpClientModule,

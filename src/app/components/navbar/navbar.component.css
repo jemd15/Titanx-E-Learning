@@ -25,3 +25,7 @@ ul li#side-nav-logout-btn, ul li#side-nav-login-btn {
 i.fas {
   color: #1a232f !important;
 }
+
+.brand-logo{
+  height: 80px;
+}

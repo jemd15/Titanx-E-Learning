@@ -78,8 +78,20 @@ export class ApiService {
     return this.http.get<Answer>(`${this.apiUrl}/question/${question_id}/answers`)
   }
 
-  getResolvedTestByCourseId(course_id: string, unit_number: string, lesson_number: string): Observable<ResolvedTest[]> {
-    return this.http.get<ResolvedTest[]>(`${this.apiUrl}/course/${course_id}/unit/${unit_number}/lesson/${lesson_number}/resolvedTests`)
+  getResolvedTestByCourseId(course_id: number): Observable<ResolvedTest[]> {
+    return this.http.get<ResolvedTest[]>(`${this.apiUrl}/course/${course_id}/resolvedTests`)
+  }
+
+  getResolvedTest(page: number): Observable<ResolvedTest[]> {
+    return this.http.get<ResolvedTest[]>(`${this.apiUrl}/courses/resolvedTests/page/${page}`)
+  }
+
+  searchResolvedTest(page: number, course: string, unit: string, lesson: string): Observable<ResolvedTest[]> {
+    return this.http.post<ResolvedTest[]>(`${this.apiUrl}/courses/searchResolvedTests/page/${page}`, { course, unit, lesson })
+  }
+
+  downloadResolvedTest(course: string, unit: string, lesson: string): Observable<ResolvedTest[]> {
+    return this.http.post<ResolvedTest[]>(`${this.apiUrl}/courses/searchResolvedTests/`, { course, unit, lesson })
   }
 
   postResolvedTest(email: string, password: string): Observable<User> {
@@ -167,6 +179,10 @@ export class ApiService {
 
   changePassUser(user_id: number, password: string, newPassword: string, email: string): Observable<any> {
     return this.http.put<any>(this.apiUrl + `/users/change-pass`, { user_id, password, newPassword, email })
+  }
+
+  responseTest(test): Observable<any> {
+    return this.http.post<any>(this.apiUrl + `/courses/resolved_test/new`, { test })
   }
 
 }

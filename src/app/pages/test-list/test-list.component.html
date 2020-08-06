@@ -1,0 +1,111 @@
+<section class="container">
+  <div class="row"></div>
+  <div class="row">
+    <!-- tabla de tests -->
+    <div class="valign-wrapper hide-on-small-only">
+      <h1 class="no-padding col s12">Tests</h1>
+      <a (click)="openCreateTestModal()" materialize="tooltip" class="btn uss-color tooltipped" data-position="left" data-delay="50" data-tooltip="Crear nuevo test"><i class="material-icons white-text">add_circle_outline</i></a>
+    </div>
+    <div class="hide-on-med-and-up">
+      <h4 class="no-padding col s12 m9">Test Resueltos</h4>
+      <!-- <h4 class="no-padding col s12 m9">Test Resueltos <a (click)="openCreateUserModal()" materialize="tooltip" class="right btn uss-color tooltipped" data-position="left" data-delay="50" data-tooltip="Crear nuevo test"><i class="material-icons white-text">add_circle_outline</i></a></h4> -->
+    </div>
+    <div class="col m3 no-padding-left">
+      <form (ngSubmit)="searchTest()" class="card-panel row hoverable no-margin" materialize [formGroup]="testSearchForm" ngNativeValidate>
+        <h5><strong>Buscar Test</strong></h5>
+        <div class="input-field col s12 no-padding">
+          <input type="text" list="courses" placeholder="Curso" formControlName="course" (change)="getUnitsByCourse()">
+          <datalist id="courses">
+            <option *ngFor="let course of courses" [value]="course.course"></option>
+          </datalist>
+        </div>
+        <div class="input-field col s12 no-padding">
+          <input type="text" list="units" placeholder="Unidad" formControlName="unit" (change)="getLessonsByUnit()">
+          <datalist id="units">
+            <option *ngFor="let unit of units" [value]="unit.title"></option>
+          </datalist>
+        </div>
+        <div class="input-field col s12 no-padding">
+          <input type="text" list="lessons" placeholder="Lección" formControlName="lesson">
+          <datalist id="lessons">
+            <option *ngFor="let lesson of lessons" [value]="lesson.title"></option>
+          </datalist>
+        </div>
+        <div class="col s12 no-padding">
+          <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color"><strong class="white-text">Buscar</strong></button>
+        </div>
+        <div class="row"></div>
+        <div class="col s12 no-padding">
+          <a (click)="resetFilters()" class="btn transparent btn-secondary waves-effect col s12">Quitar Filtro</a>
+        </div>
+      </form>
+      <br>
+      <form (ngSubmit)="downloadTest()" class="card-panel row hoverable no-margin" materialize [formGroup]="downloadTestsForm" ngNativeValidate>
+        <h5><strong>Descargar Test</strong></h5>
+        <div class="input-field col s12 no-padding">
+          <input type="text" list="download_courses" placeholder="Curso" formControlName="course" (change)="getUnitsByCourseOnDownload()">
+          <datalist id="download_courses">
+            <option *ngFor="let course of courses" [value]="course.course"></option>
+          </datalist>
+        </div>
+        <div class="input-field col s12 no-padding">
+          <input type="text" list="download_units" placeholder="Unidad" formControlName="unit" (change)="getLessonsByUnitOnDownload()">
+          <datalist id="download_units">
+            <option *ngFor="let unit of download_units" [value]="unit.title"></option>
+          </datalist>
+        </div>
+        <div class="input-field col s12 no-padding">
+          <input type="text" list="download_lessons" placeholder="Lección" formControlName="lesson">
+          <datalist id="download_lessons">
+            <option *ngFor="let lesson of download_lessons" [value]="lesson.title"></option>
+          </datalist>
+        </div>
+        <div class="col s12 no-padding">
+          <button type="submit" class="hoverable btn col s12 waves-effect waves-light uss-color"><strong class="white-text">Descargar</strong></button>
+        </div>
+      </form>
+    </div>
+    <div class="col s12 m9 no-padding-right">
+      <div class="card-panel no-margin hoverable">
+        <table class="striped responsive-table">
+          <thead>
+            <tr>
+              <th>Alumno</th>
+              <th>Curso</th>
+              <th>Unidad</th>
+              <th>Lección</th>
+              <th>Detalle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let test of tests">
+              <td>{{test.student}}</td>
+              <td>{{test.course}}</td>
+              <td>{{test.unit}}</td>
+              <td>{{test.lesson}}</td>
+              <td><a (click)="openDetailTestResolvedModal(test)" class="btn uss-color tooltipped" data-position="right" data-delay="50" data-tooltip="Crear nuevo test"><i class="material-icons white-text">expand_more</i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col offset-m4">
+        <ul class="pagination card-panel">
+          <li (click)="chargePage(lastPage)" class="waves-effect"><a><i class="material-icons">chevron_left</i></a></li>
+          <li *ngFor="let page of pages" (click)="chargePage(page.number)" class="waves-effect" [ngClass]="page.state"><a>{{page.number}}</a></li>
+          <li (click)="chargePage(nextPage)" class="waves-effect"><a><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- estructura del modal de recuperación de contraseña -->
+<div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalDetailTestResolved">
+  <div class="col s12 m6 offset-m3">
+    <div class="card-panel row hoverable center">
+      {{detailTest | json}}
+      <div class="row"></div>
+      <a (click)="closeDetailTestResolvedModal()" class="btn uss-color">cerrar modal</a>
+    </div>
+  </div>
+</div>

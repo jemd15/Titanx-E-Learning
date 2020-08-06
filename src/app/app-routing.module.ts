@@ -11,6 +11,7 @@ import { StudentsComponent } from './pages/students/students.component';
 import { SchoolsComponent } from './pages/schools/schools.component';
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
 import { AccountComponent } from './pages/account/account.component';
+import { TestListComponent } from './pages/test-list/test-list.component';
 
 export const AppRoutes: Routes = [
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
@@ -20,6 +21,7 @@ export const AppRoutes: Routes = [
   { path: 'users', component: UsersComponent, pathMatch: 'full' },
   { path: 'students', component: StudentsComponent, pathMatch: 'full' },
   { path: 'schools', component: SchoolsComponent, pathMatch: 'full' },
+  { path: 'test-list', component: TestListComponent, pathMatch: 'full' },
   { path: 'verify-email/:token', component: VerifyEmailComponent, pathMatch: 'full' },
   { path: 'account', component: AccountComponent, pathMatch: 'full' },
   { path: 'courses/:courseId/:course', component: CourseDetailComponent, pathMatch: 'full' },
