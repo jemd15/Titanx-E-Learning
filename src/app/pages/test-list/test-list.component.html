@@ -43,7 +43,7 @@
       <form (ngSubmit)="downloadTest()" class="card-panel row hoverable no-margin" materialize [formGroup]="downloadTestsForm" ngNativeValidate>
         <h5><strong>Descargar Test</strong></h5>
         <div class="input-field col s12 no-padding">
-          <input type="text" list="download_courses" placeholder="Curso" formControlName="course" (change)="getUnitsByCourseOnDownload()">
+          <input type="text" list="download_courses" placeholder="Curso" formControlName="course" (change)="getUnitsByCourseOnDownload()" required="true" class="validate">
           <datalist id="download_courses">
             <option *ngFor="let course of courses" [value]="course.course"></option>
           </datalist>
@@ -99,13 +99,51 @@
   </div>
 </section>
 
-<!-- estructura del modal de recuperación de contraseña -->
-<div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalDetailTestResolved">
-  <div class="col s12 m6 offset-m3">
-    <div class="card-panel row hoverable center">
-      {{detailTest | json}}
+<!-- estructura del modal de detalle de test resuelto -->
+<div id="modal1" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalDetailTestResolved">
+  <div class="modal-content">
+    <div *ngIf="detailTest.length > 0" class="row center">
+      <h4 class="no-margin"><strong>Detalle de Test</strong></h4>
+      <div>
+        <strong>{{ detailTest[0].course + ' | ' + detailTest[0].unit + ' | ' + detailTest[0].lesson }}</strong>
+      </div>
+      <br>
+      <div class="col s4 left-align no-padding">
+        <strong>Nombre: </strong>{{ detailTest[0].student }}
+      </div>
+      <div class="col s4 center no-padding">
+        <strong>Fecha: </strong>{{ (detailTest[0].datetime | date: 'longDate') }}
+      </div>
+      <div class="col s4 right-align no-padding">
+        <strong>Hora: </strong>{{ (detailTest[0].datetime | date:'hh:mm a') }}
+      </div>
+      <!-- <p *ngFor="let item of detailTest">{{item | json}}</p> -->
       <div class="row"></div>
-      <a (click)="closeDetailTestResolvedModal()" class="btn uss-color">cerrar modal</a>
+      <table class="striped responsive-table">
+        <thead>
+          <tr>
+            <th class="uss-color white-text">Pregunta</th>
+            <th class="uss-color white-text">Respuesta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of detailTest">
+            <td>{{item.title}}</td>
+            <td *ngIf="item.response !== ''; else noResponse">
+              <div *ngFor="let res of item.response">
+                <a class="text-uss-color">{{res}}</a>
+                <br>
+              </div>
+            </td>
+            <ng-template #noResponse>
+              <td>{{'Sin Respuesta'}}</td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+  <div class="modal-footer">
+    <a (click)="closeDetailTestResolvedModal()" class="modal-action modal-close waves-effect waves-green btn uss-color">Cerrar</a>
   </div>
 </div>

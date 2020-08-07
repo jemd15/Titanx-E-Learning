@@ -8,6 +8,12 @@ import { AppRoutes } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth/auth.interceptor';
 
+// cambiando LOCALE_ID a español
+import { LOCALE_ID } from '@angular/core';
+import es from '@angular/common/locales/es'
+import { registerLocaleData } from '@angular/common'
+registerLocaleData(es)
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { Page404Component } from './pages/page404/page404.component';
@@ -67,6 +73,10 @@ import { TestListComponent } from './pages/test-list/test-list.component';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi:true,
+    },
+    { 
+      provide: LOCALE_ID,
+      useValue: "es-ES"
     },
     ApiService,
     AuthService

@@ -86,6 +86,10 @@ export class ApiService {
     return this.http.get<ResolvedTest[]>(`${this.apiUrl}/courses/resolvedTests/page/${page}`)
   }
 
+  getResolvedTestDetail(student_id: number, test_id: number): Observable<ResolvedTest[]> {
+    return this.http.get<ResolvedTest[]>(`${this.apiUrl}/courses/resolvedTestsDetail/student/${student_id}/test/${test_id}`)
+  }
+
   searchResolvedTest(page: number, course: string, unit: string, lesson: string): Observable<ResolvedTest[]> {
     return this.http.post<ResolvedTest[]>(`${this.apiUrl}/courses/searchResolvedTests/page/${page}`, { course, unit, lesson })
   }

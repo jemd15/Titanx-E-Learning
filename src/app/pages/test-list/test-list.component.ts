@@ -31,7 +31,7 @@ export class TestListComponent implements OnInit {
   public testSearchForm: FormGroup;
   public downloadTestsForm: FormGroup;
   public filtered: boolean = false;
-  public detailTest;
+  public detailTest = [];
 
   constructor(
     public formBuilder: FormBuilder,
@@ -82,12 +82,32 @@ export class TestListComponent implements OnInit {
   }
 
   openDetailTestResolvedModal(test) {
-    this.detailTest = test;
+    this.api.getResolvedTestDetail(test.student_id, test.test_id).toPromise()
+      .then((res: any) => {
+        res.resolvedTests.map(test => {
+          this.detailTest.push({ 
+            student_id: test.student_id,
+            student: test.student,
+            test_id: test.test_id,
+            title: test.title,
+            response: test.response.split(';;;'),
+            lesson: test.lesson,
+            unit: test.unit,
+            course_id: test.course_id,
+            course: test.course,
+            datetime: test.datetime
+          });
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      })
     this.modalDetailTestResolved.emit({ action: 'modal', params: ['open'] });
   }
 
   closeDetailTestResolvedModal() {
     this.modalDetailTestResolved.emit({ action: 'modal', params: ['close'] });
+    this.detailTest = [];
   }
 
   searchTest() {
