@@ -14,6 +14,13 @@ import es from '@angular/common/locales/es'
 import { registerLocaleData } from '@angular/common'
 registerLocaleData(es)
 
+import { ApiService } from './services/api.service';
+import { AuthService } from './services/auth.service';
+import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SearchPipe } from './pipes/search/search.pipe';
+import { ExcelService } from './services/excel.service';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { Page404Component } from './pages/page404/page404.component';
@@ -25,12 +32,7 @@ import { CourseDetailComponent } from './pages/course-detail/course-detail.compo
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { LessonComponent } from './pages/lesson/lesson.component';
 import { RestorePassComponent } from './pages/restore-pass/restore-pass.component';
-import { ApiService } from './services/api.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthService } from './services/auth.service';
-import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
 import { UsersComponent } from './pages/users/users.component';
-import { SearchPipe } from './pipes/search/search.pipe';
 import { StudentsComponent } from './pages/students/students.component';
 import { SchoolsComponent } from './pages/schools/schools.component';
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
@@ -79,7 +81,8 @@ import { TestListComponent } from './pages/test-list/test-list.component';
       useValue: "es-ES"
     },
     ApiService,
-    AuthService
+    AuthService,
+    ExcelService
   ],
   bootstrap: [AppComponent]
 })

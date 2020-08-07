@@ -4,8 +4,9 @@ import { Course } from '../../models/courses';
 import { Unit } from '../../models/units';
 import { Lesson } from '../../models/lessons';
 import { EventEmitter } from '@angular/core';
-import { MaterializeAction } from 'angular2-materialize';
+import { MaterializeAction, toast } from 'angular2-materialize';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { ExcelService } from '../../services/excel.service';
 
 @Component({
   selector: 'app-test-list',
@@ -36,6 +37,7 @@ export class TestListComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private api: ApiService,
+    private xlsx: ExcelService
   ) { }
 
   ngOnInit(): void {
@@ -284,7 +286,15 @@ export class TestListComponent implements OnInit {
     console.log('download:',this.downloadTestsForm.controls['course'].value, ',', this.downloadTestsForm.controls['unit'].value, ',', this.downloadTestsForm.controls['lesson'].value);
     this.api.downloadResolvedTest(this.downloadTestsForm.controls['course'].value, this.downloadTestsForm.controls['unit'].value, this.downloadTestsForm.controls['lesson'].value).toPromise()
       .then((res: any) => {
-        console.table(res.resolvedTests);
+        console.log(res.resolvedTests);
+        if (res.resolvedTests.length > 0) {
+          this.xlsx.exportAsExcelFile(res.resolvedTests, `test resueltos - ${res.resolvedTests[0].course} - ${res.resolvedTests[0].unit} - ${res.resolvedTests[0].lesson}`);
+        } else {
+          toast('No hay tests resueltos', 3000);
+        }
       })
+      .catch(err => {
+        console.log(err);
+      });
   }
 }

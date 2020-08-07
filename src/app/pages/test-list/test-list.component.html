@@ -83,7 +83,7 @@
               <td>{{test.course}}</td>
               <td>{{test.unit}}</td>
               <td>{{test.lesson}}</td>
-              <td><a (click)="openDetailTestResolvedModal(test)" class="btn uss-color tooltipped" data-position="right" data-delay="50" data-tooltip="Crear nuevo test"><i class="material-icons white-text">expand_more</i></a></td>
+              <td><a (click)="openDetailTestResolvedModal(test)" class="btn uss-color"><i class="material-icons white-text">expand_more</i></a></td>
             </tr>
           </tbody>
         </table>
@@ -117,7 +117,6 @@
       <div class="col s4 right-align no-padding">
         <strong>Hora: </strong>{{ (detailTest[0].datetime | date:'hh:mm a') }}
       </div>
-      <!-- <p *ngFor="let item of detailTest">{{item | json}}</p> -->
       <div class="row"></div>
       <table class="striped responsive-table">
         <thead>
@@ -131,7 +130,7 @@
             <td>{{item.title}}</td>
             <td *ngIf="item.response !== ''; else noResponse">
               <div *ngFor="let res of item.response">
-                <a class="text-uss-color">{{res}}</a>
+                <a class="text-uss-color">{{res || 'Sin respuesta'}}</a>
                 <br>
               </div>
             </td>
