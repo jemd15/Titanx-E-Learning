@@ -5,7 +5,7 @@ import { Unit } from '../../models/units';
 import { Lesson } from '../../models/lessons';
 import { EventEmitter } from '@angular/core';
 import { MaterializeAction, toast } from 'angular2-materialize';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { ExcelService } from '../../services/excel.service';
 
 @Component({
@@ -22,6 +22,8 @@ export class TestListComponent implements OnInit {
   public lessons: Lesson[];
   public download_units: Unit[];
   public download_lessons: Lesson[];
+  public new_test_units: Unit[];
+  public new_test_lessons: Lesson[];
   public pages = [];
   public actualPage: number;
   public lastPage: number;
@@ -49,14 +51,48 @@ export class TestListComponent implements OnInit {
       .then((res: any) => {
         this.courses = res.courses;
       })
+      .catch(err => {
+        console.log(err);        
+      })
   }
 
   private createNewTestForm() {
     return this.formBuilder.group({
-      name: ['', Validators.required],
-      img_url: ['', Validators.required]
+      course: ['', Validators.required],
+      unit: ['', Validators.required],
+      lesson: ['', Validators.required],
+      questions: this.formBuilder.array([])
+      /* questions: this.formBuilder.array([{
+        type: ['', Validators.required],
+        title: ['', Validators.required],
+        answer_1: ['', Validators.required],
+        answer_2: ['', Validators.required],
+        answer_3: ['', Validators.required],
+        answer_4: ['', Validators.required]
+      }]) */
     })
   }
+
+  get questions(): FormArray {
+    return this.newTestForm.get('questions') as FormArray;
+  }
+
+  public addQuestionAndAnswers() {
+    const newTestFormGroup = this.formBuilder.group({
+      type: ['', Validators.required],
+      title: ['Esta es una pregunta de selección ', Validators.required],
+      answer_1: ['Opción A'],
+      answer_2: ['Opción B'],
+      answer_3: ['Opción C'],
+      answer_4: ['Opción D']
+    });
+
+    this.questions.push(newTestFormGroup);
+  }
+
+  public removeQuestionAndAnswers(index: number) {
+    this.questions.removeAt(index);
+  } 
 
   private createTestSearchForm() {
     return this.formBuilder.group({
@@ -81,6 +117,7 @@ export class TestListComponent implements OnInit {
   closeCreateTestModal() {
     this.modalNewTest.emit({ action: 'modal', params: ['close'] });
     this.newTestForm.reset();
+    this.questions.controls.splice(0, this.questions.length);
   }
 
   openDetailTestResolvedModal(test) {
@@ -282,13 +319,69 @@ export class TestListComponent implements OnInit {
     }
   }
 
+  async getUnitsByCourseOnNewTest() {
+    this.newTestForm.controls['unit'].reset();
+    this.newTestForm.controls['lesson'].reset();
+    if (this.newTestForm.value.course !== '') {
+      let course_id: string;
+      for await (const course of this.courses) {
+        if (course.course == this.newTestForm.value.course) {
+          course_id = course.course_id.toString();
+          this.api.getAllUnitsByCourseId(course_id).toPromise()
+            .then((res: any) => {
+              this.new_test_units = res.units;
+            })
+            .catch(err => {
+              console.log(err);
+            });
+          break;
+        }
+      }
+    }
+  }
+
+  async getLessonsByUnitOnNewTest() {
+    this.newTestForm.controls['lesson'].reset();
+    if (this.newTestForm.controls['unit'].value !== '') {
+      let unit_id: string;
+      for await (const unit of this.new_test_units) {
+        if (unit.title == this.newTestForm.value.unit) {
+          unit_id = unit.unit_id.toString();
+          this.api.getAllLessonsByUnitId(unit_id).toPromise()
+            .then((res: any) => {
+              this.new_test_lessons = res.lessons;
+            })
+            .catch(err => {
+              console.log(err);
+            });
+          break;
+        }
+      }
+    }
+  }
+
   downloadTest() {
     console.log('download:',this.downloadTestsForm.controls['course'].value, ',', this.downloadTestsForm.controls['unit'].value, ',', this.downloadTestsForm.controls['lesson'].value);
     this.api.downloadResolvedTest(this.downloadTestsForm.controls['course'].value, this.downloadTestsForm.controls['unit'].value, this.downloadTestsForm.controls['lesson'].value).toPromise()
       .then((res: any) => {
         console.log(res.resolvedTests);
         if (res.resolvedTests.length > 0) {
-          this.xlsx.exportAsExcelFile(res.resolvedTests, `test resueltos - ${res.resolvedTests[0].course} - ${res.resolvedTests[0].unit} - ${res.resolvedTests[0].lesson}`);
+          let excelData = res.resolvedTests.map(test => {
+            const date = new Date(test.datetime);
+            return {
+              Alumno: test.student,
+              Pregunta:test.title,
+              Respuesta: test.response.split(';;;').join(' - '),
+              Curso: test.course,
+              Unidad: test.unit,
+              Lección: test.lesson,
+              Fecha: `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`,
+              Hora: `${date.getHours()}:${date.getSeconds()}`
+            }
+          })
+          console.log(excelData);
+          this.xlsx.exportAsExcelFile(excelData, `test resueltos - ${res.resolvedTests[0].course} - ${res.resolvedTests[0].unit} - ${res.resolvedTests[0].lesson}`);
+          toast('Descargando tests resueltos', 1500);
         } else {
           toast('No hay tests resueltos', 3000);
         }
@@ -296,5 +389,52 @@ export class TestListComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  createTest() {
+    let course_id = this.courses.find(course => course.course == this.newTestForm.value.course).course_id;
+    let unit_id = this.new_test_units.find(unit => unit.title == this.newTestForm.value.unit).unit_id;
+    let lesson_id = this.new_test_lessons.find(lesson => lesson.title == this.newTestForm.value.lesson).lesson_id;
+    let newTest = {
+      state: 'active',
+      course_id,
+      unit_id,
+      lesson_id,
+      questions: this.newTestForm.value.questions.map(question => {
+        switch(question.type) {
+          case 'Desarrollo':
+            question.type = 'text';
+            break;
+          case 'Selección simple':
+            question.type = 'simple-selection';
+            break;
+          case 'Selección múltiple':
+            question.type = 'multiple-selection';
+            break;
+        }
+
+        return {
+          title: question.title,
+          answer_1: question.answer_1,
+          answer_2: question.answer_2,
+          answer_3: question.answer_3,
+          answer_4: question.answer_4,
+          type: question.type
+        }
+      })
+    }
+    console.log({newTest});
+    this.api.createTest(newTest).toPromise()
+      .then((res: any) => {
+        toast('Test creado correctamente', 1500);
+        this.closeCreateTestModal();
+      })
+      .catch(err => {
+        if(err.error.message == 'You cannot duplicate or make another tests on this lesson'){
+          toast('Lección ya tiene test', 3000);
+        } else {
+          toast('Error al crear nuevo test', 3000);
+        }
+      })
   }
 }

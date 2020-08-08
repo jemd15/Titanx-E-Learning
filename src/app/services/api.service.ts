@@ -189,5 +189,16 @@ export class ApiService {
     return this.http.post<any>(this.apiUrl + `/courses/resolved_test/new`, { test })
   }
 
+  createTest(test): Observable<any> {
+    console.log({test})
+    return this.http.post<any>(this.apiUrl + `/courses/newTest`, {
+      state: test.state,
+      course_id: test.course_id,
+      unit_id: test.unit_id,
+      lesson_id: test.lesson_id,
+      questions: test.questions
+    })
+  }
+
 }
 

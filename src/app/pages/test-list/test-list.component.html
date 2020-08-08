@@ -91,8 +91,10 @@
       <div class="col offset-m4">
         <ul class="pagination card-panel">
           <li (click)="chargePage(lastPage)" class="waves-effect"><a><i class="material-icons">chevron_left</i></a></li>
-          <li *ngFor="let page of pages" (click)="chargePage(page.number)" class="waves-effect" [ngClass]="page.state"><a>{{page.number}}</a></li>
-          <li (click)="chargePage(nextPage)" class="waves-effect"><a><i class="material-icons">chevron_right</i></a></li>
+          <li *ngFor="let page of pages" (click)="chargePage(page.number)" class="waves-effect" [ngClass]="page.state">
+            <a>{{page.number}}</a></li>
+          <li (click)="chargePage(nextPage)" class="waves-effect"><a><i class="material-icons">chevron_right</i></a>
+          </li>
         </ul>
       </div>
     </div>
@@ -145,4 +147,88 @@
   <div class="modal-footer">
     <a (click)="closeDetailTestResolvedModal()" class="modal-action modal-close waves-effect waves-green btn uss-color">Cerrar</a>
   </div>
+</div>
+
+<!-- estructura del modal de crear test -->
+<div id="modal1" class="modal modal-new-test modal-fixed-footer white" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalNewTest">
+  <form (ngSubmit)="createTest()" materialize [formGroup]="newTestForm" ngNativeValidate>
+    <div class="modal-content row">
+      <h3 class="center">Crear Test</h3>
+      <div class="input-field col s12 m4">
+        <input type="text" list="new_test_courses" placeholder="Curso" formControlName="course" (change)="getUnitsByCourseOnNewTest()" required="true" class="validate">
+        <datalist id="new_test_courses">
+          <option *ngFor="let course of courses" [value]="course.course"></option>
+        </datalist>
+      </div>
+      <div class="input-field col s12 m4">
+        <input type="text" list="new_test_units" placeholder="Unidad" formControlName="unit" (change)="getLessonsByUnitOnNewTest()" required="true" class="validate">
+        <datalist id="new_test_units">
+          <option *ngFor="let unit of new_test_units" [value]="unit.title"></option>
+        </datalist>
+      </div>
+      <div class="input-field col s12 m4">
+        <input type="text" list="new_test_lessons" placeholder="Lección" formControlName="lesson" required="true" class="validate">
+        <datalist id="new_test_lessons">
+          <option *ngFor="let lesson of new_test_lessons" [value]="lesson.title"></option>
+        </datalist>
+      </div>
+      <h5 class="center">Preguntas</h5>
+
+      <!-- array con preguntas -->
+      <div formArrayName="questions" *ngFor="let question of questions.controls; let i = index">
+        <div class="col s12 input-field">
+          <div class="input-field col s12 no-padding">
+            <input [formControl]="question.get('type')" list="types" type="text" placeholder="Tipo" required="true" class="validate">
+            <datalist id="types">
+              <option value="Desarrollo">Pregunta con respuesta abierta de hasta 2000 caracteres</option>
+              <option value="Selección simple">Una sola respuesta correcta</option>
+              <option value="Selección múltiple">Múltiples respuestas correctas</option>
+            </datalist>
+          </div>
+        </div>
+        <div class="col s12 input-field">
+          <div class="input-field col s12 no-padding">
+            <input [formControl]="question.get('title')" type="text" [placeholder]="'Pregunta ' + (i + 1)" required="true" class="validate">
+          </div>
+        </div>
+        <div *ngIf="question.controls.type.value !== 'Desarrollo' && question.controls.type.value !== ''">
+          <div class="input-field col s12">
+            <textarea [formControl]="question.get('answer_1')" [id]="'answer_1_' + i" required="true" class="validate materialize-textarea grey lighten-3"></textarea>
+            <label [for]="'answer_1_' + i">Alternativa 1</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea [formControl]="question.get('answer_2')" [id]="'answer_2_' + i" required="true" class="validate materialize-textarea grey lighten-3"></textarea>
+            <label [for]="'answer_2_' + i">Alternativa 2</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea [formControl]="question.get('answer_3')" [id]="'answer_3_' + i" required="true" class="validate materialize-textarea grey lighten-3"></textarea>
+            <label [for]="'answer_3_' + i">Alternativa 3</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea [formControl]="question.get('answer_4')" [id]="'answer_4_' + i" required="true" class="validate materialize-textarea grey lighten-3"></textarea>
+            <label [for]="'answer_4_' + i">Alternativa 4</label>
+          </div>
+        </div>
+        <div class="center">
+          <a (click)="removeQuestionAndAnswers(i)" class="btn red darken-4">Eliminar</a>
+        </div>
+        <div class="row"></div>
+        <div class="col s12">
+          <hr>
+        </div>
+      </div>
+      <div class="row"></div>
+      <div class="center">
+        <a (click)="addQuestionAndAnswers()" class="btn uss-color">Agregar Pregunta</a>
+      </div>
+    </div>
+    <div class="modal-footer row">
+      <div class="col m3 offset-m6">
+        <button type="submit" class="col s12 waves-effect waves-green btn uss-color">Crear</button>
+      </div>
+      <div class="col m3">
+        <a (click)="closeCreateTestModal()" class="col s12 modal-action modal-close btn transparent btn-secondary waves-effect">Cancelar</a>
+      </div>
+    </div>
+  </form>
 </div>
