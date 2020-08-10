@@ -3,7 +3,7 @@
   <div class="row"></div>
   <div class="row"></div>
   <div class="row">
-    <div class="col s12 m4" *ngFor="let course of courses">
+    <div class="col s12 m4" *ngFor="let course of courses; let i = index">
       <div class="card sticky-action hoverable">
         <div class="card-image waves-effect waves-block waves-light">
           <img [src]="course.img_url" class="activator">
@@ -22,7 +22,7 @@
               <div class="col s9">Alumnos</div><a (click)="openAddStudentModal(course.school_id, course.course_id)" class="secondary-content btn uss-color waves-effect waves-light right col s3"><i class="material-icons white-text">add_circle_outline</i></a>
             </li>
             <li class="collection-item valign-wrapper row">
-              <div class="col s9">Eliminar curso</div><a class="secondary-content btn uss-color delete-hover darken-4 waves-effect waves-light right col s3"><i class="material-icons white-text">delete</i></a>
+              <div class="col s9">Eliminar curso</div><a (click)="deleteCourse(course.course_id, i)" class="secondary-content btn uss-color delete-hover darken-4 waves-effect waves-light right col s3"><i class="material-icons white-text">delete</i></a>
             </li>
           </ul>
         </div>

@@ -1,6 +1,6 @@
 <div class="full">
   <div class="parallax-container valign-wrapper">
-    <div class="parallax" materialize="parallax"><img src="../../../assets/imgs/fondomakeit.png" alt=""></div>
+    <div class="parallax" materialize="parallax"><img src="../../../assets/imgs/fondomakeit.png"></div>
     <div class="container row no-margin-bottom">
       <div class="col s12 m4 offset-m1">
         <form class="card-panel hoverable" materialize [formGroup]="loginForm" (ngSubmit)="login()" ngNativeValidate>
@@ -33,7 +33,7 @@
 <!-- estructura del modal de recuperación de contraseña -->
 <div id="modal1" class="modal white row transparent z-depth-0" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
   <div class="col s12 m6 offset-m3">
-    <form class="card-panel row hoverable" materialize [formGroup]="loginForm" ngNativeValidate>
+    <form (ngSubmit)="restorePass()" class="card-panel row hoverable" materialize [formGroup]="restorePassForm" ngNativeValidate>
       <div class="row center no-margin">
         <img class="logo" src="../../../assets/imgs/logo-dark.png">
       </div>

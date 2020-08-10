@@ -67,7 +67,6 @@ export class UsersComponent implements OnInit {
   createUser() {
     if (this.checkSchool(this.createUserForm.value.school_school_id) || this.createUserForm.value.rol == 'Admin') { // si el usuario no es admin se comprueba que se le asigne un colegio existente
       if (!this.passConfirmationWrong) {
-        toast('usuario creado', 3000)
         switch(this.createUserForm.value.rol){
           case 'Admin':
             this.createUserForm.value.rol = 'admin'

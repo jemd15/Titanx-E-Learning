@@ -58,17 +58,17 @@ export class CoursesComponent implements OnInit {
     this.api.getStudentsBySchoolId(school_id).toPromise()
       .then((res: any) => {
         let students = res.students;
-        console.log({students});
         this.api.getStudentsByCourseId(course_id).toPromise()
           .then((res: any) => {
             this.modalAddStudent.emit({ action: 'modal', params: ['open'] });
             this.students = students;
             this.courseStudents = res.students;
-            console.log(this.courseStudents);
             this.deleteDuplicatedStudents()
           })
           .catch(err => {
             toast('Error al consultar estudiantes del curso', 3000);
+            console.log(err);
+
           });
       })
       .catch(err => {
@@ -104,7 +104,6 @@ export class CoursesComponent implements OnInit {
   }
 
   addStudentToCourse(student: User) {
-    console.log('addStudentToCourse()', student.user_id);
     this.api.asignStudentToCourse(this.courseSelected, student.student_id, student.school_school_id).toPromise()
       .then(() => {
         let studentToDelete = this.students.indexOf(student);
@@ -119,7 +118,6 @@ export class CoursesComponent implements OnInit {
   }
 
   removeStudentToCourse(student: User) {
-    console.log('addStudentToCourse()', student.user_id);
     this.api.removeStudentToCourse(this.courseSelected, student.student_id).toPromise()
       .then(() => {
         let studentToDelete = this.courseStudents.indexOf(student);
@@ -134,14 +132,28 @@ export class CoursesComponent implements OnInit {
   }
 
   deleteDuplicatedStudents() {
-    console.log('estudiantes', this.students);
-    this.courseStudents.forEach(studentInCourse => {
+    this.courseStudents.forEach((studentInCourse, j) => {
       this.students.forEach((student, i) => {
-        if(studentInCourse.user_id == student.user_id) {
-          this.students.splice(student[i], 1);
+        if (studentInCourse.user_id == student.user_id) {
+          this.students.splice(i, 1);
         }
       });
     });
+  }
+
+  deleteCourse(course_id, index) {
+    let permissionToContinue = confirm('¿Esta seguro que desea eliminar este curso?\n\nSe perderán todos los datos de unidades, lecciones, tests y demás.');
+
+    if (permissionToContinue) {
+      this.api.deleteCourse(course_id).toPromise()
+      .then(() => {
+        this.courses.splice(index, 1);
+        toast('Curso eliminado', 3000);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
   }
 
 }

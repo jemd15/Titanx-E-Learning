@@ -63,8 +63,8 @@ export class LessonComponent implements OnInit {
     });
     this.api.getTestByCourseId(this.course_id, this.unitNumber, this.lesson_number).toPromise()
       .then((res: any) => {
-        this.test_id = res.test[0].test_id;
         if (res.test.length > 0) {
+          this.test_id = res.test[0].test_id;
           this.api.getQuestionsByTestId(this.test_id).toPromise()
             .then((res: any) => {
               this.questions = res.questions;
@@ -144,6 +144,16 @@ export class LessonComponent implements OnInit {
       type: this.newActivityForm.value.type,
       url: this.newActivityForm.value.url
     }
+    
+    let testUrl: string;
+    if (newActivity.type === 'video' && (this.newActivityForm.value.url.search('www.youtube.com/watch') !== -1)) {
+      testUrl = this.newActivityForm.value.url.split('=')[1];
+      this.newActivityForm.value.url = `https://www.youtube.com/embed/${testUrl}`;
+    } else if (newActivity.type === 'video' && (this.newActivityForm.value.url.search('youtu.be') !== -1)) {
+      testUrl = this.newActivityForm.value.url.split('/')[3];
+      this.newActivityForm.value.url = `https://www.youtube.com/embed/${testUrl}`;
+    }
+
     this.api.postNewActivity(this.course_id, this.unitNumber, this.lesson_number, newActivity).toPromise()
       .then(() => {
         this.activities.push(newActivity);

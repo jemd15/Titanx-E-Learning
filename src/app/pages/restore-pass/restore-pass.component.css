@@ -46,11 +46,13 @@ img.logo {
   width: 87%;
 }
 
-@media only screen and (max-width: 600px) {
+.pass-not-match {
+  position: absolute;
+  top: 50px;
+  left: 55px;
+}
 
-  img.logo {
-    zoom: 0.15;
-  }
+@media only screen and (max-width: 600px) {
 
   .full {
     min-height: 90vh;

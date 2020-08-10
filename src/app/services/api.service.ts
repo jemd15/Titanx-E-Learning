@@ -17,8 +17,8 @@ import { School } from '../models/schools';
 })
 export class ApiService {
 
-  private apiUrl = 'http://localhost:3000/api'
-  // private apiUrl = 'https://e-learning.titanx.cl/api'
+  // private apiUrl = 'http://192.168.0.13:3000/api'
+  private apiUrl = 'https://e-learning.titanx.cl/api'
 
   constructor(
     private http: HttpClient
@@ -190,7 +190,6 @@ export class ApiService {
   }
 
   createTest(test): Observable<any> {
-    console.log({test})
     return this.http.post<any>(this.apiUrl + `/courses/newTest`, {
       state: test.state,
       course_id: test.course_id,
@@ -198,6 +197,18 @@ export class ApiService {
       lesson_id: test.lesson_id,
       questions: test.questions
     })
+  }
+
+  deleteCourse(course_id): Observable<any> {
+    return this.http.delete<any>(this.apiUrl + `/course/${course_id}/delete`)
+  }
+
+  requestRestorePass(email: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + `/users/restore-pass`, { email })
+  }
+
+  restorePass(newPassword: string, token: string): Observable<any> {
+    return this.http.put<any>(this.apiUrl + `/users/restore-pass`, { newPassword, token })
   }
 
 }

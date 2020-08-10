@@ -27,7 +27,7 @@ export class AuthService {
             this.router.navigate(['courses']);
           });
         }, err => {
-          toast(`Error: ${err.message}`, 3000);
+          toast(`Email y/o contraseña incorrectas`, 3000);
         }
       );
   }
