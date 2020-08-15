@@ -80,11 +80,11 @@ export class TestListComponent implements OnInit {
   public addQuestionAndAnswers() {
     const newTestFormGroup = this.formBuilder.group({
       type: ['', Validators.required],
-      title: ['Esta es una pregunta de selección ', Validators.required],
-      answer_1: ['Opción A'],
-      answer_2: ['Opción B'],
-      answer_3: ['Opción C'],
-      answer_4: ['Opción D']
+      title: ['', Validators.required],
+      answer_1: [''],
+      answer_2: [''],
+      answer_3: [''],
+      answer_4: ['']
     });
 
     this.questions.push(newTestFormGroup);
