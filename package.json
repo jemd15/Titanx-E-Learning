@@ -24,6 +24,7 @@
     "hammerjs": "^2.0.8",
     "jquery": "^3.4.0",
     "materialize-css": "^0.100.2",
+    "ngx-konami": "^1.7.1",
     "rxjs": "~6.5.4",
     "ts-helpers": "^1.1.1",
     "tslib": "^1.10.0",

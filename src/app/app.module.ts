@@ -39,6 +39,8 @@ import { VerifyEmailComponent } from './pages/verify-email/verify-email.componen
 import { AccountComponent } from './pages/account/account.component';
 import { TestListComponent } from './pages/test-list/test-list.component';
 
+// Secret library
+import { KonamiModule } from 'ngx-konami';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { TestListComponent } from './pages/test-list/test-list.component';
     TestListComponent
   ],
   imports: [
+    KonamiModule,
     HttpClientModule,
     BrowserModule,
     MaterializeModule,
